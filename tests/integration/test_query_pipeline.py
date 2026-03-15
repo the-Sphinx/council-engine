@@ -1,11 +1,11 @@
 """
 Integration test: end-to-end query pipeline using in-memory index and FakeLLMClient.
 """
-
 import tempfile
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
 
 from tests.conftest import FakeLLMClient, SAMPLE_CORPUS
 
@@ -221,3 +221,156 @@ def test_verifier_with_fake_llm(project_with_index, db):
 
     assert report.status in ("pass", "pass_with_warnings", "fail")
     assert report.status == "pass"
+
+
+def test_query_endpoint_returns_structured_success(project_with_index, db):
+    project_id, im, passages = project_with_index
+
+    from app.db.session import get_db
+    from app.main import app
+    import app.main as main_module
+    from app.core.interfaces import (
+        AnswerDraftDomain,
+        CitationDomain,
+        ClaimDomain,
+        VerificationReportDomain,
+    )
+
+    app.dependency_overrides.clear()
+
+    def override_get_db():
+        yield db
+
+    app.dependency_overrides[get_db] = override_get_db
+    original_index_managers = dict(main_module._index_managers)
+    original_generator = main_module._generator
+    original_verifier = main_module._verifier
+    original_get_generator = main_module.get_generator
+    original_get_verifier = main_module.get_verifier
+
+    try:
+        main_module._index_managers = {project_id: im}
+        main_module._generator = None
+        main_module._verifier = None
+
+        class StubGenerator:
+            def generate(self, question, evidence_bundle):
+                anchor = evidence_bundle.anchors[0]
+                return AnswerDraftDomain(
+                    final_answer="The text describes patience as a virtue.",
+                    claims=[
+                        ClaimDomain(
+                            "c1",
+                            "Patience is a virtue.",
+                            [anchor.passage_id],
+                            "direct",
+                        )
+                    ],
+                    supporting_citations=[
+                        CitationDomain(anchor.passage_id, anchor.text[:60])
+                    ],
+                    objections_raised=[],
+                    confidence_notes="Direct textual support found.",
+                )
+
+        class StubVerifier:
+            def verify(self, question, evidence_bundle, answer_draft):
+                return VerificationReportDomain(
+                    status="pass",
+                    supported_claims=["c1"],
+                    unsupported_claims=[],
+                    citation_issues=[],
+                    notes="All claims verified.",
+                )
+
+        def fake_generator():
+            return StubGenerator()
+
+        def fake_verifier():
+            return StubVerifier()
+
+        main_module.get_generator = fake_generator
+        main_module.get_verifier = fake_verifier
+
+        client = TestClient(app)
+        response = client.post(
+            f"/api/projects/{project_id}/queries",
+            json={"question": "What does the text say about patience?"},
+        )
+
+        assert response.status_code == 201
+        payload = response.json()
+        assert payload["final_answer"]
+        assert payload["verification_status"] == "pass"
+        assert isinstance(payload["citations"], list)
+        assert len(payload["citations"]) == 1
+        assert payload["debug_url"]
+    finally:
+        app.dependency_overrides.clear()
+        main_module._index_managers = original_index_managers
+        main_module._generator = original_generator
+        main_module._verifier = original_verifier
+        main_module.get_generator = original_get_generator
+        main_module.get_verifier = original_get_verifier
+
+
+def test_query_endpoint_returns_structured_generation_error(project_with_index, db):
+    project_id, im, _passages = project_with_index
+
+    from app.db.session import get_db
+    from app.main import app
+    import app.main as main_module
+
+    class BrokenGenerator:
+        def generate(self, question, evidence_bundle):
+            from app.generation.answer_generator import GenerationError
+
+            raise GenerationError("Answer generator request failed: test failure")
+
+    class StubVerifier:
+        def verify(self, question, evidence_bundle, answer_draft):
+            raise AssertionError("verifier should not be called")
+
+    app.dependency_overrides.clear()
+
+    def override_get_db():
+        yield db
+
+    app.dependency_overrides[get_db] = override_get_db
+    original_index_managers = dict(main_module._index_managers)
+    original_generator = main_module._generator
+    original_verifier = main_module._verifier
+    original_get_generator = main_module.get_generator
+    original_get_verifier = main_module.get_verifier
+
+    try:
+        main_module._index_managers = {project_id: im}
+        main_module._generator = BrokenGenerator()
+        main_module._verifier = StubVerifier()
+
+        def fake_generator():
+            return main_module._generator
+
+        def fake_verifier():
+            return main_module._verifier
+
+        main_module.get_generator = fake_generator
+        main_module.get_verifier = fake_verifier
+
+        client = TestClient(app)
+        response = client.post(
+            f"/api/projects/{project_id}/queries",
+            json={"question": "What does the text say about patience?"},
+        )
+
+        assert response.status_code == 500
+        payload = response.json()
+        assert payload["detail"]["error"] == "generation_failed"
+        assert "Answer generator request failed" in payload["detail"]["message"]
+    finally:
+        app.dependency_overrides.clear()
+        main_module._index_managers = original_index_managers
+        main_module._generator = original_generator
+        main_module._verifier = original_verifier
+        main_module.get_generator = original_get_generator
+        main_module.get_verifier = original_get_verifier

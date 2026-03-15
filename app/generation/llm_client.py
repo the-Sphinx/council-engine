@@ -51,6 +51,13 @@ class OllamaClient(LLMClient):
                 timeout=120.0,
             )
             if resp.status_code == 404:
+                model_error = self._extract_model_not_found(resp)
+                if model_error:
+                    raise RuntimeError(
+                        f"Ollama is running at {self._base_url}, but the configured model "
+                        f"{self._model!r} is not installed. Run `ollama pull {self._model}` "
+                        "or change LLM_MODEL in .env."
+                    )
                 return self._chat_openai_compatible(messages, temperature)
             resp.raise_for_status()
             data = resp.json()
@@ -83,6 +90,14 @@ class OllamaClient(LLMClient):
                 "Configured LLM endpoint did not respond as Ollama or as an OpenAI-compatible "
                 f"chat API at {self._base_url}: {e}"
             ) from e
+
+    def _extract_model_not_found(self, response: httpx.Response) -> bool:
+        try:
+            data = response.json()
+        except ValueError:
+            return False
+        error = data.get("error")
+        return isinstance(error, str) and "model" in error.lower() and "not found" in error.lower()
 
 
 class OpenAIClient(LLMClient):

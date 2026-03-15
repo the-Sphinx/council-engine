@@ -53,6 +53,29 @@ def test_ollama_client_falls_back_to_openai_compatible_endpoint(monkeypatch):
     ]
 
 
+def test_ollama_client_reports_missing_model_before_fallback(monkeypatch):
+    def fake_post(url, json, timeout):
+        request = httpx.Request("POST", url)
+        if url.endswith("/api/chat"):
+            return httpx.Response(
+                404,
+                request=request,
+                json={"error": "model 'llama3.1:8b' not found"},
+            )
+        raise AssertionError("fallback should not be called for missing Ollama model")
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+
+    client = OllamaClient(base_url="http://localhost:11434", model="llama3.1:8b")
+
+    try:
+        client.chat("system", "user")
+        assert False, "expected RuntimeError"
+    except RuntimeError as exc:
+        assert "not installed" in str(exc)
+        assert "ollama pull llama3.1:8b" in str(exc)
+
+
 class FailingLLM:
     def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
         raise RuntimeError("boom")
