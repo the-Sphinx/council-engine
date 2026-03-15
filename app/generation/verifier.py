@@ -54,7 +54,10 @@ class LLMVerifier(VerifierInterface):
         }
 
         user_prompt = build_verifier_user_prompt(question, evidence_bundle, draft_dict)
-        raw = self._llm.chat(VERIFIER_SYSTEM, user_prompt)
+        try:
+            raw = self._llm.chat(VERIFIER_SYSTEM, user_prompt)
+        except Exception as exc:
+            raise VerificationError(f"Verifier request failed: {exc}") from exc
         output = self._parse(raw)
 
         if output is None:
@@ -63,7 +66,10 @@ class LLMVerifier(VerifierInterface):
                 user_prompt
                 + "\n\nReturn ONLY valid JSON according to the schema, nothing else."
             )
-            raw2 = self._llm.chat(VERIFIER_SYSTEM, retry_prompt)
+            try:
+                raw2 = self._llm.chat(VERIFIER_SYSTEM, retry_prompt)
+            except Exception as exc:
+                raise VerificationError(f"Verifier retry failed: {exc}") from exc
             output = self._parse(raw2)
 
         if output is None:

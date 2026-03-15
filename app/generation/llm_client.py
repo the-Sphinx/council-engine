@@ -33,12 +33,13 @@ class OllamaClient(LLMClient):
         self._model = model
 
     def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ]
         payload = {
             "model": self._model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
+            "messages": messages,
             "stream": False,
             "options": {"temperature": temperature},
             "format": "json",
@@ -49,11 +50,39 @@ class OllamaClient(LLMClient):
                 json=payload,
                 timeout=120.0,
             )
+            if resp.status_code == 404:
+                return self._chat_openai_compatible(messages, temperature)
             resp.raise_for_status()
             data = resp.json()
             return data["message"]["content"]
         except httpx.HTTPError as e:
             raise RuntimeError(f"Ollama request failed: {e}") from e
+
+    def _chat_openai_compatible(
+        self,
+        messages: list[dict[str, str]],
+        temperature: float,
+    ) -> str:
+        payload = {
+            "model": self._model,
+            "messages": messages,
+            "temperature": temperature,
+            "response_format": {"type": "json_object"},
+        }
+        try:
+            resp = httpx.post(
+                f"{self._base_url}/v1/chat/completions",
+                json=payload,
+                timeout=120.0,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            return data["choices"][0]["message"]["content"]
+        except httpx.HTTPError as e:
+            raise RuntimeError(
+                "Configured LLM endpoint did not respond as Ollama or as an OpenAI-compatible "
+                f"chat API at {self._base_url}: {e}"
+            ) from e
 
 
 class OpenAIClient(LLMClient):

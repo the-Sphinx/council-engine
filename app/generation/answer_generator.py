@@ -36,7 +36,10 @@ class GroundedAnswerGenerator(AnswerGeneratorInterface):
         user_prompt = build_answer_user_prompt(question, evidence_bundle)
         valid_ids = {a.passage_id for a in evidence_bundle.anchors}
 
-        raw = self._llm.chat(ANSWER_GENERATOR_SYSTEM, user_prompt)
+        try:
+            raw = self._llm.chat(ANSWER_GENERATOR_SYSTEM, user_prompt)
+        except Exception as exc:
+            raise GenerationError(f"Answer generator request failed: {exc}") from exc
         output = self._parse_and_validate(raw, valid_ids)
 
         if output is None:
@@ -46,7 +49,10 @@ class GroundedAnswerGenerator(AnswerGeneratorInterface):
                 + "\n\nIMPORTANT: Your previous response was not valid JSON. "
                 "Return ONLY a valid JSON object, nothing else."
             )
-            raw2 = self._llm.chat(ANSWER_GENERATOR_SYSTEM, correction_prompt)
+            try:
+                raw2 = self._llm.chat(ANSWER_GENERATOR_SYSTEM, correction_prompt)
+            except Exception as exc:
+                raise GenerationError(f"Answer generator retry failed: {exc}") from exc
             output = self._parse_and_validate(raw2, valid_ids)
 
         if output is None:
