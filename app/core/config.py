@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "ollama"
     LLM_MODEL: str = "llama3.1:8b"
     LLM_BASE_URL: str = "http://localhost:11434"
+    LLM_TIMEOUT_SECONDS: float = 45.0
     EMBEDDER_MODEL: str = "all-MiniLM-L6-v2"
     RERANKER_MODEL: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
     LOG_LEVEL: str = "INFO"

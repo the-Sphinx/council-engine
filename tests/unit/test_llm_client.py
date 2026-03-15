@@ -81,14 +81,17 @@ class FailingLLM:
         raise RuntimeError("boom")
 
 
+class InvalidSchemaLLM:
+    def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+        return '{"passages":[{"passage_id":"p1","text":"Patience is a virtue."}]}'
+
+
 def test_answer_generator_wraps_transport_failures():
     generator = GroundedAnswerGenerator(FailingLLM())
+    draft = generator.generate("What is patience?", _bundle())
 
-    try:
-        generator.generate("What is patience?", _bundle())
-        assert False, "expected GenerationError"
-    except GenerationError as exc:
-        assert "request failed" in str(exc)
+    assert draft.claims[0].supporting_passage_ids == ["p1"]
+    assert "Fallback extractive answer" in draft.confidence_notes
 
 
 def test_verifier_wraps_transport_failures():
@@ -101,8 +104,33 @@ def test_verifier_wraps_transport_failures():
         confidence_notes="Direct support.",
     )
 
-    try:
-        verifier.verify("What is patience?", _bundle(), draft)
-        assert False, "expected VerificationError"
-    except VerificationError as exc:
-        assert "request failed" in str(exc)
+    report = verifier.verify("What is patience?", _bundle(), draft)
+
+    assert report.status == "pass_with_warnings"
+    assert report.supported_claims == ["c1"]
+
+
+def test_answer_generator_falls_back_to_extractive_answer_for_invalid_schema():
+    generator = GroundedAnswerGenerator(InvalidSchemaLLM())
+    draft = generator.generate("What is patience?", _bundle())
+
+    assert draft.final_answer == "Patience is a virtue."
+    assert draft.claims[0].supporting_passage_ids == ["p1"]
+    assert "Fallback extractive answer" in draft.confidence_notes
+
+
+def test_verifier_falls_back_to_deterministic_report_for_invalid_schema():
+    verifier = LLMVerifier(InvalidSchemaLLM())
+    draft = AnswerDraftDomain(
+        final_answer="Patience is a virtue.",
+        claims=[ClaimDomain("c1", "Patience is a virtue.", ["p1"], "direct")],
+        supporting_citations=[CitationDomain("p1", "Patience is a virtue.")],
+        objections_raised=[],
+        confidence_notes="Fallback extractive answer built from top evidence after schema validation failed.",
+    )
+
+    report = verifier.verify("What is patience?", _bundle(), draft)
+
+    assert report.status == "pass_with_warnings"
+    assert report.supported_claims == ["c1"]
+    assert "Fallback verification" in report.notes

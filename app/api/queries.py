@@ -144,13 +144,20 @@ def get_query(query_id: str, db: Session = Depends(get_db)):
                 "section_title": anchor.get("section_title"),
                 "passage_text": anchor.get("text", ""),
             })
+    objections = []
+    if draft_db:
+        raw_objections = json.loads(draft_db.objections_json or "[]")
+        objections = [
+            obj["issue"] if isinstance(obj, dict) else obj
+            for obj in raw_objections
+        ]
 
     return QueryResponse(
         query_id=query_id,
         question=query.question_text,
         final_answer=draft_db.answer_text if draft_db else "",
         citations=citations,
-        objections=json.loads(draft_db.objections_json or "[]") if draft_db else [],
+        objections=objections,
         confidence_notes="",
         verification_status=report_db.status if report_db else "unknown",
         verification_warnings=[],

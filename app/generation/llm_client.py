@@ -28,9 +28,10 @@ class LLMClient(ABC):
 
 
 class OllamaClient(LLMClient):
-    def __init__(self, base_url: str, model: str):
+    def __init__(self, base_url: str, model: str, timeout_seconds: float = 45.0):
         self._base_url = base_url.rstrip("/")
         self._model = model
+        self._timeout_seconds = timeout_seconds
 
     def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
         messages = [
@@ -48,7 +49,7 @@ class OllamaClient(LLMClient):
             resp = httpx.post(
                 f"{self._base_url}/api/chat",
                 json=payload,
-                timeout=120.0,
+                timeout=self._timeout_seconds,
             )
             if resp.status_code == 404:
                 model_error = self._extract_model_not_found(resp)
@@ -80,7 +81,7 @@ class OllamaClient(LLMClient):
             resp = httpx.post(
                 f"{self._base_url}/v1/chat/completions",
                 json=payload,
-                timeout=120.0,
+                timeout=self._timeout_seconds,
             )
             resp.raise_for_status()
             data = resp.json()
@@ -101,10 +102,17 @@ class OllamaClient(LLMClient):
 
 
 class OpenAIClient(LLMClient):
-    def __init__(self, api_key: str, model: str = "gpt-4o-mini", base_url: str | None = None):
+    def __init__(
+        self,
+        api_key: str,
+        model: str = "gpt-4o-mini",
+        base_url: str | None = None,
+        timeout_seconds: float = 45.0,
+    ):
         self._api_key = api_key
         self._model = model
         self._base_url = (base_url or "https://api.openai.com/v1").rstrip("/")
+        self._timeout_seconds = timeout_seconds
 
     def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
         payload = {
@@ -124,7 +132,7 @@ class OpenAIClient(LLMClient):
             f"{self._base_url}/chat/completions",
             json=payload,
             headers=headers,
-            timeout=120.0,
+            timeout=self._timeout_seconds,
         )
         resp.raise_for_status()
         data = resp.json()
@@ -135,6 +143,14 @@ def get_llm_client(settings: Settings) -> LLMClient:
     if settings.LLM_PROVIDER == "openai":
         import os
         api_key = os.environ.get("OPENAI_API_KEY", "")
-        return OpenAIClient(api_key=api_key, model=settings.LLM_MODEL)
+        return OpenAIClient(
+            api_key=api_key,
+            model=settings.LLM_MODEL,
+            timeout_seconds=settings.LLM_TIMEOUT_SECONDS,
+        )
     # Default: ollama
-    return OllamaClient(base_url=settings.LLM_BASE_URL, model=settings.LLM_MODEL)
+    return OllamaClient(
+        base_url=settings.LLM_BASE_URL,
+        model=settings.LLM_MODEL,
+        timeout_seconds=settings.LLM_TIMEOUT_SECONDS,
+    )
