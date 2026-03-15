@@ -28,9 +28,16 @@ def _infer_passage_strategy(text: str) -> str:
 
     blank_lines = sum(1 for line in lines if not line)
     line_based_ratio = len(non_empty_lines) / max(len(lines), 1)
+    blank_line_ratio = blank_lines / max(len(lines), 1)
     average_line_length = sum(len(line) for line in non_empty_lines) / len(non_empty_lines)
+    allowed_blank_lines = max(3, int(len(lines) * 0.02))
 
-    if blank_lines <= 1 and line_based_ratio >= 0.85 and average_line_length < 220:
+    if (
+        blank_lines <= allowed_blank_lines
+        and blank_line_ratio <= 0.2
+        and line_based_ratio >= 0.85
+        and average_line_length < 220
+    ):
         return "natural_units"
     return "paragraph"
 
