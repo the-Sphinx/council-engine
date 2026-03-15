@@ -1,0 +1,1256 @@
+[
+  {
+    "surah": 1,
+    "title": "Al-Fatihah",
+    "section_type": "chapter",
+    "order_index": 0,
+    "start_offset": 0,
+    "end_offset": 436,
+    "metadata": {
+      "surah_number": 1
+    }
+  },
+  {
+    "surah": 2,
+    "title": "Al-Baqarah",
+    "section_type": "chapter",
+    "order_index": 1,
+    "start_offset": 436,
+    "end_offset": 69659,
+    "metadata": {
+      "surah_number": 2
+    }
+  },
+  {
+    "surah": 3,
+    "title": "Ali 'Imran",
+    "section_type": "chapter",
+    "order_index": 2,
+    "start_offset": 69659,
+    "end_offset": 109690,
+    "metadata": {
+      "surah_number": 3
+    }
+  },
+  {
+    "surah": 4,
+    "title": "An-Nisa'",
+    "section_type": "chapter",
+    "order_index": 3,
+    "start_offset": 109690,
+    "end_offset": 151367,
+    "metadata": {
+      "surah_number": 4
+    }
+  },
+  {
+    "surah": 5,
+    "title": "Al-Ma'idah",
+    "section_type": "chapter",
+    "order_index": 4,
+    "start_offset": 151367,
+    "end_offset": 182597,
+    "metadata": {
+      "surah_number": 5
+    }
+  },
+  {
+    "surah": 6,
+    "title": "Al-An'am",
+    "section_type": "chapter",
+    "order_index": 5,
+    "start_offset": 182597,
+    "end_offset": 217185,
+    "metadata": {
+      "surah_number": 6
+    }
+  },
+  {
+    "surah": 7,
+    "title": "Al-A'raf",
+    "section_type": "chapter",
+    "order_index": 6,
+    "start_offset": 217185,
+    "end_offset": 255192,
+    "metadata": {
+      "surah_number": 7
+    }
+  },
+  {
+    "surah": 8,
+    "title": "Al-Anfal",
+    "section_type": "chapter",
+    "order_index": 7,
+    "start_offset": 255192,
+    "end_offset": 269482,
+    "metadata": {
+      "surah_number": 8
+    }
+  },
+  {
+    "surah": 9,
+    "title": "At-Tawbah",
+    "section_type": "chapter",
+    "order_index": 8,
+    "start_offset": 269482,
+    "end_offset": 298936,
+    "metadata": {
+      "surah_number": 9
+    }
+  },
+  {
+    "surah": 10,
+    "title": "Yunus",
+    "section_type": "chapter",
+    "order_index": 9,
+    "start_offset": 298936,
+    "end_offset": 318883,
+    "metadata": {
+      "surah_number": 10
+    }
+  },
+  {
+    "surah": 11,
+    "title": "Hud",
+    "section_type": "chapter",
+    "order_index": 10,
+    "start_offset": 318883,
+    "end_offset": 340626,
+    "metadata": {
+      "surah_number": 11
+    }
+  },
+  {
+    "surah": 12,
+    "title": "Yusuf",
+    "section_type": "chapter",
+    "order_index": 11,
+    "start_offset": 340626,
+    "end_offset": 360255,
+    "metadata": {
+      "surah_number": 12
+    }
+  },
+  {
+    "surah": 13,
+    "title": "Ar-Ra'd",
+    "section_type": "chapter",
+    "order_index": 12,
+    "start_offset": 360255,
+    "end_offset": 369935,
+    "metadata": {
+      "surah_number": 13
+    }
+  },
+  {
+    "surah": 14,
+    "title": "Ibrahim",
+    "section_type": "chapter",
+    "order_index": 13,
+    "start_offset": 369935,
+    "end_offset": 379286,
+    "metadata": {
+      "surah_number": 14
+    }
+  },
+  {
+    "surah": 15,
+    "title": "Al-Hijr",
+    "section_type": "chapter",
+    "order_index": 14,
+    "start_offset": 379286,
+    "end_offset": 387520,
+    "metadata": {
+      "surah_number": 15
+    }
+  },
+  {
+    "surah": 16,
+    "title": "An-Nahl",
+    "section_type": "chapter",
+    "order_index": 15,
+    "start_offset": 387520,
+    "end_offset": 408717,
+    "metadata": {
+      "surah_number": 16
+    }
+  },
+  {
+    "surah": 17,
+    "title": "Al-Isra'",
+    "section_type": "chapter",
+    "order_index": 16,
+    "start_offset": 408717,
+    "end_offset": 426918,
+    "metadata": {
+      "surah_number": 17
+    }
+  },
+  {
+    "surah": 18,
+    "title": "Al-Kahf",
+    "section_type": "chapter",
+    "order_index": 17,
+    "start_offset": 426918,
+    "end_offset": 445510,
+    "metadata": {
+      "surah_number": 18
+    }
+  },
+  {
+    "surah": 19,
+    "title": "Maryam",
+    "section_type": "chapter",
+    "order_index": 18,
+    "start_offset": 445510,
+    "end_offset": 456782,
+    "metadata": {
+      "surah_number": 19
+    }
+  },
+  {
+    "surah": 20,
+    "title": "Ta-Ha",
+    "section_type": "chapter",
+    "order_index": 19,
+    "start_offset": 456782,
+    "end_offset": 472783,
+    "metadata": {
+      "surah_number": 20
+    }
+  },
+  {
+    "surah": 21,
+    "title": "Al-Anbya'",
+    "section_type": "chapter",
+    "order_index": 20,
+    "start_offset": 472783,
+    "end_offset": 486638,
+    "metadata": {
+      "surah_number": 21
+    }
+  },
+  {
+    "surah": 22,
+    "title": "Al-Hajj",
+    "section_type": "chapter",
+    "order_index": 21,
+    "start_offset": 486638,
+    "end_offset": 501072,
+    "metadata": {
+      "surah_number": 22
+    }
+  },
+  {
+    "surah": 23,
+    "title": "Al-Mu'minun",
+    "section_type": "chapter",
+    "order_index": 22,
+    "start_offset": 501072,
+    "end_offset": 513275,
+    "metadata": {
+      "surah_number": 23
+    }
+  },
+  {
+    "surah": 24,
+    "title": "An-Nur",
+    "section_type": "chapter",
+    "order_index": 23,
+    "start_offset": 513275,
+    "end_offset": 528056,
+    "metadata": {
+      "surah_number": 24
+    }
+  },
+  {
+    "surah": 25,
+    "title": "Al-Furqan",
+    "section_type": "chapter",
+    "order_index": 24,
+    "start_offset": 528056,
+    "end_offset": 538568,
+    "metadata": {
+      "surah_number": 25
+    }
+  },
+  {
+    "surah": 26,
+    "title": "Ash-Shu'ara'",
+    "section_type": "chapter",
+    "order_index": 25,
+    "start_offset": 538568,
+    "end_offset": 554368,
+    "metadata": {
+      "surah_number": 26
+    }
+  },
+  {
+    "surah": 27,
+    "title": "An-Naml",
+    "section_type": "chapter",
+    "order_index": 26,
+    "start_offset": 554368,
+    "end_offset": 567590,
+    "metadata": {
+      "surah_number": 27
+    }
+  },
+  {
+    "surah": 28,
+    "title": "Al-Qasas",
+    "section_type": "chapter",
+    "order_index": 27,
+    "start_offset": 567590,
+    "end_offset": 583485,
+    "metadata": {
+      "surah_number": 28
+    }
+  },
+  {
+    "surah": 29,
+    "title": "Al-'Ankabut",
+    "section_type": "chapter",
+    "order_index": 28,
+    "start_offset": 583485,
+    "end_offset": 594634,
+    "metadata": {
+      "surah_number": 29
+    }
+  },
+  {
+    "surah": 30,
+    "title": "Ar-Rum",
+    "section_type": "chapter",
+    "order_index": 29,
+    "start_offset": 594634,
+    "end_offset": 603902,
+    "metadata": {
+      "surah_number": 30
+    }
+  },
+  {
+    "surah": 31,
+    "title": "Luqman",
+    "section_type": "chapter",
+    "order_index": 30,
+    "start_offset": 603902,
+    "end_offset": 609778,
+    "metadata": {
+      "surah_number": 31
+    }
+  },
+  {
+    "surah": 32,
+    "title": "As-Sajdah",
+    "section_type": "chapter",
+    "order_index": 31,
+    "start_offset": 609778,
+    "end_offset": 613999,
+    "metadata": {
+      "surah_number": 32
+    }
+  },
+  {
+    "surah": 33,
+    "title": "Al-Ahzab",
+    "section_type": "chapter",
+    "order_index": 32,
+    "start_offset": 613999,
+    "end_offset": 628869,
+    "metadata": {
+      "surah_number": 33
+    }
+  },
+  {
+    "surah": 34,
+    "title": "Saba'",
+    "section_type": "chapter",
+    "order_index": 33,
+    "start_offset": 628869,
+    "end_offset": 638686,
+    "metadata": {
+      "surah_number": 34
+    }
+  },
+  {
+    "surah": 35,
+    "title": "Fatir",
+    "section_type": "chapter",
+    "order_index": 34,
+    "start_offset": 638686,
+    "end_offset": 647259,
+    "metadata": {
+      "surah_number": 35
+    }
+  },
+  {
+    "surah": 36,
+    "title": "Ya-Sin",
+    "section_type": "chapter",
+    "order_index": 35,
+    "start_offset": 647259,
+    "end_offset": 655618,
+    "metadata": {
+      "surah_number": 36
+    }
+  },
+  {
+    "surah": 37,
+    "title": "As-Saffat",
+    "section_type": "chapter",
+    "order_index": 36,
+    "start_offset": 655618,
+    "end_offset": 667075,
+    "metadata": {
+      "surah_number": 37
+    }
+  },
+  {
+    "surah": 38,
+    "title": "Sad",
+    "section_type": "chapter",
+    "order_index": 37,
+    "start_offset": 667075,
+    "end_offset": 676224,
+    "metadata": {
+      "surah_number": 38
+    }
+  },
+  {
+    "surah": 39,
+    "title": "Az-Zumar",
+    "section_type": "chapter",
+    "order_index": 38,
+    "start_offset": 676224,
+    "end_offset": 689324,
+    "metadata": {
+      "surah_number": 39
+    }
+  },
+  {
+    "surah": 40,
+    "title": "Ghafir",
+    "section_type": "chapter",
+    "order_index": 39,
+    "start_offset": 689324,
+    "end_offset": 703201,
+    "metadata": {
+      "surah_number": 40
+    }
+  },
+  {
+    "surah": 41,
+    "title": "Fussilat",
+    "section_type": "chapter",
+    "order_index": 40,
+    "start_offset": 703201,
+    "end_offset": 712456,
+    "metadata": {
+      "surah_number": 41
+    }
+  },
+  {
+    "surah": 42,
+    "title": "Ash-Shura",
+    "section_type": "chapter",
+    "order_index": 41,
+    "start_offset": 712456,
+    "end_offset": 722030,
+    "metadata": {
+      "surah_number": 42
+    }
+  },
+  {
+    "surah": 43,
+    "title": "Az-Zukhruf",
+    "section_type": "chapter",
+    "order_index": 42,
+    "start_offset": 722030,
+    "end_offset": 732243,
+    "metadata": {
+      "surah_number": 43
+    }
+  },
+  {
+    "surah": 44,
+    "title": "Ad-Dukhan",
+    "section_type": "chapter",
+    "order_index": 43,
+    "start_offset": 732243,
+    "end_offset": 736525,
+    "metadata": {
+      "surah_number": 44
+    }
+  },
+  {
+    "surah": 45,
+    "title": "Al-Jathiyah",
+    "section_type": "chapter",
+    "order_index": 44,
+    "start_offset": 736525,
+    "end_offset": 742093,
+    "metadata": {
+      "surah_number": 45
+    }
+  },
+  {
+    "surah": 46,
+    "title": "Al-Ahqaf",
+    "section_type": "chapter",
+    "order_index": 45,
+    "start_offset": 742093,
+    "end_offset": 749481,
+    "metadata": {
+      "surah_number": 46
+    }
+  },
+  {
+    "surah": 47,
+    "title": "Muhammad",
+    "section_type": "chapter",
+    "order_index": 46,
+    "start_offset": 749481,
+    "end_offset": 755862,
+    "metadata": {
+      "surah_number": 47
+    }
+  },
+  {
+    "surah": 48,
+    "title": "Al-Fath",
+    "section_type": "chapter",
+    "order_index": 47,
+    "start_offset": 755862,
+    "end_offset": 762565,
+    "metadata": {
+      "surah_number": 48
+    }
+  },
+  {
+    "surah": 49,
+    "title": "Al-Hujurat",
+    "section_type": "chapter",
+    "order_index": 48,
+    "start_offset": 762565,
+    "end_offset": 766349,
+    "metadata": {
+      "surah_number": 49
+    }
+  },
+  {
+    "surah": 50,
+    "title": "Qaf",
+    "section_type": "chapter",
+    "order_index": 49,
+    "start_offset": 766349,
+    "end_offset": 770699,
+    "metadata": {
+      "surah_number": 50
+    }
+  },
+  {
+    "surah": 51,
+    "title": "Adh-Dhariyat",
+    "section_type": "chapter",
+    "order_index": 50,
+    "start_offset": 770699,
+    "end_offset": 775192,
+    "metadata": {
+      "surah_number": 51
+    }
+  },
+  {
+    "surah": 52,
+    "title": "At-Tur",
+    "section_type": "chapter",
+    "order_index": 51,
+    "start_offset": 775192,
+    "end_offset": 779195,
+    "metadata": {
+      "surah_number": 52
+    }
+  },
+  {
+    "surah": 53,
+    "title": "An-Najm",
+    "section_type": "chapter",
+    "order_index": 52,
+    "start_offset": 779195,
+    "end_offset": 783517,
+    "metadata": {
+      "surah_number": 53
+    }
+  },
+  {
+    "surah": 54,
+    "title": "Al-Qamar",
+    "section_type": "chapter",
+    "order_index": 53,
+    "start_offset": 783517,
+    "end_offset": 787886,
+    "metadata": {
+      "surah_number": 54
+    }
+  },
+  {
+    "surah": 55,
+    "title": "Ar-Rahman",
+    "section_type": "chapter",
+    "order_index": 54,
+    "start_offset": 787886,
+    "end_offset": 792587,
+    "metadata": {
+      "surah_number": 55
+    }
+  },
+  {
+    "surah": 56,
+    "title": "Al-Waqi'ah",
+    "section_type": "chapter",
+    "order_index": 55,
+    "start_offset": 792587,
+    "end_offset": 797759,
+    "metadata": {
+      "surah_number": 56
+    }
+  },
+  {
+    "surah": 57,
+    "title": "Al-Hadid",
+    "section_type": "chapter",
+    "order_index": 56,
+    "start_offset": 797759,
+    "end_offset": 804439,
+    "metadata": {
+      "surah_number": 57
+    }
+  },
+  {
+    "surah": 58,
+    "title": "Al-Mujadila",
+    "section_type": "chapter",
+    "order_index": 57,
+    "start_offset": 804439,
+    "end_offset": 809769,
+    "metadata": {
+      "surah_number": 58
+    }
+  },
+  {
+    "surah": 59,
+    "title": "Al-Hashr",
+    "section_type": "chapter",
+    "order_index": 58,
+    "start_offset": 809769,
+    "end_offset": 814962,
+    "metadata": {
+      "surah_number": 59
+    }
+  },
+  {
+    "surah": 60,
+    "title": "Al-Mumtahanah",
+    "section_type": "chapter",
+    "order_index": 59,
+    "start_offset": 814962,
+    "end_offset": 818989,
+    "metadata": {
+      "surah_number": 60
+    }
+  },
+  {
+    "surah": 61,
+    "title": "As-Saf",
+    "section_type": "chapter",
+    "order_index": 60,
+    "start_offset": 818989,
+    "end_offset": 821393,
+    "metadata": {
+      "surah_number": 61
+    }
+  },
+  {
+    "surah": 62,
+    "title": "Al-Jumu'ah",
+    "section_type": "chapter",
+    "order_index": 61,
+    "start_offset": 821393,
+    "end_offset": 823265,
+    "metadata": {
+      "surah_number": 62
+    }
+  },
+  {
+    "surah": 63,
+    "title": "Al-Munafiqun",
+    "section_type": "chapter",
+    "order_index": 62,
+    "start_offset": 823265,
+    "end_offset": 825323,
+    "metadata": {
+      "surah_number": 63
+    }
+  },
+  {
+    "surah": 64,
+    "title": "At-Taghabun",
+    "section_type": "chapter",
+    "order_index": 63,
+    "start_offset": 825323,
+    "end_offset": 828202,
+    "metadata": {
+      "surah_number": 64
+    }
+  },
+  {
+    "surah": 65,
+    "title": "At-Talaq",
+    "section_type": "chapter",
+    "order_index": 64,
+    "start_offset": 828202,
+    "end_offset": 831441,
+    "metadata": {
+      "surah_number": 65
+    }
+  },
+  {
+    "surah": 66,
+    "title": "At-Tahrim",
+    "section_type": "chapter",
+    "order_index": 65,
+    "start_offset": 831441,
+    "end_offset": 834211,
+    "metadata": {
+      "surah_number": 66
+    }
+  },
+  {
+    "surah": 67,
+    "title": "Al-Mulk",
+    "section_type": "chapter",
+    "order_index": 66,
+    "start_offset": 834211,
+    "end_offset": 837902,
+    "metadata": {
+      "surah_number": 67
+    }
+  },
+  {
+    "surah": 68,
+    "title": "Al-Qalam",
+    "section_type": "chapter",
+    "order_index": 67,
+    "start_offset": 837902,
+    "end_offset": 841790,
+    "metadata": {
+      "surah_number": 68
+    }
+  },
+  {
+    "surah": 69,
+    "title": "Al-Haqqah",
+    "section_type": "chapter",
+    "order_index": 68,
+    "start_offset": 841790,
+    "end_offset": 845105,
+    "metadata": {
+      "surah_number": 69
+    }
+  },
+  {
+    "surah": 70,
+    "title": "Al-Ma'arij",
+    "section_type": "chapter",
+    "order_index": 69,
+    "start_offset": 845105,
+    "end_offset": 847851,
+    "metadata": {
+      "surah_number": 70
+    }
+  },
+  {
+    "surah": 71,
+    "title": "Nuh",
+    "section_type": "chapter",
+    "order_index": 70,
+    "start_offset": 847851,
+    "end_offset": 850450,
+    "metadata": {
+      "surah_number": 71
+    }
+  },
+  {
+    "surah": 72,
+    "title": "Al-Jinn",
+    "section_type": "chapter",
+    "order_index": 71,
+    "start_offset": 850450,
+    "end_offset": 853727,
+    "metadata": {
+      "surah_number": 72
+    }
+  },
+  {
+    "surah": 73,
+    "title": "Al-Muzzammil",
+    "section_type": "chapter",
+    "order_index": 72,
+    "start_offset": 853727,
+    "end_offset": 856098,
+    "metadata": {
+      "surah_number": 73
+    }
+  },
+  {
+    "surah": 74,
+    "title": "Al-Muddaththir",
+    "section_type": "chapter",
+    "order_index": 73,
+    "start_offset": 856098,
+    "end_offset": 859337,
+    "metadata": {
+      "surah_number": 74
+    }
+  },
+  {
+    "surah": 75,
+    "title": "Al-Qiyamah",
+    "section_type": "chapter",
+    "order_index": 74,
+    "start_offset": 859337,
+    "end_offset": 861476,
+    "metadata": {
+      "surah_number": 75
+    }
+  },
+  {
+    "surah": 76,
+    "title": "Al-Insan",
+    "section_type": "chapter",
+    "order_index": 75,
+    "start_offset": 861476,
+    "end_offset": 864550,
+    "metadata": {
+      "surah_number": 76
+    }
+  },
+  {
+    "surah": 77,
+    "title": "Al-Mursalat",
+    "section_type": "chapter",
+    "order_index": 76,
+    "start_offset": 864550,
+    "end_offset": 867008,
+    "metadata": {
+      "surah_number": 77
+    }
+  },
+  {
+    "surah": 78,
+    "title": "An-Naba'",
+    "section_type": "chapter",
+    "order_index": 77,
+    "start_offset": 867008,
+    "end_offset": 869317,
+    "metadata": {
+      "surah_number": 78
+    }
+  },
+  {
+    "surah": 79,
+    "title": "An-Nazi'at",
+    "section_type": "chapter",
+    "order_index": 78,
+    "start_offset": 869317,
+    "end_offset": 871904,
+    "metadata": {
+      "surah_number": 79
+    }
+  },
+  {
+    "surah": 80,
+    "title": "'Abasa",
+    "section_type": "chapter",
+    "order_index": 79,
+    "start_offset": 871904,
+    "end_offset": 873856,
+    "metadata": {
+      "surah_number": 80
+    }
+  },
+  {
+    "surah": 81,
+    "title": "At-Takwir",
+    "section_type": "chapter",
+    "order_index": 80,
+    "start_offset": 873856,
+    "end_offset": 875317,
+    "metadata": {
+      "surah_number": 81
+    }
+  },
+  {
+    "surah": 82,
+    "title": "Al-Infitar",
+    "section_type": "chapter",
+    "order_index": 81,
+    "start_offset": 875317,
+    "end_offset": 876365,
+    "metadata": {
+      "surah_number": 82
+    }
+  },
+  {
+    "surah": 83,
+    "title": "Al-Mutaffifin",
+    "section_type": "chapter",
+    "order_index": 82,
+    "start_offset": 876365,
+    "end_offset": 878535,
+    "metadata": {
+      "surah_number": 83
+    }
+  },
+  {
+    "surah": 84,
+    "title": "Al-Inshiqaq",
+    "section_type": "chapter",
+    "order_index": 83,
+    "start_offset": 878535,
+    "end_offset": 879965,
+    "metadata": {
+      "surah_number": 84
+    }
+  },
+  {
+    "surah": 85,
+    "title": "Al-Buruj",
+    "section_type": "chapter",
+    "order_index": 84,
+    "start_offset": 879965,
+    "end_offset": 881340,
+    "metadata": {
+      "surah_number": 85
+    }
+  },
+  {
+    "surah": 86,
+    "title": "At-Tariq",
+    "section_type": "chapter",
+    "order_index": 85,
+    "start_offset": 881340,
+    "end_offset": 882119,
+    "metadata": {
+      "surah_number": 86
+    }
+  },
+  {
+    "surah": 87,
+    "title": "Al-A'la",
+    "section_type": "chapter",
+    "order_index": 86,
+    "start_offset": 882119,
+    "end_offset": 883041,
+    "metadata": {
+      "surah_number": 87
+    }
+  },
+  {
+    "surah": 88,
+    "title": "Al-Ghashiyah",
+    "section_type": "chapter",
+    "order_index": 87,
+    "start_offset": 883041,
+    "end_offset": 884268,
+    "metadata": {
+      "surah_number": 88
+    }
+  },
+  {
+    "surah": 89,
+    "title": "Al-Fajr",
+    "section_type": "chapter",
+    "order_index": 88,
+    "start_offset": 884268,
+    "end_offset": 886049,
+    "metadata": {
+      "surah_number": 89
+    }
+  },
+  {
+    "surah": 90,
+    "title": "Al-Balad",
+    "section_type": "chapter",
+    "order_index": 89,
+    "start_offset": 886049,
+    "end_offset": 887098,
+    "metadata": {
+      "surah_number": 90
+    }
+  },
+  {
+    "surah": 91,
+    "title": "Ash-Shams",
+    "section_type": "chapter",
+    "order_index": 90,
+    "start_offset": 887098,
+    "end_offset": 888029,
+    "metadata": {
+      "surah_number": 91
+    }
+  },
+  {
+    "surah": 92,
+    "title": "Al-Layl",
+    "section_type": "chapter",
+    "order_index": 91,
+    "start_offset": 888029,
+    "end_offset": 889063,
+    "metadata": {
+      "surah_number": 92
+    }
+  },
+  {
+    "surah": 93,
+    "title": "Ad-Duha",
+    "section_type": "chapter",
+    "order_index": 92,
+    "start_offset": 889063,
+    "end_offset": 889682,
+    "metadata": {
+      "surah_number": 93
+    }
+  },
+  {
+    "surah": 94,
+    "title": "Ash-Sharh",
+    "section_type": "chapter",
+    "order_index": 93,
+    "start_offset": 889682,
+    "end_offset": 890072,
+    "metadata": {
+      "surah_number": 94
+    }
+  },
+  {
+    "surah": 95,
+    "title": "At-Tin",
+    "section_type": "chapter",
+    "order_index": 94,
+    "start_offset": 890072,
+    "end_offset": 890474,
+    "metadata": {
+      "surah_number": 95
+    }
+  },
+  {
+    "surah": 96,
+    "title": "Al-'Alaq",
+    "section_type": "chapter",
+    "order_index": 95,
+    "start_offset": 890474,
+    "end_offset": 891304,
+    "metadata": {
+      "surah_number": 96
+    }
+  },
+  {
+    "surah": 97,
+    "title": "Al-Qadr",
+    "section_type": "chapter",
+    "order_index": 96,
+    "start_offset": 891304,
+    "end_offset": 891628,
+    "metadata": {
+      "surah_number": 97
+    }
+  },
+  {
+    "surah": 98,
+    "title": "Al-Bayyinah",
+    "section_type": "chapter",
+    "order_index": 97,
+    "start_offset": 891628,
+    "end_offset": 892685,
+    "metadata": {
+      "surah_number": 98
+    }
+  },
+  {
+    "surah": 99,
+    "title": "Az-Zalzalah",
+    "section_type": "chapter",
+    "order_index": 98,
+    "start_offset": 892685,
+    "end_offset": 893139,
+    "metadata": {
+      "surah_number": 99
+    }
+  },
+  {
+    "surah": 100,
+    "title": "Al-'Adiyat",
+    "section_type": "chapter",
+    "order_index": 99,
+    "start_offset": 893139,
+    "end_offset": 893687,
+    "metadata": {
+      "surah_number": 100
+    }
+  },
+  {
+    "surah": 101,
+    "title": "Al-Qari'ah",
+    "section_type": "chapter",
+    "order_index": 100,
+    "start_offset": 893687,
+    "end_offset": 894201,
+    "metadata": {
+      "surah_number": 101
+    }
+  },
+  {
+    "surah": 102,
+    "title": "At-Takathur",
+    "section_type": "chapter",
+    "order_index": 101,
+    "start_offset": 894201,
+    "end_offset": 894582,
+    "metadata": {
+      "surah_number": 102
+    }
+  },
+  {
+    "surah": 103,
+    "title": "Al-'Asr",
+    "section_type": "chapter",
+    "order_index": 102,
+    "start_offset": 894582,
+    "end_offset": 894765,
+    "metadata": {
+      "surah_number": 103
+    }
+  },
+  {
+    "surah": 104,
+    "title": "Al-Humazah",
+    "section_type": "chapter",
+    "order_index": 103,
+    "start_offset": 894765,
+    "end_offset": 895196,
+    "metadata": {
+      "surah_number": 104
+    }
+  },
+  {
+    "surah": 105,
+    "title": "Al-Fil",
+    "section_type": "chapter",
+    "order_index": 104,
+    "start_offset": 895196,
+    "end_offset": 895484,
+    "metadata": {
+      "surah_number": 105
+    }
+  },
+  {
+    "surah": 106,
+    "title": "Quraysh",
+    "section_type": "chapter",
+    "order_index": 105,
+    "start_offset": 895484,
+    "end_offset": 895749,
+    "metadata": {
+      "surah_number": 106
+    }
+  },
+  {
+    "surah": 107,
+    "title": "Al-Ma'un",
+    "section_type": "chapter",
+    "order_index": 106,
+    "start_offset": 895749,
+    "end_offset": 896072,
+    "metadata": {
+      "surah_number": 107
+    }
+  },
+  {
+    "surah": 108,
+    "title": "Al-Kawthar",
+    "section_type": "chapter",
+    "order_index": 107,
+    "start_offset": 896072,
+    "end_offset": 896235,
+    "metadata": {
+      "surah_number": 108
+    }
+  },
+  {
+    "surah": 109,
+    "title": "Al-Kafirun",
+    "section_type": "chapter",
+    "order_index": 108,
+    "start_offset": 896235,
+    "end_offset": 896520,
+    "metadata": {
+      "surah_number": 109
+    }
+  },
+  {
+    "surah": 110,
+    "title": "An-Nasr",
+    "section_type": "chapter",
+    "order_index": 109,
+    "start_offset": 896520,
+    "end_offset": 896779,
+    "metadata": {
+      "surah_number": 110
+    }
+  },
+  {
+    "surah": 111,
+    "title": "Al-Masad",
+    "section_type": "chapter",
+    "order_index": 110,
+    "start_offset": 896779,
+    "end_offset": 897069,
+    "metadata": {
+      "surah_number": 111
+    }
+  },
+  {
+    "surah": 112,
+    "title": "Al-Ikhlas",
+    "section_type": "chapter",
+    "order_index": 111,
+    "start_offset": 897069,
+    "end_offset": 897221,
+    "metadata": {
+      "surah_number": 112
+    }
+  },
+  {
+    "surah": 113,
+    "title": "Al-Falaq",
+    "section_type": "chapter",
+    "order_index": 112,
+    "start_offset": 897221,
+    "end_offset": 897470,
+    "metadata": {
+      "surah_number": 113
+    }
+  },
+  {
+    "surah": 114,
+    "title": "An-Nas",
+    "section_type": "chapter",
+    "order_index": 113,
+    "start_offset": 897470,
+    "end_offset": 897724,
+    "metadata": {
+      "surah_number": 114
+    }
+  }
+]

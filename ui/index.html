@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heyet — Source-Grounded Q&A</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Heyet</h1>
+    <nav>
+      <a href="#projects">Projects</a>
+    </nav>
+  </header>
+
+  <!-- View: Project List -->
+  <div id="view-projects" class="view">
+    <h2>Projects</h2>
+    <div class="card" style="margin-bottom:20px">
+      <h3>New Project</h3>
+      <div class="form-group">
+        <label>Name</label>
+        <input id="new-project-name" type="text" placeholder="e.g. Quran Q&A" />
+      </div>
+      <div class="form-group">
+        <label>Description (optional)</label>
+        <input id="new-project-desc" type="text" placeholder="..." />
+      </div>
+      <button class="btn btn-primary" onclick="createProject()">Create Project</button>
+    </div>
+    <div id="project-list"></div>
+  </div>
+
+  <!-- View: Project Detail -->
+  <div id="view-project" class="view">
+    <button class="btn btn-secondary btn-sm" onclick="navigate('projects')" style="margin-bottom:12px">← Back</button>
+    <h2 id="project-title">Project</h2>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('documents')">Documents</div>
+      <div class="tab" onclick="showTab('ask')">Ask a Question</div>
+    </div>
+
+    <!-- Tab: Documents -->
+    <div id="tab-documents">
+      <div class="card">
+        <h3>Upload Document</h3>
+        <div class="form-group">
+          <div class="file-upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()">
+            <div>Drop a .txt file here or click to browse</div>
+            <input id="file-input" type="file" accept=".txt" style="display:none" onchange="handleFileSelect(event)" />
+          </div>
+        </div>
+        <div id="upload-status"></div>
+      </div>
+      <div class="card">
+        <h3>Build Index</h3>
+        <p style="margin-bottom:12px;font-size:0.9rem;color:#6b7280">
+          After uploading documents, build the search index to enable Q&A.
+          This may take a few minutes for large corpora.
+        </p>
+        <button class="btn btn-primary" onclick="buildIndex()">Build Index</button>
+        <div id="index-status" style="margin-top:8px"></div>
+      </div>
+      <h3 style="margin:16px 0 8px">Documents</h3>
+      <div id="document-list"></div>
+    </div>
+
+    <!-- Tab: Ask -->
+    <div id="tab-ask" style="display:none">
+      <div class="card">
+        <div class="form-group">
+          <label>Your Question</label>
+          <textarea id="question-input" rows="3" placeholder="What does the text say about..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="submitQuestion()">Ask</button>
+      </div>
+      <div id="answer-area"></div>
+    </div>
+  </div>
+
+  <!-- View: Answer Detail -->
+  <div id="view-answer" class="view">
+    <button class="btn btn-secondary btn-sm" id="back-to-project" style="margin-bottom:12px">← Back</button>
+    <div id="answer-detail"></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
