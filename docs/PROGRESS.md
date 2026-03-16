@@ -22,6 +22,7 @@ Overall status:
 - [x] Step 1 foundation is substantially implemented
 - [x] Retrieval and indexing are operational
 - [x] Inspectability/debug artifact persistence is operational
+- [x] Shared structured-generation enforcement layer now exists for answer + verifier JSON/schema handling
 - [ ] Final answer generation is stable enough for intended product quality
 - [ ] Verification is reliably schema-compliant with the configured local model
 
@@ -43,6 +44,7 @@ Overall status:
 - [x] Retrieval debug artifacts are persisted and exposed by API
 - [x] Prompt and output schema layer exists
 - [x] Answer generator and verifier pipeline exists
+- [x] Shared structured generation runner now centralizes JSON cleanup, validation, and retry handling
 - [x] Fallback extractive answer path exists when the local model fails schema validation
 - [x] Fallback deterministic verification path exists when the local model fails schema validation
 - [x] Uploading the bundled Quran corpus now ingests into verse-level passages instead of giant chunks
@@ -128,6 +130,7 @@ Immediate focus:
 #### Answer generation and verification
 - [x] Prompt/schema infrastructure exists
 - [x] Generator/verifier pipeline exists
+- [x] Shared structured generation runner exists
 - [x] Fallback extractive answer path exists when local model fails schema validation
 - [x] Fallback deterministic verification path exists when local model fails schema validation
 - [ ] Reliable schema-compliant answer generation from the configured local model
@@ -161,6 +164,7 @@ Immediate focus:
 - [x] Repo/setup baseline complete
 - [x] Core backend and retrieval pipeline complete for MVP Step 1
 - [x] Upload, ingestion, indexing, and retrieval-debug flow complete
+- [x] Shared structured generation enforcement complete
 - [ ] Grounded answer generation quality still needs stabilization
 - [ ] Verifier reliability still needs stabilization
 - [ ] UI polish and end-to-end UX cleanup still pending

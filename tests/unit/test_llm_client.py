@@ -86,6 +86,36 @@ class InvalidSchemaLLM:
         return '{"passages":[{"passage_id":"p1","text":"Patience is a virtue."}]}'
 
 
+class RetryThenValidAnswerLLM:
+    def __init__(self):
+        self.calls = 0
+
+    def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+        self.calls += 1
+        if self.calls == 1:
+            return '{"final_answer":"Patience matters."}'
+        return (
+            '{"final_answer":"Patience is a virtue.","claims":[{"claim_id":"c1",'
+            '"statement":"Patience is a virtue.","supporting_passage_ids":["p1"],'
+            '"support_type":"direct"}],"supporting_citations":[{"passage_id":"p1",'
+            '"quote":"Patience is a virtue."}],"objections_raised":[],"confidence_notes":"Direct support."}'
+        )
+
+
+class RetryThenValidVerifierLLM:
+    def __init__(self):
+        self.calls = 0
+
+    def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+        self.calls += 1
+        if self.calls == 1:
+            return '{"status":"pass"}'
+        return (
+            '{"status":"pass","supported_claims":["c1"],"unsupported_claims":[],'
+            '"citation_issues":[],"notes":"All claims supported."}'
+        )
+
+
 def test_answer_generator_wraps_transport_failures():
     generator = GroundedAnswerGenerator(FailingLLM())
     draft = generator.generate("What is patience?", _bundle())
@@ -134,3 +164,72 @@ def test_verifier_falls_back_to_deterministic_report_for_invalid_schema():
     assert report.status == "pass_with_warnings"
     assert report.supported_claims == ["c1"]
     assert "Fallback verification" in report.notes
+
+
+def test_answer_generator_retries_and_returns_structured_output():
+    generator = GroundedAnswerGenerator(RetryThenValidAnswerLLM())
+
+    draft = generator.generate("What is patience?", _bundle())
+
+    assert draft.final_answer == "Patience is a virtue."
+    assert draft.claims[0].supporting_passage_ids == ["p1"]
+    assert draft.confidence_notes == "Direct support."
+
+
+def test_answer_generator_filters_hallucinated_passage_ids_after_structured_success():
+    class HallucinatedAnswerLLM:
+        def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+            return (
+                '{"final_answer":"Patience is a virtue.","claims":[{"claim_id":"c1",'
+                '"statement":"Patience is a virtue.","supporting_passage_ids":["p1","ghost"],'
+                '"support_type":"direct"}],"supporting_citations":[{"passage_id":"p1",'
+                '"quote":"Patience is a virtue."},{"passage_id":"ghost","quote":"ghost"}],'
+                '"objections_raised":[],"confidence_notes":"Direct support."}'
+            )
+
+    generator = GroundedAnswerGenerator(HallucinatedAnswerLLM())
+    draft = generator.generate("What is patience?", _bundle())
+
+    assert draft.claims[0].supporting_passage_ids == ["p1"]
+    assert [citation.passage_id for citation in draft.supporting_citations] == ["p1"]
+
+
+def test_verifier_retries_and_returns_structured_output():
+    verifier = LLMVerifier(RetryThenValidVerifierLLM())
+    draft = AnswerDraftDomain(
+        final_answer="Patience is a virtue.",
+        claims=[ClaimDomain("c1", "Patience is a virtue.", ["p1"], "direct")],
+        supporting_citations=[CitationDomain("p1", "Patience is a virtue.")],
+        objections_raised=[],
+        confidence_notes="Direct support.",
+    )
+
+    report = verifier.verify("What is patience?", _bundle(), draft)
+
+    assert report.status == "pass"
+    assert report.supported_claims == ["c1"]
+
+
+def test_verifier_filters_unknown_claim_ids_and_passage_ids():
+    class VerifierFilteringLLM:
+        def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+            return (
+                '{"status":"pass_with_warnings","supported_claims":["c1"],'
+                '"unsupported_claims":[{"claim_id":"c1","reason":"warn"},{"claim_id":"ghost","reason":"bad"}],'
+                '"citation_issues":[{"passage_id":"p1","issue":"warn"},{"passage_id":"ghost","issue":"bad"}],'
+                '"notes":"Mixed."}'
+            )
+
+    verifier = LLMVerifier(VerifierFilteringLLM())
+    draft = AnswerDraftDomain(
+        final_answer="Patience is a virtue.",
+        claims=[ClaimDomain("c1", "Patience is a virtue.", ["p1"], "direct")],
+        supporting_citations=[CitationDomain("p1", "Patience is a virtue.")],
+        objections_raised=[],
+        confidence_notes="Direct support.",
+    )
+
+    report = verifier.verify("What is patience?", _bundle(), draft)
+
+    assert [claim.claim_id for claim in report.unsupported_claims] == ["c1"]
+    assert [issue.passage_id for issue in report.citation_issues] == ["p1"]

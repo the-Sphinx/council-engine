@@ -52,3 +52,13 @@ Store retrieval debug artifacts for every query.
 
 Reason:
 Enables debugging and evaluation.
+
+---
+
+## Structured Generation Enforcement
+
+Decision:
+Centralize JSON cleanup, parsing, validation, and retry behavior in a shared structured-generation layer before answer/verifier domain conversion.
+
+Reason:
+Improves schema compliance and inspectability without collapsing the answer generator and verifier into one generic pipeline.

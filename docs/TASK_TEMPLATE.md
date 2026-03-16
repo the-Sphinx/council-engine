@@ -6,7 +6,7 @@ Use this template when assigning tasks to coding agents like Codex.
 
 ## Context
 
-Before implementing anything read:
+Before implementing anything read the following documents that are stored under the `docs/` directory:
 
 MASTER_BRIEF.md  
 DECISIONS.md  

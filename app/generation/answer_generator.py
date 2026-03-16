@@ -4,9 +4,6 @@ GroundedAnswerGenerator: sends evidence bundle to LLM and returns structured Ans
 
 from __future__ import annotations
 
-import json
-from dataclasses import dataclass
-
 from app.core.interfaces import (
     AnswerDraftDomain,
     AnswerGeneratorInterface,
@@ -19,6 +16,7 @@ from app.core.logging import get_logger
 from app.generation.llm_client import LLMClient
 from app.generation.prompts import ANSWER_GENERATOR_SYSTEM, build_answer_user_prompt
 from app.generation.schema_validator import AnswerGeneratorOutput
+from app.generation.structured_generation import StructuredGenerationRunner
 
 logger = get_logger(__name__)
 
@@ -27,80 +25,51 @@ class GenerationError(Exception):
     pass
 
 
-@dataclass
-class ParseAttempt:
-    output: AnswerGeneratorOutput | None
-    should_retry: bool
-
-
 class GroundedAnswerGenerator(AnswerGeneratorInterface):
     def __init__(self, llm_client: LLMClient):
         self._llm = llm_client
+        self._runner = StructuredGenerationRunner(llm_client)
 
     def generate(
         self, question: str, evidence_bundle: EvidenceBundleDomain
     ) -> AnswerDraftDomain:
         user_prompt = build_answer_user_prompt(question, evidence_bundle)
         valid_ids = {a.passage_id for a in evidence_bundle.anchors}
+        result = self._runner.run(
+            system_prompt=ANSWER_GENERATOR_SYSTEM,
+            user_prompt=user_prompt,
+            output_model=AnswerGeneratorOutput,
+            schema_label="answer generator output",
+        )
 
-        try:
-            raw = self._llm.chat(ANSWER_GENERATOR_SYSTEM, user_prompt)
-        except Exception as exc:
-            logger.warning("Answer generator request failed, using fallback: %s", exc)
-            return self._build_fallback_answer(evidence_bundle)
-        attempt = self._parse_and_validate(raw, valid_ids)
-        output = attempt.output
-
-        if output is None and attempt.should_retry:
-            # Retry once with explicit correction
-            correction_prompt = (
-                user_prompt
-                + "\n\nIMPORTANT: Your previous response was not valid JSON. "
-                "Return ONLY a valid JSON object, nothing else."
-            )
-            try:
-                raw2 = self._llm.chat(ANSWER_GENERATOR_SYSTEM, correction_prompt)
-            except Exception as exc:
-                logger.warning("Answer generator retry failed, using fallback: %s", exc)
-                return self._build_fallback_answer(evidence_bundle)
-            output = self._parse_and_validate(raw2, valid_ids).output
-
-        if output is None:
+        if result.parsed is None:
             logger.warning(
-                "Falling back to deterministic extractive answer for query %r",
+                "Falling back to deterministic extractive answer for query %r after %s attempts: %s",
                 question[:120],
+                result.attempts,
+                result.failure_reason,
             )
             return self._build_fallback_answer(evidence_bundle)
 
+        output = result.parsed
+        self._filter_hallucinated_passage_ids(output, valid_ids)
         return self._to_domain(output)
 
-    def _parse_and_validate(
-        self, raw: str, valid_ids: set[str]
-    ) -> ParseAttempt:
-        try:
-            data = json.loads(raw)
-            output = AnswerGeneratorOutput.model_validate(data)
-
-            # Check for hallucinated passage IDs and remove them
-            bad_ids = set(output.validate_passage_ids(valid_ids))
-            if bad_ids:
-                logger.warning("Hallucinated passage IDs detected: %s", bad_ids)
-                # Filter out bad IDs rather than hard-failing
-                for claim in output.claims:
-                    claim.supporting_passage_ids = [
-                        pid for pid in claim.supporting_passage_ids if pid not in bad_ids
-                    ]
-                output.supporting_citations = [
-                    c for c in output.supporting_citations if c.passage_id not in bad_ids
+    def _filter_hallucinated_passage_ids(
+        self,
+        output: AnswerGeneratorOutput,
+        valid_ids: set[str],
+    ) -> None:
+        bad_ids = set(output.validate_passage_ids(valid_ids))
+        if bad_ids:
+            logger.warning("Hallucinated passage IDs detected: %s", bad_ids)
+            for claim in output.claims:
+                claim.supporting_passage_ids = [
+                    pid for pid in claim.supporting_passage_ids if pid not in bad_ids
                 ]
-
-            return ParseAttempt(output=output, should_retry=False)
-        except json.JSONDecodeError as e:
-            logger.warning("Answer generator parse error: %s", e)
-            return ParseAttempt(output=None, should_retry=True)
-        except Exception as e:
-            logger.warning("Answer generator parse error: %s", e)
-            return ParseAttempt(output=None, should_retry=False)
+            output.supporting_citations = [
+                c for c in output.supporting_citations if c.passage_id not in bad_ids
+            ]
 
     def _build_fallback_answer(
         self,

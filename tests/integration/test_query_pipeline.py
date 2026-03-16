@@ -180,6 +180,57 @@ def test_answer_generation_with_fake_llm(project_with_index, db):
     assert all(c.claim_id for c in draft.claims)
 
 
+def test_answer_generation_retries_through_shared_runner(project_with_index, db):
+    project_id, im, passages = project_with_index
+
+    from app.core.interfaces import AnchorPassage, EvidenceBundleDomain
+    from app.generation.answer_generator import GroundedAnswerGenerator
+
+    anchor_passage_id = passages[5].id
+    bundle = EvidenceBundleDomain(
+        query_id="test-query",
+        mode="source_only",
+        anchors=[
+            AnchorPassage(
+                passage_id=anchor_passage_id,
+                text=passages[5].text,
+                rank=1,
+                scores={"hybrid": 0.9},
+                section_title=None,
+                section_order_index=None,
+                window_passage_ids=[anchor_passage_id],
+                window_text=passages[5].text,
+            )
+        ],
+    )
+
+    class RetryLLM:
+        def __init__(self):
+            self.calls = 0
+
+        def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+            self.calls += 1
+            if self.calls == 1:
+                return '{"final_answer":"Patience is a virtue."}'
+            return (
+                '{"final_answer":"Patience is a virtue.","claims":[{"claim_id":"c1",'
+                '"statement":"Patience is a virtue.","supporting_passage_ids":["'
+                + anchor_passage_id
+                + '"],"support_type":"direct"}],"supporting_citations":[{"passage_id":"'
+                + anchor_passage_id
+                + '","quote":"Patience is a virtue"}],"objections_raised":[],'
+                '"confidence_notes":"Direct support."}'
+            )
+
+    draft = GroundedAnswerGenerator(RetryLLM()).generate(
+        "What does the text say about patience?",
+        bundle,
+    )
+
+    assert draft.final_answer == "Patience is a virtue."
+    assert draft.claims[0].supporting_passage_ids == [anchor_passage_id]
+
+
 def test_verifier_with_fake_llm(project_with_index, db):
     project_id, im, passages = project_with_index
 

@@ -4,9 +4,6 @@ LLMVerifier: validates that answer draft claims are supported by evidence bundle
 
 from __future__ import annotations
 
-import json
-from dataclasses import dataclass
-
 from app.core.interfaces import (
     AnswerDraftDomain,
     CitationIssueDomain,
@@ -19,6 +16,7 @@ from app.core.logging import get_logger
 from app.generation.llm_client import LLMClient
 from app.generation.prompts import VERIFIER_SYSTEM, build_verifier_user_prompt
 from app.generation.schema_validator import VerifierOutput
+from app.generation.structured_generation import StructuredGenerationRunner
 
 logger = get_logger(__name__)
 
@@ -27,15 +25,10 @@ class VerificationError(Exception):
     pass
 
 
-@dataclass
-class ParseAttempt:
-    output: VerifierOutput | None
-    should_retry: bool
-
-
 class LLMVerifier(VerifierInterface):
     def __init__(self, llm_client: LLMClient):
         self._llm = llm_client
+        self._runner = StructuredGenerationRunner(llm_client)
 
     def verify(
         self,
@@ -61,33 +54,22 @@ class LLMVerifier(VerifierInterface):
         }
 
         user_prompt = build_verifier_user_prompt(question, evidence_bundle, draft_dict)
-        try:
-            raw = self._llm.chat(VERIFIER_SYSTEM, user_prompt)
-        except Exception as exc:
-            logger.warning("Verifier request failed, using fallback: %s", exc)
-            return self._build_fallback_report(evidence_bundle, answer_draft)
-        attempt = self._parse(raw)
-        output = attempt.output
+        result = self._runner.run(
+            system_prompt=VERIFIER_SYSTEM,
+            user_prompt=user_prompt,
+            output_model=VerifierOutput,
+            schema_label="verifier output",
+        )
 
-        if output is None and attempt.should_retry:
-            # Retry once
-            retry_prompt = (
-                user_prompt
-                + "\n\nReturn ONLY valid JSON according to the schema, nothing else."
-            )
-            try:
-                raw2 = self._llm.chat(VERIFIER_SYSTEM, retry_prompt)
-            except Exception as exc:
-                logger.warning("Verifier retry failed, using fallback: %s", exc)
-                return self._build_fallback_report(evidence_bundle, answer_draft)
-            output = self._parse(raw2).output
-
-        if output is None:
+        if result.parsed is None:
             logger.warning(
-                "Falling back to deterministic verification for query %r",
+                "Falling back to deterministic verification for query %r after %s attempts: %s",
                 question[:120],
+                result.attempts,
+                result.failure_reason,
             )
             return self._build_fallback_report(evidence_bundle, answer_draft)
+        output = result.parsed
 
         # Cross-check: unsupported claim_ids must exist in draft
         draft_claim_ids = {c.claim_id for c in answer_draft.claims}
@@ -114,17 +96,6 @@ class LLMVerifier(VerifierInterface):
             ],
             notes=output.notes,
         )
-
-    def _parse(self, raw: str) -> ParseAttempt:
-        try:
-            data = json.loads(raw)
-            return ParseAttempt(output=VerifierOutput.model_validate(data), should_retry=False)
-        except json.JSONDecodeError as e:
-            logger.warning("Verifier parse error: %s", e)
-            return ParseAttempt(output=None, should_retry=True)
-        except Exception as e:
-            logger.warning("Verifier parse error: %s", e)
-            return ParseAttempt(output=None, should_retry=False)
 
     def _build_fallback_report(
         self,
