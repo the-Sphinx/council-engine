@@ -1,0 +1,327 @@
+{
+  "run_id": "06fa384e-cdd3-46e2-9257-b6cdf1fb88b0",
+  "summary": {
+    "model_name": "llama3.1:8b",
+    "label": null,
+    "project_id": "86da8892-b3c5-4a15-a174-1f8ff5179d6b",
+    "dataset": "data/evals/questions.json",
+    "timestamp": "2026-03-17T08:57:39.988566",
+    "total_queries": 10,
+    "error_count": 0,
+    "errors": [],
+    "fallback_count": 9,
+    "fallback_rate": 0.9,
+    "verifier_fallback_count": 9,
+    "verifier_fallback_rate": 0.9,
+    "schema_success_rate": 0.1,
+    "answer_schema_success_rate": 0.1,
+    "verifier_schema_success_rate": 0.1,
+    "average_retries_used": 0.0,
+    "answer_average_retries_used": 0.0,
+    "verifier_average_retries_used": 0.0,
+    "repair_used_count": 0,
+    "repair_success_count": 0
+  },
+  "queries": [
+    {
+      "id": "q001",
+      "question": "What does the text say about fasting?",
+      "category": "direct_lookup",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "2|184|[Fasting for] a limited number of days. So whoever among you is ill or on a journey [during them] - then an equal number of days [are to be made up]. And upon those who are able [to fast, but with hardship] - a ransom [as substitute] ",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q002",
+      "question": "What does the text say about patience?",
+      "category": "direct_lookup",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "18|78|[Al-Khidh r] said, \"This is parting between me and you. I will inform you of the interpretation of that about which you could not have patience. 18|72|[Al-Khidh r] said, \"Did I not say that with me you would never be able to have pati",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q003",
+      "question": "What guidance is given about prayer?",
+      "category": "direct_lookup",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "3|73|And do not trust except those who follow your religion.\" Say, \"Indeed, the [true] guidance is the guidance of Allah. [Do you fear] lest someone be given [knowledge] like you were given or that they would [thereby] argue with you before",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q004",
+      "question": "What does the text say about giving to the poor?",
+      "category": "paraphrase",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "2|271|If you disclose your charitable expenditures, they are good; but if you conceal them and give them to the poor, it is better for you, and He will remove from you some of your misdeeds [thereby]. And Allah, with what you do, is [fully]",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q005",
+      "question": "What are the rewards promised to the righteous?",
+      "category": "multi_passage",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "25|15|Say, \"Is that better or the Garden of Eternity which is promised to the righteous? It will be for them a reward and destination. 5|9|Allah has promised those who believe and do righteous deeds [that] for them there is forgiveness and ",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q006",
+      "question": "What does the text say about abstaining from food during a sacred period?",
+      "category": "paraphrase",
+      "answer": {
+        "mode": "structured",
+        "attempts": 1,
+        "structured_success": true,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": null,
+        "fallback_used": false,
+        "final_answer_preview": "",
+        "objections": [
+          "The passage does not explicitly mention abstaining from food."
+        ]
+      },
+      "verifier": {
+        "mode": "structured",
+        "attempts": 1,
+        "structured_success": true,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": null,
+        "fallback_used": false
+      },
+      "verification_status": "fail",
+      "error": null,
+      "verification_notes": ""
+    },
+    {
+      "id": "q007",
+      "question": "How does the text describe the concept of mercy?",
+      "category": "multi_passage",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "46|12|And before it was the scripture of Moses to lead and as a mercy. And this is a confirming Book in an Arabic tongue to warn those who have wronged and as good tidings to the doers of good. 43|32|Do they distribute the mercy of your Lor",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q008",
+      "question": "What does the text say about Moses?",
+      "category": "direct_lookup",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "7|128|Said Moses to his people, \"Seek help through Allah and be patient. Indeed, the earth belongs to Allah. He causes to inherit it whom He wills of His servants. And the [best] outcome is for the righteous.\" 10|77|Moses said, \"Do you say ",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q009",
+      "question": "What themes are associated with patience and prayer together?",
+      "category": "multi_passage",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "2|153|O you who have believed, seek help through patience and prayer. Indeed, Allah is with the patient. 2|45|And seek help through patience and prayer, and indeed, it is difficult except for the humbly submissive [to Allah] 12|83|[Jacob] s",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    },
+    {
+      "id": "q010",
+      "question": "What restrictions does the text place on eating?",
+      "category": "paraphrase",
+      "answer": {
+        "mode": "fallback",
+        "attempts": 1,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "llm_error: Ollama request failed: timed out",
+        "fallback_used": true,
+        "final_answer_preview": "24|61|There is not upon the blind [any] constraint nor upon the lame constraint nor upon the ill constraint nor upon yourselves when you eat from your [own] houses or the houses of your fathers or the houses of your mothers or the houses of",
+        "objections": [
+          "This answer was assembled directly from the top retrieved passages because the local model did not return the required schema."
+        ]
+      },
+      "verifier": {
+        "mode": "deterministic_skip",
+        "attempts": 0,
+        "structured_success": false,
+        "repair_attempted": false,
+        "repair_succeeded": false,
+        "failure_reason": "skipped_for_fallback_answer",
+        "fallback_used": true
+      },
+      "verification_status": "pass_with_warnings",
+      "error": null,
+      "verification_notes": "Fallback verification used deterministic passage/citation checks because the local model did not return the required schema."
+    }
+  ]
+}

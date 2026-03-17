@@ -62,3 +62,13 @@ Centralize JSON cleanup, parsing, validation, and retry behavior in a shared str
 
 Reason:
 Improves schema compliance and inspectability without collapsing the answer generator and verifier into one generic pipeline.
+
+---
+
+## Default Local Model
+
+Decision:
+Use `qwen2.5:7b` as the default local Ollama model instead of `llama3.1:8b`.
+
+Reason:
+Local evaluation over 10 Quran questions showed materially better behavior: fallback rate dropped from 90% to 50%, and full structured answer+verifier schema success improved from 10% to 40%.

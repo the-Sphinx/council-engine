@@ -139,18 +139,19 @@ class OpenAIClient(LLMClient):
         return data["choices"][0]["message"]["content"]
 
 
-def get_llm_client(settings: Settings) -> LLMClient:
+def get_llm_client(settings: Settings, model_override: str | None = None) -> LLMClient:
+    model_name = model_override or settings.LLM_MODEL
     if settings.LLM_PROVIDER == "openai":
         import os
         api_key = os.environ.get("OPENAI_API_KEY", "")
         return OpenAIClient(
             api_key=api_key,
-            model=settings.LLM_MODEL,
+            model=model_name,
             timeout_seconds=settings.LLM_TIMEOUT_SECONDS,
         )
     # Default: ollama
     return OllamaClient(
         base_url=settings.LLM_BASE_URL,
-        model=settings.LLM_MODEL,
+        model=model_name,
         timeout_seconds=settings.LLM_TIMEOUT_SECONDS,
     )

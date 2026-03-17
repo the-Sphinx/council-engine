@@ -16,13 +16,14 @@ Current reality:
 - retrieval is working
 - source passage splitting is working
 - backend query flow is working
-- local LLM answer generation and verification are still not reliably schema-compliant
+- local LLM answer generation and verification are improved with `qwen2.5:7b`, but still not reliably schema-compliant
 
 Overall status:
 - [x] Step 1 foundation is substantially implemented
 - [x] Retrieval and indexing are operational
 - [x] Inspectability/debug artifact persistence is operational
 - [x] Shared structured-generation enforcement layer now exists for answer + verifier JSON/schema handling
+- [x] Local model evaluation workflow exists and baseline vs upgraded model results have been captured
 - [ ] Final answer generation is stable enough for intended product quality
 - [ ] Verification is reliably schema-compliant with the configured local model
 
@@ -47,6 +48,7 @@ Overall status:
 - [x] Shared structured generation runner now centralizes JSON cleanup, validation, and retry handling
 - [x] Fallback extractive answer path exists when the local model fails schema validation
 - [x] Fallback deterministic verification path exists when the local model fails schema validation
+- [x] Configurable model evaluation script exists for local model comparison
 - [x] Uploading the bundled Quran corpus now ingests into verse-level passages instead of giant chunks
 - [x] Live upload -> index -> query flow works through the backend
 
@@ -84,12 +86,13 @@ Overall status:
 - [x] Retrieval benchmark scaffolding exists
 - [x] Eval runner exists
 - [x] Grounding metrics scaffolding exists
+- [x] Model comparison eval results captured for `llama3.1:8b` and `qwen2.5:7b`
 
 ---
 
 ## In Progress / Known Issues
 
-- [ ] The configured Ollama model often times out or returns the wrong JSON shape
+- [ ] The upgraded `qwen2.5:7b` model still times out on some broad questions and still returns invalid verifier JSON on some cases
 - [ ] The app currently relies on fallback answer/verification behavior more than intended
 - [ ] Final answer quality is not yet at the intended product level
 - [ ] UI messaging is still confusing in some states
@@ -100,7 +103,7 @@ Overall status:
 
 ## Current Task
 
-Stabilize the answer-generation layer so the product moves from:
+Reduce fallback frequency and stabilize the upgraded local model so the product moves from:
 
 retrieval + fallback extractive answers
 
@@ -109,7 +112,8 @@ to:
 reliable grounded answers + reliable verifier output
 
 Immediate focus:
-- improve the local model behavior or replace the local model
+- keep `qwen2.5:7b` as the current default local model
+- reduce the remaining verifier schema failures and answer timeouts
 - reduce schema failures and fallback frequency
 - improve user-facing UI/status messaging
 
@@ -133,8 +137,8 @@ Immediate focus:
 - [x] Shared structured generation runner exists
 - [x] Fallback extractive answer path exists when local model fails schema validation
 - [x] Fallback deterministic verification path exists when local model fails schema validation
-- [ ] Reliable schema-compliant answer generation from the configured local model
-- [ ] Reliable schema-compliant verification from the configured local model
+- [ ] Reliable schema-compliant answer generation from `qwen2.5:7b`
+- [ ] Reliable schema-compliant verification from `qwen2.5:7b`
 - [ ] Good user-facing answer quality without fallback behavior
 
 #### Frontend
@@ -154,7 +158,7 @@ Immediate focus:
 - [x] Schema models exist
 - [x] Prompt templates exist
 - [x] Validator layer exists
-- [ ] Local model does not yet reliably follow the required schema
+- [ ] `qwen2.5:7b` improves schema compliance but does not yet reliably follow the required schema
 - [ ] This remains the main blocker for a strong final answer experience
 
 ---
@@ -165,6 +169,37 @@ Immediate focus:
 - [x] Core backend and retrieval pipeline complete for MVP Step 1
 - [x] Upload, ingestion, indexing, and retrieval-debug flow complete
 - [x] Shared structured generation enforcement complete
+- [x] Local model upgraded from `llama3.1:8b` to `qwen2.5:7b` based on measured eval results
 - [ ] Grounded answer generation quality still needs stabilization
 - [ ] Verifier reliability still needs stabilization
 - [ ] UI polish and end-to-end UX cleanup still pending
+
+---
+
+## Model Evaluation Summary
+
+Current default local model:
+- `qwen2.5:7b`
+
+Measured on:
+- dataset: `data/evals/questions.json`
+- questions: 10
+- project: `86da8892-b3c5-4a15-a174-1f8ff5179d6b`
+
+Results:
+- `llama3.1:8b`
+  - fallback rate: `0.90`
+  - full schema success rate: `0.10`
+  - answer schema success rate: `0.10`
+  - verifier schema success rate: `0.10`
+- `qwen2.5:7b`
+  - fallback rate: `0.50`
+  - full schema success rate: `0.40`
+  - answer schema success rate: `0.50`
+  - verifier schema success rate: `0.40`
+
+Decision:
+- switch to `qwen2.5:7b` as the default local model
+
+Remaining gap:
+- even with `qwen2.5:7b`, fallback is still too common for production-quality behavior

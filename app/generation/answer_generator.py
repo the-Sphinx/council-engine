@@ -29,6 +29,7 @@ class GroundedAnswerGenerator(AnswerGeneratorInterface):
     def __init__(self, llm_client: LLMClient):
         self._llm = llm_client
         self._runner = StructuredGenerationRunner(llm_client)
+        self.last_run_info: dict | None = None
 
     def generate(
         self, question: str, evidence_bundle: EvidenceBundleDomain
@@ -43,6 +44,15 @@ class GroundedAnswerGenerator(AnswerGeneratorInterface):
         )
 
         if result.parsed is None:
+            self.last_run_info = {
+                "mode": "fallback",
+                "attempts": result.attempts,
+                "structured_success": False,
+                "repair_attempted": result.repair_attempted,
+                "repair_succeeded": result.repair_succeeded,
+                "failure_reason": result.failure_reason,
+                "fallback_used": True,
+            }
             logger.warning(
                 "Falling back to deterministic extractive answer for query %r after %s attempts: %s",
                 question[:120],
@@ -52,6 +62,15 @@ class GroundedAnswerGenerator(AnswerGeneratorInterface):
             return self._build_fallback_answer(evidence_bundle)
 
         output = result.parsed
+        self.last_run_info = {
+            "mode": "structured",
+            "attempts": result.attempts,
+            "structured_success": True,
+            "repair_attempted": result.repair_attempted,
+            "repair_succeeded": result.repair_succeeded,
+            "failure_reason": None,
+            "fallback_used": False,
+        }
         self._filter_hallucinated_passage_ids(output, valid_ids)
         return self._to_domain(output)
 

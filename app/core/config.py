@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     DATA_DIR: Path = Path("./data")
     INDICES_DIR: Path = Path("./data/indices")
     LLM_PROVIDER: str = "ollama"
-    LLM_MODEL: str = "llama3.1:8b"
+    LLM_MODEL: str = "qwen2.5:7b"
     LLM_BASE_URL: str = "http://localhost:11434"
     LLM_TIMEOUT_SECONDS: float = 45.0
     EMBEDDER_MODEL: str = "all-MiniLM-L6-v2"

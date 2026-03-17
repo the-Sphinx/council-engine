@@ -29,6 +29,7 @@ class LLMVerifier(VerifierInterface):
     def __init__(self, llm_client: LLMClient):
         self._llm = llm_client
         self._runner = StructuredGenerationRunner(llm_client)
+        self.last_run_info: dict | None = None
 
     def verify(
         self,
@@ -37,6 +38,15 @@ class LLMVerifier(VerifierInterface):
         answer_draft: AnswerDraftDomain,
     ) -> VerificationReportDomain:
         if self._should_use_deterministic_verification(answer_draft):
+            self.last_run_info = {
+                "mode": "deterministic_skip",
+                "attempts": 0,
+                "structured_success": False,
+                "repair_attempted": False,
+                "repair_succeeded": False,
+                "failure_reason": "skipped_for_fallback_answer",
+                "fallback_used": True,
+            }
             logger.warning(
                 "Using deterministic verification for fallback answer draft on query %r",
                 question[:120],
@@ -69,6 +79,15 @@ class LLMVerifier(VerifierInterface):
         )
 
         if result.parsed is None:
+            self.last_run_info = {
+                "mode": "deterministic_fallback",
+                "attempts": result.attempts,
+                "structured_success": False,
+                "repair_attempted": result.repair_attempted,
+                "repair_succeeded": result.repair_succeeded,
+                "failure_reason": result.failure_reason,
+                "fallback_used": True,
+            }
             logger.warning(
                 "Falling back to deterministic verification for query %r after %s attempts: %s",
                 question[:120],
@@ -77,6 +96,15 @@ class LLMVerifier(VerifierInterface):
             )
             return self._build_fallback_report(evidence_bundle, answer_draft)
         output = result.parsed
+        self.last_run_info = {
+            "mode": "structured",
+            "attempts": result.attempts,
+            "structured_success": True,
+            "repair_attempted": result.repair_attempted,
+            "repair_succeeded": result.repair_succeeded,
+            "failure_reason": None,
+            "fallback_used": False,
+        }
 
         # Cross-check: unsupported claim_ids must exist in draft
         draft_claim_ids = {c.claim_id for c in answer_draft.claims}

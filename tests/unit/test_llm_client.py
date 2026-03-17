@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import httpx
 
+from app.core.config import Settings
 from app.generation.answer_generator import GenerationError, GroundedAnswerGenerator
-from app.generation.llm_client import OllamaClient
+from app.generation.llm_client import OllamaClient, get_llm_client
 from app.generation.verifier import LLMVerifier, VerificationError
 from app.core.interfaces import AnchorPassage, AnswerDraftDomain, CitationDomain, ClaimDomain, EvidenceBundleDomain
 
@@ -122,6 +123,8 @@ def test_answer_generator_wraps_transport_failures():
 
     assert draft.claims[0].supporting_passage_ids == ["p1"]
     assert "Fallback extractive answer" in draft.confidence_notes
+    assert generator.last_run_info is not None
+    assert generator.last_run_info["fallback_used"] is True
 
 
 def test_verifier_wraps_transport_failures():
@@ -138,6 +141,8 @@ def test_verifier_wraps_transport_failures():
 
     assert report.status == "pass_with_warnings"
     assert report.supported_claims == ["c1"]
+    assert verifier.last_run_info is not None
+    assert verifier.last_run_info["fallback_used"] is True
 
 
 def test_answer_generator_falls_back_to_extractive_answer_for_invalid_schema():
@@ -254,3 +259,16 @@ def test_verifier_filters_unknown_claim_ids_and_passage_ids():
 
     assert [claim.claim_id for claim in report.unsupported_claims] == ["c1"]
     assert [issue.passage_id for issue in report.citation_issues] == ["p1"]
+
+
+def test_get_llm_client_uses_model_override():
+    settings = Settings(
+        LLM_PROVIDER="ollama",
+        LLM_MODEL="llama3.1:8b",
+        LLM_BASE_URL="http://localhost:11434",
+    )
+
+    client = get_llm_client(settings, model_override="qwen2.5:7b")
+
+    assert isinstance(client, OllamaClient)
+    assert client._model == "qwen2.5:7b"

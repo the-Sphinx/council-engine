@@ -1,7 +1,7 @@
 # REVIEW BUNDLE
 
 ## 1. Task Summary
-- Task name: Structured generation enforcement layer
+- Task name: Model upgrade and local evaluation
 - Date: 2026-03-17
 - Branch: main
 - Commit hash: pending commit
@@ -9,79 +9,72 @@
 - Status: completed
 
 ## 2. Objective
-Implement a shared structured-generation layer so answer generation and verification both use the same JSON cleanup, parsing, validation, retry, and failure-reporting flow before falling back.
+Evaluate whether switching the local Ollama model improves schema compliance, fallback rate, and answer quality enough to justify changing the project default.
 
 ## 3. What Changed
-- Added a shared structured-generation runner with retry, safe JSON cleanup, and structured failure metadata
-- Refactored the answer generator to use the shared runner and keep only answer-specific post-validation/fallback logic
-- Refactored the verifier to use the shared runner and keep only verifier-specific post-validation/fallback logic
-- Added a verifier guard that skips the LLM and uses deterministic verification when the answer draft is already a fallback extractive answer
-- Added unit tests for structured generation success, repair, retry, and failure behavior
-- Added retry-oriented generator integration coverage
-- Updated progress and architecture decision docs
+- Added `scripts/run_model_eval.py` to run model-specific evals against `data/evals/questions.json`
+- Added per-query answer/verifier structured-generation stats so eval runs can measure fallback, retries, and schema success directly
+- Ran baseline eval with `llama3.1:8b`, then removed it to free disk space
+- Downloaded `qwen2.5:7b`, ran the same eval, and saved both result files plus a comparison summary
+- Switched the recommended default local model from `llama3.1:8b` to `qwen2.5:7b`
+- Updated progress and decisions docs with the measured outcome
 
 ## 4. Files Changed
-- app/generation/structured_generation.py
+- app/core/config.py
+- app/generation/llm_client.py
 - app/generation/answer_generator.py
 - app/generation/verifier.py
-- tests/unit/test_structured_generation.py
+- scripts/run_model_eval.py
+- data/evals/questions.json
+- data/evals/results/llama3.1_8b_results.json
+- data/evals/results/qwen2.5_7b_results.json
+- data/evals/results/model_comparison.json
 - tests/unit/test_llm_client.py
-- tests/integration/test_query_pipeline.py
 - docs/DECISIONS.md
 - docs/PROGRESS.md
 - docs/review/REVIEW_BUNDLE.md
 
 ## 5. Architecture Impact
-This change affects the prompting/schema handling layer, answer generator, verifier, and test coverage.
-It does not change the data model, retrieval pipeline, evidence bundle contract, or public API schemas.
+This change affects local-model configuration, answer/verifier eval observability, and project defaults.
+It does not change the retrieval pipeline, schema definitions, evidence bundle contract, or public API schemas.
 
 ## 6. Key Implementation Notes
-- The shared runner performs only safe cleanup: code-fence stripping, trimming surrounding text, and extracting the first balanced JSON block
-- Schema validation still uses the existing Pydantic models
-- Answer-specific and verifier-specific fallback paths were preserved
-- Domain-specific filtering remains local to the answer/verifier modules, so the new shared layer handles structure, not semantics
-- Live API validation showed an important edge case: if answer generation falls back after an LLM timeout, sending that fallback answer back into the LLM verifier can incorrectly turn a usable response into `verification_status="fail"`. The verifier now short-circuits to deterministic verification for fallback answer drafts.
+- Model switching was already possible through `LLM_MODEL`; the eval script now adds a clean model override path so comparisons do not require code edits
+- The eval script records answer and verifier run metadata separately, including attempts, structured success, repair usage, fallback usage, and failure reason
+- The disk-sensitive workflow was followed explicitly: baseline run first, old model deleted, new model pulled second
+- The local `.env` was updated to `qwen2.5:7b` to match the installed model on this machine
 
 ## 7. Risks / Known Issues
-- Better schema enforcement should reduce fallback frequency, but it cannot compensate for a weak or timing-out local model
-- The runner currently logs failure metadata but does not persist it to the database
-- Repair is intentionally conservative and may still reject malformed near-JSON outputs that need human-visible model tuning
-- Verifier outputs from the local model can still be schema-valid but low quality or contradictory, which means the user can still see verification failures until the model or verifier policy is improved
-- The fail-state frontend message is still misleading in some cases, especially when `verification_status="fail"` is produced without a useful verifier note
+- `qwen2.5:7b` is clearly better than `llama3.1:8b`, but fallback is still too high at 50%
+- Broad or synthesis-heavy questions still time out on answer generation
+- Verifier schema issues still occur on some prompts, including null `unsupported_claims[].claim_id`
+- The eval script currently uses one fixed indexed Quran project rather than creating a fresh project per run
 
 ## 8. Alignment Check Against MASTER_BRIEF
 - source grounding: preserved
 - hybrid retrieval: unchanged
 - verification layer: preserved
 - generic schema: preserved
-- inspectability: improved through structured failure metadata and centralized handling
+- inspectability: improved through per-query structured-generation stats in eval results
 
 ## 9. Testing Performed
-- Unit tests for structured-generation runner success, cleanup, retry, and failure cases
-- Unit tests for answer generator and verifier retry/fallback behavior
-- Integration test for answer generation succeeding after an initial malformed response
-- Full automated suite passed: `85 passed in 20.25s`
-- Live API validation against a real local server on `127.0.0.1:8002` using:
-  `POST /api/projects/86da8892-b3c5-4a15-a174-1f8ff5179d6b/queries`
-  with question: `Is there anything that a muslim should not eat?`
-- Live API result after the verifier guard fix:
-  non-empty `final_answer`, `verification_status="pass_with_warnings"`, and `error=null`
+- Targeted tests passed: `29 passed in 20.30s`
+- Baseline model eval on `llama3.1:8b` over 10 questions
+- Upgraded model eval on `qwen2.5:7b` over the same 10 questions
+- Disk check before and after model swap confirmed enough space remained for the replacement pull
 
 ## 10. Example Output / Logs
-- Example failure reason: `schema_validation: ...`
-- Example failure reason: `llm_error: boom`
-- Example repair path: code-fenced JSON parsed successfully after cleanup
-- Observed live limitation before the verifier guard fix:
-  verifier sometimes returned schema-invalid `supported_claims` items like `{"claim_id":"c1"}` instead of plain strings
-- Observed live behavior after the verifier guard fix:
-  timed-out answer generation can still produce a deterministic extractive answer, but it now remains visible to the user instead of being converted into a hard verification failure
+- `llama3.1:8b` summary:
+  fallback rate `0.90`, schema success rate `0.10`
+- `qwen2.5:7b` summary:
+  fallback rate `0.50`, schema success rate `0.40`
+- Example remaining verifier failure on `qwen2.5:7b`:
+  `unsupported_claims.0.claim_id` came back as `null`, forcing deterministic verifier fallback after 3 attempts
 
 ## 11. Recommended Reviewer Focus
-- Whether the shared runner is generic enough without over-generalizing answer/verifier logic
-- Whether the cleanup and retry behavior is safe and conservative
-- Whether failure metadata is sufficient for debugging future model comparisons
-- Whether answer and verifier domain boundaries remain clean
-- Whether verifier-fail responses should degrade more gracefully when the local verifier model remains unreliable
+- Whether `qwen2.5:7b` is the right default or whether a smaller/faster local model should also be benchmarked
+- Whether verifier prompts should be tightened further before adding another model comparison round
+- Whether eval metrics should be persisted in a more formal experiment-tracking shape later
 
 ## 12. Suggested Next Step
-Improve verifier fail-policy and frontend fail messaging, then measure fallback frequency again with the current local model before deciding whether to switch to a stronger schema-following model.
+Tune verifier prompting and failure policy around `qwen2.5:7b`, then rerun the same 10-question eval to see whether fallback can be pushed materially below 50%.

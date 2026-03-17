@@ -1,0 +1,72 @@
+[
+  {
+    "id": "q001",
+    "question": "What does the text say about fasting?",
+    "mode": "source_only",
+    "category": "direct_lookup",
+    "notes": "Should retrieve fasting passages."
+  },
+  {
+    "id": "q002",
+    "question": "What does the text say about patience?",
+    "mode": "source_only",
+    "category": "direct_lookup",
+    "notes": "Should retrieve patience passages."
+  },
+  {
+    "id": "q003",
+    "question": "What guidance is given about prayer?",
+    "mode": "source_only",
+    "category": "direct_lookup",
+    "notes": "Prayer-related guidance."
+  },
+  {
+    "id": "q004",
+    "question": "What does the text say about giving to the poor?",
+    "mode": "source_only",
+    "category": "paraphrase",
+    "notes": "Charity/zakat passages."
+  },
+  {
+    "id": "q005",
+    "question": "What are the rewards promised to the righteous?",
+    "mode": "source_only",
+    "category": "multi_passage",
+    "notes": "Multi-passage synthesis."
+  },
+  {
+    "id": "q006",
+    "question": "What does the text say about abstaining from food during a sacred period?",
+    "mode": "source_only",
+    "category": "paraphrase",
+    "notes": "Paraphrase of fasting passages."
+  },
+  {
+    "id": "q007",
+    "question": "How does the text describe the concept of mercy?",
+    "mode": "source_only",
+    "category": "multi_passage",
+    "notes": "Mercy across multiple contexts."
+  },
+  {
+    "id": "q008",
+    "question": "What does the text say about Moses?",
+    "mode": "source_only",
+    "category": "direct_lookup",
+    "notes": "Story of Moses."
+  },
+  {
+    "id": "q009",
+    "question": "What themes are associated with patience and prayer together?",
+    "mode": "source_only",
+    "category": "multi_passage",
+    "notes": "Joint patience/prayer themes."
+  },
+  {
+    "id": "q010",
+    "question": "What restrictions does the text place on eating?",
+    "mode": "source_only",
+    "category": "paraphrase",
+    "notes": "Eating restrictions."
+  }
+]
