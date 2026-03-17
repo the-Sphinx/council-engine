@@ -166,6 +166,27 @@ def test_verifier_falls_back_to_deterministic_report_for_invalid_schema():
     assert "Fallback verification" in report.notes
 
 
+def test_verifier_skips_llm_for_fallback_answer_draft():
+    class ShouldNotBeCalledLLM:
+        def chat(self, system: str, user: str, temperature: float = 0.0) -> str:
+            raise AssertionError("LLM should not be called for fallback answer verification")
+
+    verifier = LLMVerifier(ShouldNotBeCalledLLM())
+    draft = AnswerDraftDomain(
+        final_answer="Patience is a virtue.",
+        claims=[ClaimDomain("fallback_c1", "Patience is a virtue.", ["p1"], "direct")],
+        supporting_citations=[CitationDomain("p1", "Patience is a virtue.")],
+        objections_raised=[],
+        confidence_notes="Fallback extractive answer built from top evidence after schema validation failed.",
+    )
+
+    report = verifier.verify("What is patience?", _bundle(), draft)
+
+    assert report.status == "pass_with_warnings"
+    assert report.supported_claims == ["fallback_c1"]
+    assert "Fallback verification" in report.notes
+
+
 def test_answer_generator_retries_and_returns_structured_output():
     generator = GroundedAnswerGenerator(RetryThenValidAnswerLLM())
 

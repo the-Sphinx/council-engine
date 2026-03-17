@@ -36,6 +36,13 @@ class LLMVerifier(VerifierInterface):
         evidence_bundle: EvidenceBundleDomain,
         answer_draft: AnswerDraftDomain,
     ) -> VerificationReportDomain:
+        if self._should_use_deterministic_verification(answer_draft):
+            logger.warning(
+                "Using deterministic verification for fallback answer draft on query %r",
+                question[:120],
+            )
+            return self._build_fallback_report(evidence_bundle, answer_draft)
+
         draft_dict = {
             "final_answer": answer_draft.final_answer,
             "claims": [
@@ -148,4 +155,15 @@ class LLMVerifier(VerifierInterface):
                 "Fallback verification used deterministic passage/citation checks because the "
                 "local model did not return the required schema."
             ),
+        )
+
+    def _should_use_deterministic_verification(
+        self,
+        answer_draft: AnswerDraftDomain,
+    ) -> bool:
+        if "Fallback extractive answer built from top evidence" in answer_draft.confidence_notes:
+            return True
+        return any(
+            "local model did not return the required schema" in objection.issue
+            for objection in answer_draft.objections_raised
         )
