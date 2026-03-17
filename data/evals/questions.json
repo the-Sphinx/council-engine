@@ -4,69 +4,79 @@
     "question": "What does the text say about fasting?",
     "mode": "source_only",
     "category": "direct_lookup",
-    "notes": "Should retrieve fasting passages."
+    "notes": "Should retrieve fasting passages.",
+    "expected_verse_refs": ["2|183", "2|184", "2|185"]
   },
   {
     "id": "q002",
     "question": "What does the text say about patience?",
     "mode": "source_only",
     "category": "direct_lookup",
-    "notes": "Should retrieve patience passages."
+    "notes": "Should retrieve patience passages.",
+    "expected_verse_refs": ["2|153", "2|45"]
   },
   {
     "id": "q003",
     "question": "What guidance is given about prayer?",
     "mode": "source_only",
     "category": "direct_lookup",
-    "notes": "Prayer-related guidance."
+    "notes": "Prayer-related guidance.",
+    "expected_verse_refs": ["20|14", "4|103", "2|238"]
   },
   {
     "id": "q004",
     "question": "What does the text say about giving to the poor?",
     "mode": "source_only",
     "category": "paraphrase",
-    "notes": "Charity/zakat passages."
+    "notes": "Charity/zakat passages.",
+    "expected_verse_refs": ["9|60", "2|271"]
   },
   {
     "id": "q005",
     "question": "What are the rewards promised to the righteous?",
     "mode": "source_only",
     "category": "multi_passage",
-    "notes": "Multi-passage synthesis."
+    "notes": "Multi-passage synthesis.",
+    "expected_verse_refs": ["25|15", "5|9", "2|25", "4|57"]
   },
   {
     "id": "q006",
     "question": "What does the text say about abstaining from food during a sacred period?",
     "mode": "source_only",
     "category": "paraphrase",
-    "notes": "Paraphrase of fasting passages."
+    "notes": "Paraphrase of fasting passages.",
+    "expected_verse_refs": ["2|183", "2|184", "2|185"]
   },
   {
     "id": "q007",
     "question": "How does the text describe the concept of mercy?",
     "mode": "source_only",
     "category": "multi_passage",
-    "notes": "Mercy across multiple contexts."
+    "notes": "Mercy across multiple contexts.",
+    "expected_verse_refs": ["39|53", "7|156", "19|96"]
   },
   {
     "id": "q008",
     "question": "What does the text say about Moses?",
     "mode": "source_only",
     "category": "direct_lookup",
-    "notes": "Story of Moses."
+    "notes": "Story of Moses.",
+    "expected_verse_refs": ["28|3", "28|7", "20|47"]
   },
   {
     "id": "q009",
     "question": "What themes are associated with patience and prayer together?",
     "mode": "source_only",
     "category": "multi_passage",
-    "notes": "Joint patience/prayer themes."
+    "notes": "Joint patience/prayer themes.",
+    "expected_verse_refs": ["2|45", "2|153"]
   },
   {
     "id": "q010",
     "question": "What restrictions does the text place on eating?",
     "mode": "source_only",
     "category": "paraphrase",
-    "notes": "Eating restrictions."
+    "notes": "Eating restrictions.",
+    "expected_verse_refs": ["5|3", "6|119", "6|121"]
   }
 ]

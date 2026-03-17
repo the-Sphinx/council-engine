@@ -1,0 +1,61 @@
+{
+  "query_id": "d1de290e-2e5b-4130-b685-302e321ed287",
+  "query": "What does the text say about giving to the poor?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "f852a246-d308-499f-b6a9-e7673a33f4e2",
+    "c6604c13-de4f-498b-8229-a956c0d5c09b"
+  ],
+  "top_lexical_ids": [
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "72371da3-2111-4422-819f-46383c88cc3d",
+    "ea3497f3-edf2-44f2-a69e-2b9e078deecf",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "a8627c47-ac08-4779-a9a1-0049108e5b80",
+    "425176f6-0c4e-47ba-a172-46b0f3d2e06b",
+    "3e021d86-6932-4934-bf6e-55e5dbf944e5",
+    "9181829f-bd54-487a-b712-54d1f1259ec8"
+  ],
+  "top_dense_ids": [
+    "c6604c13-de4f-498b-8229-a956c0d5c09b",
+    "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+    "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+    "c64fc734-6607-4218-8a2e-e5b9672958bd",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a",
+    "b3c7ce3a-9f71-4914-891f-46bafcb8a6d0",
+    "d1ce16c0-a0f5-4864-bd5f-bfc69380ed9f",
+    "1880a917-22a1-4d89-be92-14a2873f3c39",
+    "027e9022-ff2e-4fe4-b21d-186a904bf499",
+    "e69adbbe-17c2-450c-940d-8a4534d2a82f"
+  ],
+  "merged_ids": [
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "c6604c13-de4f-498b-8229-a956c0d5c09b",
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+    "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+    "72371da3-2111-4422-819f-46383c88cc3d",
+    "ea3497f3-edf2-44f2-a69e-2b9e078deecf",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "c64fc734-6607-4218-8a2e-e5b9672958bd",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a"
+  ],
+  "reranked_ids": [
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "c6604c13-de4f-498b-8229-a956c0d5c09b",
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+    "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+    "72371da3-2111-4422-819f-46383c88cc3d",
+    "ea3497f3-edf2-44f2-a69e-2b9e078deecf",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "c64fc734-6607-4218-8a2e-e5b9672958bd",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

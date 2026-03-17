@@ -60,7 +60,10 @@ class SentenceTransformerEmbedder(EmbedderInterface):
         if self._model is None:
             try:
                 from sentence_transformers import SentenceTransformer
-                self._model = SentenceTransformer(self._model_name)
+                try:
+                    self._model = SentenceTransformer(self._model_name, local_files_only=True)
+                except Exception:
+                    self._model = SentenceTransformer(self._model_name)
             except Exception as exc:
                 logger.warning(
                     "Falling back to hashing embedder because %s could not be loaded: %s",

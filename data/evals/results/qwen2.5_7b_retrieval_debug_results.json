@@ -1,0 +1,342 @@
+{
+  "run_id": "45ba8333-2e9e-45b9-94be-279cf0a9b89d",
+  "summary": {
+    "model_name": "qwen2.5:7b",
+    "label": "retrieval_debug",
+    "project_id": "86da8892-b3c5-4a15-a174-1f8ff5179d6b",
+    "dataset": "data/evals/questions.json",
+    "timestamp": "2026-03-17T09:51:04.817075",
+    "generation_skipped": true,
+    "total_queries": 10,
+    "error_count": 0,
+    "errors": [],
+    "hit_at_5": 0.5,
+    "hit_at_10": 0.5,
+    "failure_count": 5,
+    "failure_types": {
+      "lexical_miss": 5
+    },
+    "fallback_count": null,
+    "fallback_rate": null,
+    "verifier_fallback_count": null,
+    "verifier_fallback_rate": null,
+    "schema_success_rate": null,
+    "answer_schema_success_rate": null,
+    "verifier_schema_success_rate": null,
+    "average_retries_used": null,
+    "answer_average_retries_used": null,
+    "verifier_average_retries_used": null,
+    "repair_used_count": null,
+    "repair_success_count": null
+  },
+  "queries": [
+    {
+      "id": "q001",
+      "question": "What does the text say about fasting?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+        "56a0e00e-efb2-466c-8733-2b4679a62575",
+        "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+      ],
+      "retrieved_passage_ids": [
+        "5731fdbd-70df-4504-bd62-e6f959f57c09",
+        "56a0e00e-efb2-466c-8733-2b4679a62575",
+        "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+        "68e7b551-6883-47a5-b7c8-d698d7134e37",
+        "4ac1f93a-156d-47f8-978a-af560ff8d186",
+        "ed36eeae-92d1-4831-9add-219803bd869a",
+        "eb869500-bb96-463b-99f0-c44e5b9ef589",
+        "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+        "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+        "d1f68ebc-f538-47ad-afe8-1f1345efd7d8"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q002",
+      "question": "What does the text say about patience?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+        "0c7f2e03-6afa-4035-9c18-eb53dcd7933f"
+      ],
+      "retrieved_passage_ids": [
+        "5731fdbd-70df-4504-bd62-e6f959f57c09",
+        "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+        "3047fbe9-e469-45c5-aea8-45024e84ab64",
+        "68e7b551-6883-47a5-b7c8-d698d7134e37",
+        "4ac1f93a-156d-47f8-978a-af560ff8d186",
+        "eb869500-bb96-463b-99f0-c44e5b9ef589",
+        "2c287de0-1875-48ad-af72-1310f84a9144",
+        "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+        "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+        "d1f68ebc-f538-47ad-afe8-1f1345efd7d8"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q003",
+      "question": "What guidance is given about prayer?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+        "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+        "e810cd59-24a5-4050-b477-bfa5d2abfdb4"
+      ],
+      "retrieved_passage_ids": [
+        "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+        "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+        "0c54609b-9e12-4276-8f3d-b8c1aff231b9",
+        "1e5fb3ff-0c92-4f29-9353-5e544719c8d1",
+        "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+        "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+        "c82d4a47-ab6a-4439-b2e8-2ec2cc2406bd",
+        "59b0ef17-3d24-4be4-ab51-92bac6d8bd61",
+        "15bdc382-ae80-42ae-a47b-4e34ff9b8eba",
+        "eec02d91-ffab-4659-877f-58821cd21ad3"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q004",
+      "question": "What does the text say about giving to the poor?",
+      "category": "paraphrase",
+      "expected_passage_ids": [
+        "f852a246-d308-499f-b6a9-e7673a33f4e2",
+        "c6604c13-de4f-498b-8229-a956c0d5c09b"
+      ],
+      "retrieved_passage_ids": [
+        "eb869500-bb96-463b-99f0-c44e5b9ef589",
+        "c6604c13-de4f-498b-8229-a956c0d5c09b",
+        "5731fdbd-70df-4504-bd62-e6f959f57c09",
+        "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+        "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+        "72371da3-2111-4422-819f-46383c88cc3d",
+        "ea3497f3-edf2-44f2-a69e-2b9e078deecf",
+        "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+        "c64fc734-6607-4218-8a2e-e5b9672958bd",
+        "3500cacf-2028-41c3-b08e-c7ef2a71d17a"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q005",
+      "question": "What are the rewards promised to the righteous?",
+      "category": "multi_passage",
+      "expected_passage_ids": [
+        "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+        "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+        "e0b6adc1-32ee-4f79-bef0-175a9e25f104",
+        "a56bb920-89d2-42df-b127-4f8d45c77b34"
+      ],
+      "retrieved_passage_ids": [
+        "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+        "4e7e62c9-ad2d-4f93-80e9-59a4174ec67a",
+        "ff89e702-6abd-4ef5-8329-3c5c44d6f98e",
+        "711be151-2b8e-434c-a364-42d2ee9f6d00",
+        "5d22a75f-4651-47e7-ad53-9cf92bc8298a",
+        "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+        "52870351-0077-4e7a-ac9c-2399043ded7d",
+        "032e435a-d785-472f-9aae-2ede4fc41673",
+        "76d9a5f6-82c5-442c-b0e7-1b6f60c86481",
+        "210e14f4-6a14-4dc0-a7bd-fa81bb78feab"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q006",
+      "question": "What does the text say about abstaining from food during a sacred period?",
+      "category": "paraphrase",
+      "expected_passage_ids": [
+        "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+        "56a0e00e-efb2-466c-8733-2b4679a62575",
+        "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+      ],
+      "retrieved_passage_ids": [
+        "a3546a30-39ff-4e49-8727-fbfe844c680c",
+        "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+        "3878c885-d863-481b-89ca-edf9d65137d7",
+        "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+        "496a553d-00cd-4401-b5f7-a913c9314e14",
+        "4b847eac-df11-4c20-aafe-d3738a00f9fa",
+        "13929422-e5e1-4c94-bdf8-76af6cb1d25a",
+        "a2c082a7-6058-41f0-bceb-f755ec5220d2",
+        "9e33ceb2-b01d-446d-9452-43a120eea8e9",
+        "4e0080c9-8b12-4740-bb23-c949e1c2d7f1"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q007",
+      "question": "How does the text describe the concept of mercy?",
+      "category": "multi_passage",
+      "expected_passage_ids": [
+        "ece92983-713f-44e0-9d64-5b44d61c36d3",
+        "dbef2942-bd53-4c04-ab15-ad5638a955ef",
+        "99ef3b55-b569-43f3-831b-2cce70e76a87"
+      ],
+      "retrieved_passage_ids": [
+        "d33bd4b4-4aa9-4397-9755-749bd3f989d5",
+        "ac81e70d-9045-4733-bf10-8f0d0f7b0856",
+        "6e91fa44-4b73-472d-b5f9-801dbb52583d",
+        "79839d5d-ea90-4574-acc7-913f79db74ad",
+        "ce7ad83a-e9cd-4571-919f-588acc335ee1",
+        "c18889ef-4845-4e57-98dd-8f7b155336c8",
+        "e8d5f910-e982-4465-a5e2-7beceeb89b5f",
+        "df3e9c2c-4103-4ebd-bb68-0a20ed2a4faf",
+        "63be5c80-8fc5-4ca6-9dc3-26e2572c8899",
+        "5bbc1e1a-dae0-41f4-afdf-5730409c87e5"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q008",
+      "question": "What does the text say about Moses?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+        "eae25f1e-9f97-4cf4-a1c8-9b7539ad86d5",
+        "6c896c2b-b2de-453b-874d-419719b3e866"
+      ],
+      "retrieved_passage_ids": [
+        "98e417ca-68c5-4cfc-a347-496707a04ca9",
+        "2503ecbc-1866-4570-9a99-ae04f605cb3d",
+        "1bca0108-eec9-4c3c-9d01-aeca4244d93f",
+        "ba75ed3c-252f-4b8f-a02f-c0c574f6fa0b",
+        "5731fdbd-70df-4504-bd62-e6f959f57c09",
+        "ab6fa359-6775-4f6e-85c9-40a9e39c91ec",
+        "68e7b551-6883-47a5-b7c8-d698d7134e37",
+        "4ac1f93a-156d-47f8-978a-af560ff8d186",
+        "eb869500-bb96-463b-99f0-c44e5b9ef589",
+        "0a566757-4d55-48cc-9284-c31dd4d3dca6"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q009",
+      "question": "What themes are associated with patience and prayer together?",
+      "category": "multi_passage",
+      "expected_passage_ids": [
+        "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23"
+      ],
+      "retrieved_passage_ids": [
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+        "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+        "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+        "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+        "4fb26f21-1b22-4980-9414-b3d6924eadb8",
+        "5147f0e5-c798-47e0-b548-09b518ef7a27",
+        "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+        "2d910a8e-7eaf-4944-8555-eb4e85d97369",
+        "fad4d835-0f22-4362-8260-20af896dbeec",
+        "3de12c8e-0e34-4064-916d-44129a347fac"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    },
+    {
+      "id": "q010",
+      "question": "What restrictions does the text place on eating?",
+      "category": "paraphrase",
+      "expected_passage_ids": [
+        "d59e0349-82bc-43d0-aeb1-beb58c2c9664",
+        "81eb4f7f-8dd4-4120-87ee-2020927fad7a",
+        "dfcc4cf6-5480-45b4-a756-e7194a065a63"
+      ],
+      "retrieved_passage_ids": [
+        "7efa6ff4-23cf-48e3-985b-90e307af3b4e",
+        "d633b88b-d3a1-49a1-b40d-6d975c030045",
+        "a3546a30-39ff-4e49-8727-fbfe844c680c",
+        "0a8b6f73-5c1d-4248-b6c9-32777d1e2189",
+        "a70c5caf-2a91-439c-ac89-111c2c663973",
+        "496a553d-00cd-4401-b5f7-a913c9314e14",
+        "4db6645d-9a01-445a-ad45-d9e6ea8d99fe",
+        "12d4f538-39df-42be-8ea9-9a927525385b",
+        "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d",
+        "0612071a-cbde-4d8e-9989-ae2157af4848"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null
+    }
+  ]
+}

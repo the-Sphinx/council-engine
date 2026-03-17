@@ -1,0 +1,61 @@
+{
+  "query_id": "b9b1cf67-a313-4d27-ae73-533e0eaf855e",
+  "query": "What does the text say about patience?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f"
+  ],
+  "top_lexical_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8",
+    "b598bab0-ac52-47d4-bbc7-44cc8b887377",
+    "0dcc615e-99cc-4254-8501-cb628ba2270a",
+    "ea3497f3-edf2-44f2-a69e-2b9e078deecf"
+  ],
+  "top_dense_ids": [
+    "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+    "3047fbe9-e469-45c5-aea8-45024e84ab64",
+    "2c287de0-1875-48ad-af72-1310f84a9144",
+    "a39e3aa6-1986-46c9-aa12-e8d0d8636b15",
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+    "d48d40f2-523a-46fa-8b83-1cc6f7431a05",
+    "3528d881-5923-4be4-9ab1-9d5fa913b791",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "42aa10e9-b88f-438a-8c8f-a6b89a81128b",
+    "3548aaa2-e1db-4168-8578-7838623f7efe"
+  ],
+  "merged_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+    "3047fbe9-e469-45c5-aea8-45024e84ab64",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "2c287de0-1875-48ad-af72-1310f84a9144",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8"
+  ],
+  "reranked_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+    "3047fbe9-e469-45c5-aea8-45024e84ab64",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "2c287de0-1875-48ad-af72-1310f84a9144",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

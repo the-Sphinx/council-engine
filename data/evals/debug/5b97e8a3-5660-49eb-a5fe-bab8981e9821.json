@@ -1,0 +1,62 @@
+{
+  "query_id": "5b97e8a3-5660-49eb-a5fe-bab8981e9821",
+  "query": "What does the text say about abstaining from food during a sacred period?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+  ],
+  "top_lexical_ids": [
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "13929422-e5e1-4c94-bdf8-76af6cb1d25a",
+    "a2c082a7-6058-41f0-bceb-f755ec5220d2",
+    "9e33ceb2-b01d-446d-9452-43a120eea8e9",
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "b598bab0-ac52-47d4-bbc7-44cc8b887377",
+    "2382ffae-82f2-4bfe-a2bf-5481b03f85ef"
+  ],
+  "top_dense_ids": [
+    "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "4b847eac-df11-4c20-aafe-d3738a00f9fa",
+    "4e0080c9-8b12-4740-bb23-c949e1c2d7f1",
+    "88e84b30-4880-4f63-af5c-34fc52d6161c",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "c81890d8-43d8-437f-b9ca-99f6f9aa9d7b",
+    "c6ad5eb5-7591-407d-a6bd-122dd228e111",
+    "81eb4f7f-8dd4-4120-87ee-2020927fad7a"
+  ],
+  "merged_ids": [
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "4b847eac-df11-4c20-aafe-d3738a00f9fa",
+    "13929422-e5e1-4c94-bdf8-76af6cb1d25a",
+    "a2c082a7-6058-41f0-bceb-f755ec5220d2",
+    "9e33ceb2-b01d-446d-9452-43a120eea8e9",
+    "4e0080c9-8b12-4740-bb23-c949e1c2d7f1"
+  ],
+  "reranked_ids": [
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "4b847eac-df11-4c20-aafe-d3738a00f9fa",
+    "13929422-e5e1-4c94-bdf8-76af6cb1d25a",
+    "a2c082a7-6058-41f0-bceb-f755ec5220d2",
+    "9e33ceb2-b01d-446d-9452-43a120eea8e9",
+    "4e0080c9-8b12-4740-bb23-c949e1c2d7f1"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

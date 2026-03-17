@@ -72,3 +72,13 @@ Use `qwen2.5:7b` as the default local Ollama model instead of `llama3.1:8b`.
 
 Reason:
 Local evaluation over 10 Quran questions showed materially better behavior: fallback rate dropped from 90% to 50%, and full structured answer+verifier schema success improved from 10% to 40%.
+
+---
+
+## Retrieval Eval Diagnostics
+
+Decision:
+Store per-query retrieval debug artifacts during eval runs, including lexical, dense, merged, and reranked passage IDs plus simple failure classification.
+
+Reason:
+Makes retrieval misses inspectable and turns evaluation into a practical tuning loop instead of a single aggregate score.

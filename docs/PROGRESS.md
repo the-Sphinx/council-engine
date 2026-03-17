@@ -24,6 +24,7 @@ Overall status:
 - [x] Inspectability/debug artifact persistence is operational
 - [x] Shared structured-generation enforcement layer now exists for answer + verifier JSON/schema handling
 - [x] Local model evaluation workflow exists and baseline vs upgraded model results have been captured
+- [x] Retrieval eval loop now writes per-query debug artifacts and failure classifications
 - [ ] Final answer generation is stable enough for intended product quality
 - [ ] Verification is reliably schema-compliant with the configured local model
 
@@ -49,6 +50,7 @@ Overall status:
 - [x] Fallback extractive answer path exists when the local model fails schema validation
 - [x] Fallback deterministic verification path exists when the local model fails schema validation
 - [x] Configurable model evaluation script exists for local model comparison
+- [x] Retrieval debug artifacts are now written for eval queries
 - [x] Uploading the bundled Quran corpus now ingests into verse-level passages instead of giant chunks
 - [x] Live upload -> index -> query flow works through the backend
 
@@ -87,6 +89,7 @@ Overall status:
 - [x] Eval runner exists
 - [x] Grounding metrics scaffolding exists
 - [x] Model comparison eval results captured for `llama3.1:8b` and `qwen2.5:7b`
+- [x] Retrieval failure classification now exists for eval runs
 
 ---
 
@@ -98,12 +101,13 @@ Overall status:
 - [ ] UI messaging is still confusing in some states
 - [ ] Older projects indexed before ingestion fixes may still contain giant chunks
 - [ ] Some API paths work correctly but still need stronger end-to-end UI validation coverage
+- [ ] Retrieval still misses too many paraphrase and theme questions in top-10
 
 ---
 
 ## Current Task
 
-Reduce fallback frequency and stabilize the upgraded local model so the product moves from:
+Use retrieval diagnostics to improve hit rates on paraphrase and thematic questions while keeping the upgraded local model in place:
 
 retrieval + fallback extractive answers
 
@@ -112,9 +116,9 @@ to:
 reliable grounded answers + reliable verifier output
 
 Immediate focus:
+- use eval debug artifacts to understand retrieval misses before changing retrieval weights or prompts
 - keep `qwen2.5:7b` as the current default local model
-- reduce the remaining verifier schema failures and answer timeouts
-- reduce schema failures and fallback frequency
+- improve lexical coverage on paraphrase/theme queries
 - improve user-facing UI/status messaging
 
 ---
@@ -127,7 +131,7 @@ Immediate focus:
 4. add stronger API-level and UI-level end-to-end tests for upload, list, index, query, and result views
 5. improve UI messaging around fallback behavior, verification warnings, and refresh state
 6. rebuild or discard older projects created before the Quran passage-splitting fix
-7. tune retrieval quality using the existing eval scaffolding
+7. tune retrieval quality using the existing eval scaffolding and debug artifacts
 
 ### Remaining Checklists
 
@@ -151,6 +155,7 @@ Immediate focus:
 - [x] Core retrieval pipeline is implemented
 - [x] Retrieval tests exist
 - [x] Eval dataset and runner exist
+- [x] Eval debug artifacts and failure tags now exist
 - [ ] Retrieval quality tuning is still needed
 - [ ] Relevance quality for real user questions still needs iteration
 
@@ -170,6 +175,7 @@ Immediate focus:
 - [x] Upload, ingestion, indexing, and retrieval-debug flow complete
 - [x] Shared structured generation enforcement complete
 - [x] Local model upgraded from `llama3.1:8b` to `qwen2.5:7b` based on measured eval results
+- [x] Retrieval diagnostics loop is now in place
 - [ ] Grounded answer generation quality still needs stabilization
 - [ ] Verifier reliability still needs stabilization
 - [ ] UI polish and end-to-end UX cleanup still pending
@@ -203,3 +209,31 @@ Decision:
 
 Remaining gap:
 - even with `qwen2.5:7b`, fallback is still too common for production-quality behavior
+
+---
+
+## Retrieval Evaluation Summary
+
+Measured on:
+- dataset: `data/evals/questions.json`
+- questions: 10
+- mode: retrieval-only debug run
+- results file: `data/evals/results/qwen2.5_7b_retrieval_debug_results.json`
+
+Current retrieval metrics:
+- hit@5: `0.50`
+- hit@10: `0.50`
+- failure count: `5`
+- failure type distribution:
+  - `lexical_miss`: `5`
+
+Observed retrieval weaknesses:
+- paraphrase queries about fasting/eating restrictions still miss expected passages in top-10
+- broad thematic prompts like mercy and Moses still miss expected passages in top-10
+- patience-themed retrieval also misses the expected anchor verses even though related verses are present elsewhere in the corpus
+
+Known successful cases:
+- fasting direct lookup
+- prayer guidance
+- giving to the poor
+- rewards promised to the righteous

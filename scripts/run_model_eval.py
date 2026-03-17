@@ -9,6 +9,7 @@ import argparse
 import json
 import sys
 import uuid
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -33,6 +34,67 @@ def _mean(values: list[float]) -> float:
     return round(sum(values) / len(values), 4)
 
 
+def _verse_prefix(text: str) -> str | None:
+    if "|" not in text:
+        return None
+    parts = text.split("|", 2)
+    if len(parts) < 2:
+        return None
+    if parts[0].isdigit() and parts[1].isdigit():
+        return f"{parts[0]}|{parts[1]}"
+    return None
+
+
+def _resolve_expected_passage_ids(
+    db,
+    project_id: str,
+    verse_refs: list[str],
+) -> list[str]:
+    if not verse_refs:
+        return []
+
+    from app.db.models import Passage, Document
+
+    passages = (
+        db.query(Passage.id, Passage.text)
+        .join(Document, Passage.document_id == Document.id)
+        .filter(Document.project_id == project_id)
+        .all()
+    )
+    by_ref: dict[str, str] = {}
+    for passage_id, text in passages:
+        prefix = _verse_prefix(text)
+        if prefix and prefix not in by_ref:
+            by_ref[prefix] = passage_id
+    return [by_ref[ref] for ref in verse_refs if ref in by_ref]
+
+
+def _classify_failure(
+    expected_ids: set[str],
+    lexical_ids: list[str],
+    dense_ids: list[str],
+    merged_ids: list[str],
+    reranked_ids: list[str],
+    top_k: int = 10,
+) -> str:
+    if not expected_ids:
+        return "unknown"
+    lexical_set = set(lexical_ids[:top_k])
+    dense_set = set(dense_ids[:top_k])
+    merged_set = set(merged_ids[:top_k])
+    reranked_set = set(reranked_ids[:top_k])
+
+    if expected_ids & reranked_set:
+        return "none"
+    if not (expected_ids & lexical_set):
+        return "lexical_miss"
+    if not (expected_ids & dense_set):
+        return "dense_miss"
+    if (expected_ids & merged_set) and not (expected_ids & reranked_set):
+        return "rerank_miss"
+    return "unknown"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run model comparison eval for Heyet")
     parser.add_argument("--project-id", required=True)
@@ -41,6 +103,8 @@ def main() -> None:
     parser.add_argument("--label", default=None)
     parser.add_argument("--max-items", type=int, default=None)
     parser.add_argument("--output-dir", type=Path, default=Path("data/evals/results"))
+    parser.add_argument("--debug-dir", type=Path, default=Path("data/evals/debug"))
+    parser.add_argument("--no-generation", action="store_true")
     args = parser.parse_args()
 
     if not args.dataset.exists():
@@ -85,11 +149,19 @@ def main() -> None:
     questions = _load_questions(args.dataset, max_items=args.max_items)
 
     query_results: list[dict] = []
+    args.debug_dir.mkdir(parents=True, exist_ok=True)
     for item in questions:
         query_result = {
             "id": item["id"],
             "question": item["question"],
             "category": item.get("category", "general"),
+            "expected_passage_ids": [],
+            "retrieved_passage_ids": [],
+            "hit_at_5": False,
+            "hit_at_10": False,
+            "failure": False,
+            "failure_type": None,
+            "model_used": model_name,
             "answer": None,
             "verifier": None,
             "verification_status": None,
@@ -106,18 +178,65 @@ def main() -> None:
             db.add(query)
             db.flush()
 
-            bundle, _debug = pipeline.run(query_id=query.id, question=item["question"], db=db)
+            expected_passage_ids = _resolve_expected_passage_ids(
+                db,
+                args.project_id,
+                item.get("expected_verse_refs", []),
+            )
+            bundle, debug = pipeline.run(query_id=query.id, question=item["question"], db=db)
             db.rollback()
 
-            draft = generator.generate(item["question"], bundle)
-            report = verifier.verify(item["question"], bundle, draft)
+            lexical_ids = [c.passage_id for c in debug.lexical_candidates]
+            dense_ids = [c.passage_id for c in debug.dense_candidates]
+            merged_ids = [c.passage_id for c in debug.merged_candidates]
+            reranked_ids = [c.passage_id for c in debug.reranked_candidates]
+            top_k_ids = reranked_ids[:10]
+            expected_set = set(expected_passage_ids)
+            hit_at_5 = bool(expected_set & set(reranked_ids[:5])) if expected_set else False
+            hit_at_10 = bool(expected_set & set(top_k_ids)) if expected_set else False
+            failure_type = _classify_failure(
+                expected_ids=expected_set,
+                lexical_ids=lexical_ids,
+                dense_ids=dense_ids,
+                merged_ids=merged_ids,
+                reranked_ids=reranked_ids,
+                top_k=10,
+            )
+            failure = bool(expected_passage_ids) and not hit_at_10
 
-            query_result["answer"] = dict(generator.last_run_info or {})
-            query_result["answer"]["final_answer_preview"] = draft.final_answer[:240]
-            query_result["answer"]["objections"] = [o.issue for o in draft.objections_raised]
-            query_result["verifier"] = dict(verifier.last_run_info or {})
-            query_result["verification_status"] = report.status
-            query_result["verification_notes"] = report.notes
+            debug_payload = {
+                "query_id": query.id,
+                "query": item["question"],
+                "model_used": model_name,
+                "expected_passage_ids": expected_passage_ids,
+                "top_lexical_ids": lexical_ids[:10],
+                "top_dense_ids": dense_ids[:10],
+                "merged_ids": merged_ids[:10],
+                "reranked_ids": top_k_ids,
+                "hit_at_5": hit_at_5,
+                "hit_at_10": hit_at_10,
+                "failure": failure,
+                "failure_type": failure_type if failure else None,
+            }
+            with open(args.debug_dir / f"{query.id}.json", "w") as f:
+                json.dump(debug_payload, f, indent=2, ensure_ascii=False)
+
+            query_result["expected_passage_ids"] = expected_passage_ids
+            query_result["retrieved_passage_ids"] = top_k_ids
+            query_result["hit_at_5"] = hit_at_5
+            query_result["hit_at_10"] = hit_at_10
+            query_result["failure"] = failure
+            query_result["failure_type"] = failure_type if failure else None
+
+            if not args.no_generation:
+                draft = generator.generate(item["question"], bundle)
+                report = verifier.verify(item["question"], bundle, draft)
+                query_result["answer"] = dict(generator.last_run_info or {})
+                query_result["answer"]["final_answer_preview"] = draft.final_answer[:240]
+                query_result["answer"]["objections"] = [o.issue for o in draft.objections_raised]
+                query_result["verifier"] = dict(verifier.last_run_info or {})
+                query_result["verification_status"] = report.status
+                query_result["verification_notes"] = report.notes
         except Exception as exc:
             db.rollback()
             query_result["error"] = str(exc)
@@ -131,6 +250,10 @@ def main() -> None:
 
     answer_fallback_count = sum(1 for r in answer_results if r.get("fallback_used"))
     verifier_fallback_count = sum(1 for r in verifier_results if r.get("fallback_used"))
+    hit_at_5_count = sum(1 for r in query_results if r.get("hit_at_5"))
+    hit_at_10_count = sum(1 for r in query_results if r.get("hit_at_10"))
+    failures = [r for r in query_results if r.get("failure")]
+    failure_counts = Counter(r.get("failure_type") or "unknown" for r in failures)
     full_schema_success_count = sum(
         1
         for result in query_results
@@ -146,39 +269,66 @@ def main() -> None:
         "project_id": args.project_id,
         "dataset": str(args.dataset),
         "timestamp": datetime.utcnow().isoformat(),
+        "generation_skipped": args.no_generation,
         "total_queries": total_queries,
         "error_count": len(errors),
         "errors": [
             {"id": r["id"], "question": r["question"], "error": r["error"]}
             for r in errors
         ],
-        "fallback_count": answer_fallback_count,
-        "fallback_rate": round(answer_fallback_count / total_queries, 4) if total_queries else 0.0,
-        "verifier_fallback_count": verifier_fallback_count,
-        "verifier_fallback_rate": round(verifier_fallback_count / total_queries, 4) if total_queries else 0.0,
-        "schema_success_rate": round(full_schema_success_count / total_queries, 4) if total_queries else 0.0,
-        "answer_schema_success_rate": round(answer_schema_success_count / total_queries, 4) if total_queries else 0.0,
-        "verifier_schema_success_rate": round(verifier_schema_success_count / total_queries, 4) if total_queries else 0.0,
-        "average_retries_used": _mean(
-            [max((r.get("attempts", 0) - 1), 0) for r in answer_results + verifier_results if r]
-        ),
-        "answer_average_retries_used": _mean(
-            [max((r.get("attempts", 0) - 1), 0) for r in answer_results if r]
-        ),
-        "verifier_average_retries_used": _mean(
-            [max((r.get("attempts", 0) - 1), 0) for r in verifier_results if r]
-        ),
-        "repair_used_count": sum(
-            1
-            for r in answer_results + verifier_results
-            if r.get("repair_attempted")
-        ),
-        "repair_success_count": sum(
-            1
-            for r in answer_results + verifier_results
-            if r.get("repair_succeeded")
-        ),
+        "hit_at_5": round(hit_at_5_count / total_queries, 4) if total_queries else 0.0,
+        "hit_at_10": round(hit_at_10_count / total_queries, 4) if total_queries else 0.0,
+        "failure_count": len(failures),
+        "failure_types": dict(failure_counts),
     }
+    if args.no_generation:
+        summary.update(
+            {
+                "fallback_count": None,
+                "fallback_rate": None,
+                "verifier_fallback_count": None,
+                "verifier_fallback_rate": None,
+                "schema_success_rate": None,
+                "answer_schema_success_rate": None,
+                "verifier_schema_success_rate": None,
+                "average_retries_used": None,
+                "answer_average_retries_used": None,
+                "verifier_average_retries_used": None,
+                "repair_used_count": None,
+                "repair_success_count": None,
+            }
+        )
+    else:
+        summary.update(
+            {
+                "fallback_count": answer_fallback_count,
+                "fallback_rate": round(answer_fallback_count / total_queries, 4) if total_queries else 0.0,
+                "verifier_fallback_count": verifier_fallback_count,
+                "verifier_fallback_rate": round(verifier_fallback_count / total_queries, 4) if total_queries else 0.0,
+                "schema_success_rate": round(full_schema_success_count / total_queries, 4) if total_queries else 0.0,
+                "answer_schema_success_rate": round(answer_schema_success_count / total_queries, 4) if total_queries else 0.0,
+                "verifier_schema_success_rate": round(verifier_schema_success_count / total_queries, 4) if total_queries else 0.0,
+                "average_retries_used": _mean(
+                    [max((r.get("attempts", 0) - 1), 0) for r in answer_results + verifier_results if r]
+                ),
+                "answer_average_retries_used": _mean(
+                    [max((r.get("attempts", 0) - 1), 0) for r in answer_results if r]
+                ),
+                "verifier_average_retries_used": _mean(
+                    [max((r.get("attempts", 0) - 1), 0) for r in verifier_results if r]
+                ),
+                "repair_used_count": sum(
+                    1
+                    for r in answer_results + verifier_results
+                    if r.get("repair_attempted")
+                ),
+                "repair_success_count": sum(
+                    1
+                    for r in answer_results + verifier_results
+                    if r.get("repair_succeeded")
+                ),
+            }
+        )
 
     result = {
         "run_id": str(uuid.uuid4()),
@@ -187,7 +337,10 @@ def main() -> None:
     }
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = args.output_dir / f"{_safe_model_name(model_name)}_results.json"
+    output_stem = _safe_model_name(model_name)
+    if args.label:
+        output_stem = f"{output_stem}_{_safe_model_name(args.label)}"
+    output_path = args.output_dir / f"{output_stem}_results.json"
     with open(output_path, "w") as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
 
