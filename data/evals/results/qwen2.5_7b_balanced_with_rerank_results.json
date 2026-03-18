@@ -1,0 +1,449 @@
+{
+  "run_id": "bdcad69e-50e3-4693-975c-9e03237ca998",
+  "summary": {
+    "model_name": "qwen2.5:7b",
+    "label": "balanced_with_rerank",
+    "project_id": "86da8892-b3c5-4a15-a174-1f8ff5179d6b",
+    "dataset": "data/evals/questions.json",
+    "hybrid_alpha": 0.5,
+    "hybrid_beta": 0.5,
+    "overlap_boost_enabled": false,
+    "overlap_boost_value": 0.05,
+    "reranker_enabled": true,
+    "reranker_top_k": 25,
+    "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "timestamp": "2026-03-17T10:56:07.488177",
+    "generation_skipped": true,
+    "total_queries": 10,
+    "error_count": 0,
+    "errors": [],
+    "hit_at_5": 0.5,
+    "hit_at_10": 0.6,
+    "failure_count": 4,
+    "failure_types": {
+      "lexical_miss": 4
+    },
+    "fallback_count": null,
+    "fallback_rate": null,
+    "verifier_fallback_count": null,
+    "verifier_fallback_rate": null,
+    "schema_success_rate": null,
+    "answer_schema_success_rate": null,
+    "verifier_schema_success_rate": null,
+    "average_retries_used": null,
+    "answer_average_retries_used": null,
+    "verifier_average_retries_used": null,
+    "repair_used_count": null,
+    "repair_success_count": null
+  },
+  "queries": [
+    {
+      "id": "q001",
+      "question": "What does the text say about fasting?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+        "56a0e00e-efb2-466c-8733-2b4679a62575",
+        "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+      ],
+      "retrieved_passage_ids": [
+        "56a0e00e-efb2-466c-8733-2b4679a62575",
+        "c98b6386-9b4a-4c3e-8c9b-b97ed3bedd39",
+        "e7ffca24-6365-4df3-9040-93ce4b8aa6ab",
+        "ed36eeae-92d1-4831-9add-219803bd869a",
+        "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+        "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+        "76d5aa11-10d4-49d0-8465-0e9efc1fb65c",
+        "c02e1b07-3728-4760-9b0f-747a0bd7aa71",
+        "c334bae4-0002-4700-8c43-fcdf7dd9927a",
+        "9ee91502-fa5c-4228-aa1a-31cf870dc722"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q002",
+      "question": "What does the text say about patience?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+        "0c7f2e03-6afa-4035-9c18-eb53dcd7933f"
+      ],
+      "retrieved_passage_ids": [
+        "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+        "28005433-3d61-40b4-a52b-079688faf1da",
+        "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+        "3047fbe9-e469-45c5-aea8-45024e84ab64",
+        "50cfb46b-5a1e-4d9f-b617-2a49e52fd72b",
+        "4fb26f21-1b22-4980-9414-b3d6924eadb8",
+        "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+        "2c287de0-1875-48ad-af72-1310f84a9144",
+        "3de12c8e-0e34-4064-916d-44129a347fac"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q003",
+      "question": "What guidance is given about prayer?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+        "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+        "e810cd59-24a5-4050-b477-bfa5d2abfdb4"
+      ],
+      "retrieved_passage_ids": [
+        "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+        "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+        "ce191342-4e7c-44c8-bb5d-e577f47d5271",
+        "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+        "4da2ca54-8174-479b-a472-3c4dd4926e62",
+        "1e5fb3ff-0c92-4f29-9353-5e544719c8d1",
+        "d5b1a3ed-3d4d-420e-944c-8aa67c1e7baf",
+        "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+        "5147f0e5-c798-47e0-b548-09b518ef7a27",
+        "59b0ef17-3d24-4be4-ab51-92bac6d8bd61"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q004",
+      "question": "What does the text say about giving to the poor?",
+      "category": "paraphrase",
+      "expected_passage_ids": [
+        "f852a246-d308-499f-b6a9-e7673a33f4e2",
+        "c6604c13-de4f-498b-8229-a956c0d5c09b"
+      ],
+      "retrieved_passage_ids": [
+        "b3c7ce3a-9f71-4914-891f-46bafcb8a6d0",
+        "3500cacf-2028-41c3-b08e-c7ef2a71d17a",
+        "bd899a3b-56f5-4e29-aaeb-e9ace35f5b49",
+        "c6604c13-de4f-498b-8229-a956c0d5c09b",
+        "fb63b8d0-b993-41e8-906e-baae370dcc1c",
+        "6b8b7ca6-0e35-4d58-826a-7ae4939005a3",
+        "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+        "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+        "b3a7bf76-ff01-4b84-b4c7-abc26310b127",
+        "c64fc734-6607-4218-8a2e-e5b9672958bd"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q005",
+      "question": "What are the rewards promised to the righteous?",
+      "category": "multi_passage",
+      "expected_passage_ids": [
+        "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+        "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+        "e0b6adc1-32ee-4f79-bef0-175a9e25f104",
+        "a56bb920-89d2-42df-b127-4f8d45c77b34"
+      ],
+      "retrieved_passage_ids": [
+        "4e7e62c9-ad2d-4f93-80e9-59a4174ec67a",
+        "58919854-a033-4383-bdd0-4bf65fb8bb93",
+        "4ee7460d-b2a6-4c90-bdb8-507c51fc865e",
+        "52dea66c-81dc-40e0-8eb3-d3acc9f068d6",
+        "dda58952-a9f3-4e57-930f-10a5d71cfbbf",
+        "10af384d-e7a7-4daf-8a95-0108ea02b045",
+        "d6947018-5b93-4b84-bce1-2989c7e161cd",
+        "28417ea0-cc21-439a-9990-dd9ca0bbf734",
+        "5e51970e-884f-4010-888b-1c13192ab34d",
+        "c405dd37-bb21-4b57-946f-8ec56111f687"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q006",
+      "question": "What does the text say about abstaining from food during a sacred period?",
+      "category": "paraphrase",
+      "expected_passage_ids": [
+        "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+        "56a0e00e-efb2-466c-8733-2b4679a62575",
+        "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+      ],
+      "retrieved_passage_ids": [
+        "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+        "3878c885-d863-481b-89ca-edf9d65137d7",
+        "a3546a30-39ff-4e49-8727-fbfe844c680c",
+        "bb868227-b016-49ab-a9b7-fb8de8b9bd79",
+        "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+        "496a553d-00cd-4401-b5f7-a913c9314e14",
+        "83e8ce40-d651-4474-92d6-581e7f554ac0",
+        "4b847eac-df11-4c20-aafe-d3738a00f9fa",
+        "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+        "70a19134-da44-4006-86b7-e69d553933c7"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q007",
+      "question": "How does the text describe the concept of mercy?",
+      "category": "multi_passage",
+      "expected_passage_ids": [
+        "ece92983-713f-44e0-9d64-5b44d61c36d3",
+        "dbef2942-bd53-4c04-ab15-ad5638a955ef",
+        "99ef3b55-b569-43f3-831b-2cce70e76a87"
+      ],
+      "retrieved_passage_ids": [
+        "1b4e7953-cd9c-4489-9e5a-dac0db806ffc",
+        "ac81e70d-9045-4733-bf10-8f0d0f7b0856",
+        "03cad44c-3f46-4f16-b53f-2663b6b6bf52",
+        "df3e9c2c-4103-4ebd-bb68-0a20ed2a4faf",
+        "8e090fa9-3d32-4119-a7e1-df6f3ad74bcb",
+        "e72df2a3-9c6c-4291-ba88-6e1606bad750",
+        "a7d8df0b-7ce0-44ae-93ab-ab58c9b28c5f",
+        "268d662f-3b3e-4951-b4e1-0928c4f09739",
+        "ecbbde27-daa1-4af4-a427-8df472dfb390",
+        "d36a7ddc-ea4d-424f-9689-213f744968f3"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q008",
+      "question": "What does the text say about Moses?",
+      "category": "direct_lookup",
+      "expected_passage_ids": [
+        "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+        "eae25f1e-9f97-4cf4-a1c8-9b7539ad86d5",
+        "6c896c2b-b2de-453b-874d-419719b3e866"
+      ],
+      "retrieved_passage_ids": [
+        "0877be3a-5018-4a54-87bd-f68ded440f31",
+        "2503ecbc-1866-4570-9a99-ae04f605cb3d",
+        "3c2b4c3a-c805-4b36-b75b-b023cefac2c0",
+        "1406bba8-8352-4193-953c-19ea3cdd3962",
+        "4c7d9785-a7d3-488d-bf76-e4000fedcde1",
+        "1bca0108-eec9-4c3c-9d01-aeca4244d93f",
+        "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+        "ba75ed3c-252f-4b8f-a02f-c0c574f6fa0b",
+        "ab6fa359-6775-4f6e-85c9-40a9e39c91ec",
+        "f4403507-e4e5-4ca0-9dd7-4c15cb0a2c4c"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q009",
+      "question": "What themes are associated with patience and prayer together?",
+      "category": "multi_passage",
+      "expected_passage_ids": [
+        "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23"
+      ],
+      "retrieved_passage_ids": [
+        "3de12c8e-0e34-4064-916d-44129a347fac",
+        "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+        "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+        "5147f0e5-c798-47e0-b548-09b518ef7a27",
+        "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+        "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+        "ce191342-4e7c-44c8-bb5d-e577f47d5271",
+        "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+        "a38874c4-238e-4270-9374-503487acec60",
+        "4fb26f21-1b22-4980-9414-b3d6924eadb8"
+      ],
+      "hit_at_5": true,
+      "hit_at_10": true,
+      "failure": false,
+      "failure_type": null,
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    },
+    {
+      "id": "q010",
+      "question": "What restrictions does the text place on eating?",
+      "category": "paraphrase",
+      "expected_passage_ids": [
+        "d59e0349-82bc-43d0-aeb1-beb58c2c9664",
+        "81eb4f7f-8dd4-4120-87ee-2020927fad7a",
+        "dfcc4cf6-5480-45b4-a756-e7194a065a63"
+      ],
+      "retrieved_passage_ids": [
+        "f0b9245c-da9d-4f96-b76e-d8670b8c72d1",
+        "a3546a30-39ff-4e49-8727-fbfe844c680c",
+        "0832d8e1-72fe-4e88-b18b-64a362df496a",
+        "d633b88b-d3a1-49a1-b40d-6d975c030045",
+        "f669c2ff-d81d-4ee8-889d-1995b76a9c36",
+        "8278d78e-876c-4003-8adf-2524fffc1e4e",
+        "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+        "f9f73c1c-df5e-4d2e-baae-1dff837d5201",
+        "3878c885-d863-481b-89ca-edf9d65137d7",
+        "894adf27-37b0-4601-bcf7-1f15df39ee4a"
+      ],
+      "hit_at_5": false,
+      "hit_at_10": false,
+      "failure": true,
+      "failure_type": "lexical_miss",
+      "model_used": "qwen2.5:7b",
+      "answer": null,
+      "verifier": null,
+      "verification_status": null,
+      "error": null,
+      "experiment": {
+        "label": "balanced_with_rerank",
+        "hybrid_alpha": 0.5,
+        "hybrid_beta": 0.5,
+        "overlap_boost_enabled": false,
+        "overlap_boost_value": 0.05,
+        "reranker_enabled": true,
+        "reranker_top_k": 25,
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      }
+    }
+  ]
+}

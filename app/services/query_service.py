@@ -76,7 +76,20 @@ def execute_query(
 
     debug_db = QueryDebugArtifact(
         query_id=query_id,
+        original_query=debug_info.original_query,
         normalized_query=debug_info.normalized_query,
+        lexical_query=debug_info.lexical_query,
+        expanded_terms_json=json.dumps(debug_info.expanded_terms),
+        retrieval_config_json=json.dumps(
+            {
+                "hybrid_alpha": debug_info.hybrid_alpha,
+                "hybrid_beta": debug_info.hybrid_beta,
+                "overlap_boost_enabled": debug_info.overlap_boost_enabled,
+                "overlap_boost_value": debug_info.overlap_boost_value,
+                "reranker_enabled": debug_info.reranker_enabled,
+                "reranker_top_k": debug_info.reranker_top_k,
+            }
+        ),
         lexical_hits_json=json.dumps([_candidate_to_dict(c) for c in debug_info.lexical_candidates]),
         dense_hits_json=json.dumps([_candidate_to_dict(c) for c in debug_info.dense_candidates]),
         merged_candidates_json=json.dumps([_candidate_to_dict(c) for c in debug_info.merged_candidates]),
@@ -205,6 +218,10 @@ def _candidate_to_dict(candidate) -> dict:
         "normalized_text": candidate.normalized_text,
         "lexical_score": candidate.lexical_score,
         "dense_score": candidate.dense_score,
+        "lexical_score_normalized": candidate.lexical_score_normalized,
+        "dense_score_normalized": candidate.dense_score_normalized,
+        "overlap_matched": candidate.overlap_matched,
+        "overlap_boost": candidate.overlap_boost,
         "hybrid_score": candidate.hybrid_score,
         "rerank_score": candidate.rerank_score,
         "source_methods": candidate.source_methods,

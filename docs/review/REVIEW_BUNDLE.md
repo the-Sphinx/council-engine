@@ -1,7 +1,7 @@
 # REVIEW BUNDLE
 
 ## 1. Task Summary
-- Task name: Retrieval debug and evaluation loop
+- Task name: Hybrid weighting and reranker tuning
 - Date: 2026-03-17
 - Branch: main
 - Commit hash: pending commit
@@ -9,79 +9,103 @@
 - Status: completed
 
 ## 2. Objective
-Turn retrieval evaluation into a practical diagnostic loop by storing expected passage IDs, per-stage retrieval IDs, and simple failure classifications for each eval query.
+Turn hybrid retrieval into a configurable experiment surface so weight choices, overlap boost, and reranker impact can be measured instead of assumed.
 
 ## 3. What Changed
-- Extended the eval question set with verse-ref-backed ground truth for the current Sahih International Quran project
-- Updated `scripts/run_model_eval.py` to resolve expected passage IDs, compute hit@5/hit@10, classify failures, and write per-query retrieval debug artifacts
-- Added a retrieval-only mode so retrieval tuning can run without paying LLM latency
-- Made the dense embedder prefer local cached sentence-transformer weights before falling back to hashing, so retrieval diagnostics reflect the intended dense retriever
-- Ran a retrieval-only debug eval with `qwen2.5:7b` and saved the results plus per-query debug files
+- Added explicit hybrid tuning config in `app/core/config.py` and `config.yaml` for:
+  - `hybrid_alpha`
+  - `hybrid_beta`
+  - `overlap_boost_enabled`
+  - `overlap_boost_value`
+  - `reranker_top_k`
+- Updated `app/core/interfaces.py` and `app/retrieval/hybrid.py` to preserve raw lexical/dense scores, compute normalized score fields separately, and track overlap metadata on each candidate
+- Updated `app/retrieval/pipeline.py` and `app/services/query_service.py` so debug artifacts now include normalized scores, overlap status, overlap boost, hybrid score, and rerank score
+- Extended retrieval debug persistence/API with retrieval config metadata so a query can be tied back to the fusion settings that produced it
+- Extended `scripts/run_model_eval.py` to support named experiment labels plus per-run overrides for weights, overlap boost, reranker on/off, and reranker top-k
+- Made the eval runner read-only with synthetic query IDs so experiment runs no longer need to insert `Query` rows into the main SQLite DB
+- Ran controlled retrieval-only experiments for balanced, lexical-heavy, reranker-off, and overlap-boost variants
 
 ## 4. Files Changed
+- app/core/interfaces.py
+- app/core/config.py
+- app/retrieval/hybrid.py
+- app/retrieval/pipeline.py
+- app/services/query_service.py
+- app/api/queries.py
+- app/schemas/api.py
+- app/db/models.py
+- app/db/bootstrap.py
+- config.yaml
 - scripts/run_model_eval.py
-- data/evals/questions.json
-- data/evals/results/qwen2.5_7b_retrieval_debug_results.json
-- data/evals/debug/*.json
-- app/retrieval/dense.py
+- scripts/run_eval.py
+- data/evals/results/qwen2.5_7b_balanced_with_rerank_results.json
+- data/evals/results/qwen2.5_7b_lexical_heavy_with_rerank_results.json
+- data/evals/results/qwen2.5_7b_balanced_no_rerank_results.json
+- data/evals/results/qwen2.5_7b_overlap_boost_balanced_results.json
+- tests/unit/test_hybrid.py
+- tests/integration/test_query_pipeline.py
+- tests/integration/test_retrieval_debug_api.py
 - tests/unit/test_model_eval_script.py
 - docs/DECISIONS.md
 - docs/PROGRESS.md
 - docs/review/REVIEW_BUNDLE.md
 
 ## 5. Architecture Impact
-This change affects the evaluation workflow and retrieval observability.
-It does not change answer generation, verification, schema definitions, or public API contracts.
+This change stays inside retrieval and inspectability boundaries.
+It does not change answer generation, verifier behavior, UI, or the core hybrid architecture.
 
 ## 6. Key Implementation Notes
-- Ground truth is expressed as verse references in `data/evals/questions.json` and resolved to passage IDs at runtime for the current indexed Quran project
-- Each eval query now writes a debug artifact containing lexical, dense, merged, and reranked IDs
-- Failure classification is intentionally simple:
-  - missing from lexical top-10 → `lexical_miss`
-  - missing from dense top-10 → `dense_miss`
-  - present before rerank but removed later → `rerank_miss`
-  - otherwise → `unknown`
-- The dense embedder now tries `local_files_only=True` first, which avoided the earlier misleading hashing fallback during retrieval-only eval runs
+- Raw lexical and dense scores are no longer overwritten during normalization; normalized scores are stored separately on each candidate
+- The optional overlap boost is explicit and small, and the candidate debug artifacts show whether it was applied
+- Eval runs now record experiment metadata directly in the output summary and each per-query record
+- The current reranker remains the same model, but its influence is now measurable because we can compare reranker-on vs reranker-off runs with the same benchmark
+- The read-only eval runner change removes the earlier SQLite write contention we saw when experiments were launched in parallel
 
 ## 7. Risks / Known Issues
-- Ground truth is still a small seed set of 10 questions, not a comprehensive benchmark
-- Verse-ref expectations were validated from the Sahih International text and spot-checked online, but the set should still be reviewed and expanded
-- All current failures classify as `lexical_miss`, which is useful but still coarse; there may be more nuanced query-understanding issues underneath
+- The benchmark is still only 10 questions, so the tuning conclusions are directional rather than definitive
+- None of the simple hybrid variants improved hit@10 beyond the current lexical-recall baseline
+- The current reranker is now measurable, but this benchmark does not show a retrieval gain from using it
+- Remaining failures still classify as `lexical_miss`, so the next bottleneck likely sits before reranking
 
 ## 8. Alignment Check Against MASTER_BRIEF
 - source grounding: preserved
-- hybrid retrieval: preserved and now easier to inspect
+- hybrid retrieval: preserved
 - verification layer: unchanged
 - generic schema: preserved
-- inspectability: improved materially for retrieval evaluation
+- inspectability: improved materially for ranking analysis and experiment comparison
 
 ## 9. Testing Performed
-- `conda run -n ai python -m pytest -q tests/unit/test_model_eval_script.py tests/unit/test_llm_client.py tests/integration/test_query_pipeline.py`
-  - `25 passed in 19.82s`
-- `conda run -n ai python -m pytest -q tests/unit/test_dense_embedder.py tests/unit/test_model_eval_script.py`
-  - `6 passed in 0.08s`
-- Retrieval-only eval run:
-  - `conda run -n ai python scripts/run_model_eval.py --project-id 86da8892-b3c5-4a15-a174-1f8ff5179d6b --dataset data/evals/questions.json --model qwen2.5:7b --label retrieval_debug --no-generation`
+- `conda run -n ai python -m pytest -q tests/unit/test_hybrid.py tests/integration/test_retrieval_debug_api.py tests/integration/test_query_pipeline.py tests/unit/test_model_eval_script.py`
+  - `24 passed in 5.89s`
+- Controlled retrieval-only experiments:
+  - `balanced_with_rerank`
+  - `lexical_heavy_with_rerank`
+  - `balanced_no_rerank`
+  - `overlap_boost_balanced`
 
 ## 10. Example Output / Logs
-- Retrieval summary:
+- `balanced_with_rerank`
   - `hit@5 = 0.50`
-  - `hit@10 = 0.50`
-  - `failure_count = 5`
-  - `failure_types = {"lexical_miss": 5}`
-- Top failure examples:
-  - `q002` patience
-  - `q006` abstaining from food during a sacred period
-  - `q007` mercy
-  - `q008` Moses
-  - `q010` eating restrictions
-- Example success:
-  - `q001` fasting now hits expected passages in top-5 once the cached dense model is used
+  - `hit@10 = 0.60`
+- `lexical_heavy_with_rerank`
+  - `hit@5 = 0.40`
+  - `hit@10 = 0.60`
+- `balanced_no_rerank`
+  - `hit@5 = 0.50`
+  - `hit@10 = 0.60`
+- `overlap_boost_balanced`
+  - `hit@5 = 0.50`
+  - `hit@10 = 0.60`
+- Current measurable answer to the reranker question:
+  - reranking did not improve top-k hit rate on the current benchmark
+  - current misses are still happening before reranking, not because of reranking
 
 ## 11. Recommended Reviewer Focus
-- Whether the current failure classifier is just detailed enough without overcomplicating the loop
-- Whether the ground-truth verse mapping for the 10-question seed set looks sound
-- Whether lexical retrieval is underperforming because of normalization/query wording, or whether the expected passages themselves need expansion for broad thematic questions
+- Whether the new weight and overlap settings are truly configurable and not hidden
+- Whether the overlap boost stays transparent and corpus-agnostic
+- Whether the current benchmark is large enough to justify keeping or removing the reranker in defaults
+- Whether the remaining misses point toward reranker replacement, dense retriever changes, or benchmark refinement
+- Whether the new debug fields are sufficient to explain rank changes and regressions
 
 ## 12. Suggested Next Step
-Tune lexical retrieval for paraphrase and theme questions using these debug artifacts, then rerun the same retrieval-only eval to raise `hit@10` materially above `0.50`.
+Use the new experiment/debug surface to inspect the four remaining misses and decide whether the next retrieval task should target dense retrieval quality, reranker replacement, or benchmark expansion rather than simple fusion-weight tuning.

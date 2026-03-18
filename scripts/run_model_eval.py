@@ -95,6 +95,29 @@ def _classify_failure(
     return "unknown"
 
 
+def _candidate_debug_rows(candidates: list, top_k: int = 10) -> list[dict]:
+    rows = []
+    for candidate in candidates[:top_k]:
+        rows.append(
+            {
+                "passage_id": candidate.passage_id,
+                "lexical_score": candidate.lexical_score,
+                "dense_score": candidate.dense_score,
+                "lexical_score_normalized": candidate.lexical_score_normalized,
+                "dense_score_normalized": candidate.dense_score_normalized,
+                "overlap_matched": candidate.overlap_matched,
+                "overlap_boost": candidate.overlap_boost,
+                "hybrid_score": candidate.hybrid_score,
+                "rerank_score": candidate.rerank_score,
+                "rank_lexical": candidate.rank_lexical,
+                "rank_dense": candidate.rank_dense,
+                "rank_hybrid": candidate.rank_hybrid,
+                "rank_rerank": candidate.rank_rerank,
+            }
+        )
+    return rows
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run model comparison eval for Heyet")
     parser.add_argument("--project-id", required=True)
@@ -105,6 +128,14 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=Path("data/evals/results"))
     parser.add_argument("--debug-dir", type=Path, default=Path("data/evals/debug"))
     parser.add_argument("--no-generation", action="store_true")
+    parser.add_argument("--hybrid-alpha", type=float, default=None)
+    parser.add_argument("--hybrid-beta", type=float, default=None)
+    parser.add_argument("--reranker-top-k", type=int, default=None)
+    parser.add_argument("--overlap-boost-value", type=float, default=None)
+    parser.add_argument("--enable-overlap-boost", action="store_true")
+    parser.add_argument("--disable-overlap-boost", action="store_true")
+    parser.add_argument("--enable-reranker", action="store_true")
+    parser.add_argument("--disable-reranker", action="store_true")
     args = parser.parse_args()
 
     if not args.dataset.exists():
@@ -112,7 +143,8 @@ def main() -> None:
         sys.exit(1)
 
     from app.core.config import settings
-    from app.db.session import Base, SessionLocal, engine
+    from app.db.bootstrap import ensure_database_ready
+    from app.db.session import SessionLocal, engine
     from app.generation.answer_generator import GroundedAnswerGenerator
     from app.generation.llm_client import get_llm_client
     from app.generation.verifier import LLMVerifier
@@ -122,7 +154,7 @@ def main() -> None:
     from app.retrieval.pipeline import RetrievalPipeline
     from app.retrieval.reranker import get_reranker
 
-    Base.metadata.create_all(bind=engine)
+    ensure_database_ready(engine)
     db = SessionLocal()
 
     model_name = args.model or settings.LLM_MODEL
@@ -137,6 +169,25 @@ def main() -> None:
         sys.exit(1)
 
     retrieval_cfg = settings.get_retrieval_config()
+    if args.hybrid_alpha is not None:
+        retrieval_cfg.hybrid_alpha = args.hybrid_alpha
+        retrieval_cfg.lexical_weight = args.hybrid_alpha
+    if args.hybrid_beta is not None:
+        retrieval_cfg.hybrid_beta = args.hybrid_beta
+        retrieval_cfg.dense_weight = args.hybrid_beta
+    if args.reranker_top_k is not None:
+        retrieval_cfg.reranker_top_k = args.reranker_top_k
+    if args.enable_overlap_boost:
+        retrieval_cfg.overlap_boost_enabled = True
+    if args.disable_overlap_boost:
+        retrieval_cfg.overlap_boost_enabled = False
+    if args.overlap_boost_value is not None:
+        retrieval_cfg.overlap_boost_value = args.overlap_boost_value
+    if args.enable_reranker:
+        retrieval_cfg.reranker_enabled = True
+    if args.disable_reranker:
+        retrieval_cfg.reranker_enabled = False
+
     embedder = SentenceTransformerEmbedder(settings.EMBEDDER_MODEL)
     lexical = BM25Retriever(im)
     dense = NumpyDenseRetriever(im, embedder)
@@ -166,24 +217,26 @@ def main() -> None:
             "verifier": None,
             "verification_status": None,
             "error": None,
+            "experiment": {
+                "label": args.label,
+                "hybrid_alpha": retrieval_cfg.hybrid_alpha,
+                "hybrid_beta": retrieval_cfg.hybrid_beta,
+                "overlap_boost_enabled": retrieval_cfg.overlap_boost_enabled,
+                "overlap_boost_value": retrieval_cfg.overlap_boost_value,
+                "reranker_enabled": retrieval_cfg.reranker_enabled,
+                "reranker_top_k": retrieval_cfg.reranker_top_k,
+                "reranker_model": settings.RERANKER_MODEL,
+            },
         }
         try:
-            from app.db.models import Query
-
-            query = Query(
-                project_id=args.project_id,
-                question_text=item["question"],
-                mode=item.get("mode", "source_only"),
-            )
-            db.add(query)
-            db.flush()
+            query_id = str(uuid.uuid4())
 
             expected_passage_ids = _resolve_expected_passage_ids(
                 db,
                 args.project_id,
                 item.get("expected_verse_refs", []),
             )
-            bundle, debug = pipeline.run(query_id=query.id, question=item["question"], db=db)
+            bundle, debug = pipeline.run(query_id=query_id, question=item["question"], db=db)
             db.rollback()
 
             lexical_ids = [c.passage_id for c in debug.lexical_candidates]
@@ -205,20 +258,38 @@ def main() -> None:
             failure = bool(expected_passage_ids) and not hit_at_10
 
             debug_payload = {
-                "query_id": query.id,
+                "query_id": query_id,
                 "query": item["question"],
+                "original_query": debug.original_query,
+                "normalized_query": debug.normalized_query,
+                "lexical_query": debug.lexical_query,
+                "expanded_terms": debug.expanded_terms,
+                "experiment": {
+                    "label": args.label,
+                    "hybrid_alpha": debug.hybrid_alpha,
+                    "hybrid_beta": debug.hybrid_beta,
+                    "overlap_boost_enabled": debug.overlap_boost_enabled,
+                    "overlap_boost_value": debug.overlap_boost_value,
+                    "reranker_enabled": debug.reranker_enabled,
+                    "reranker_top_k": debug.reranker_top_k,
+                    "reranker_model": settings.RERANKER_MODEL,
+                },
                 "model_used": model_name,
                 "expected_passage_ids": expected_passage_ids,
                 "top_lexical_ids": lexical_ids[:10],
                 "top_dense_ids": dense_ids[:10],
                 "merged_ids": merged_ids[:10],
                 "reranked_ids": top_k_ids,
+                "top_lexical_candidates": _candidate_debug_rows(debug.lexical_candidates),
+                "top_dense_candidates": _candidate_debug_rows(debug.dense_candidates),
+                "top_merged_candidates": _candidate_debug_rows(debug.merged_candidates),
+                "top_reranked_candidates": _candidate_debug_rows(debug.reranked_candidates),
                 "hit_at_5": hit_at_5,
                 "hit_at_10": hit_at_10,
                 "failure": failure,
                 "failure_type": failure_type if failure else None,
             }
-            with open(args.debug_dir / f"{query.id}.json", "w") as f:
+            with open(args.debug_dir / f"{query_id}.json", "w") as f:
                 json.dump(debug_payload, f, indent=2, ensure_ascii=False)
 
             query_result["expected_passage_ids"] = expected_passage_ids
@@ -268,6 +339,13 @@ def main() -> None:
         "label": args.label,
         "project_id": args.project_id,
         "dataset": str(args.dataset),
+        "hybrid_alpha": retrieval_cfg.hybrid_alpha,
+        "hybrid_beta": retrieval_cfg.hybrid_beta,
+        "overlap_boost_enabled": retrieval_cfg.overlap_boost_enabled,
+        "overlap_boost_value": retrieval_cfg.overlap_boost_value,
+        "reranker_enabled": retrieval_cfg.reranker_enabled,
+        "reranker_top_k": retrieval_cfg.reranker_top_k,
+        "reranker_model": settings.RERANKER_MODEL,
         "timestamp": datetime.utcnow().isoformat(),
         "generation_skipped": args.no_generation,
         "total_queries": total_queries,

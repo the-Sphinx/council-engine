@@ -228,7 +228,11 @@ def get_retrieval_debug(query_id: str, db: Session = Depends(get_db)):
     return RetrievalDebugResponse(
         query_id=query_id,
         question=query.question_text,
+        original_query=debug_db.original_query if debug_db and debug_db.original_query else query.question_text,
         normalized_query=debug_db.normalized_query if debug_db else query.question_text,
+        lexical_query=debug_db.lexical_query if debug_db and debug_db.lexical_query else "",
+        expanded_terms=json.loads(debug_db.expanded_terms_json or "[]") if debug_db else [],
+        retrieval_config=json.loads(debug_db.retrieval_config_json or "{}") if debug_db else {},
         lexical_hits=json.loads(debug_db.lexical_hits_json or "[]") if debug_db else [],
         dense_hits=json.loads(debug_db.dense_hits_json or "[]") if debug_db else [],
         merged_candidates=json.loads(debug_db.merged_candidates_json or "[]") if debug_db else [],

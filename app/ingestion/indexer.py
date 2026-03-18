@@ -18,6 +18,7 @@ from rank_bm25 import BM25Okapi
 
 from app.core.interfaces import PassageForIndex
 from app.core.logging import get_logger
+from app.retrieval.query_processing import tokenize_text_for_lexical
 
 logger = get_logger(__name__)
 
@@ -40,7 +41,7 @@ class IndexManager:
         if not passages:
             logger.warning("build_lexical called with empty passage list")
             return
-        tokenized = [p.normalized_text.lower().split() for p in passages]
+        tokenized = [tokenize_text_for_lexical(p.normalized_text) for p in passages]
         self._bm25 = BM25Okapi(tokenized)
         self._bm25_meta = [
             {
@@ -141,7 +142,7 @@ class IndexManager:
         """Returns top_k results sorted by BM25 score (descending)."""
         if self._bm25 is None or not self._bm25_meta:
             raise RuntimeError("Lexical index not loaded")
-        tokens = query.lower().split()
+        tokens = tokenize_text_for_lexical(query)
         scores = self._bm25.get_scores(tokens)
         top_indices = np.argsort(scores)[::-1][:top_k]
         results = []

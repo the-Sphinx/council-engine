@@ -25,6 +25,8 @@ Overall status:
 - [x] Shared structured-generation enforcement layer now exists for answer + verifier JSON/schema handling
 - [x] Local model evaluation workflow exists and baseline vs upgraded model results have been captured
 - [x] Retrieval eval loop now writes per-query debug artifacts and failure classifications
+- [x] Lexical query normalization and optional query expansion are now implemented and exposed in retrieval debug output
+- [x] Hybrid weighting, overlap boost, and reranker comparison are now configurable and measurable through the eval runner
 - [ ] Final answer generation is stable enough for intended product quality
 - [ ] Verification is reliably schema-compliant with the configured local model
 
@@ -101,7 +103,8 @@ Overall status:
 - [ ] UI messaging is still confusing in some states
 - [ ] Older projects indexed before ingestion fixes may still contain giant chunks
 - [ ] Some API paths work correctly but still need stronger end-to-end UI validation coverage
-- [ ] Retrieval still misses too many paraphrase and theme questions in top-10
+- [ ] Retrieval still misses too many paraphrase and theme questions in top-10 despite the latest lexical improvements
+- [ ] Hybrid tuning did not yet improve retrieval metrics beyond the lexical-recall baseline
 
 ---
 
@@ -118,7 +121,7 @@ reliable grounded answers + reliable verifier output
 Immediate focus:
 - use eval debug artifacts to understand retrieval misses before changing retrieval weights or prompts
 - keep `qwen2.5:7b` as the current default local model
-- improve lexical coverage on paraphrase/theme queries
+- use the new experiment surface to decide whether the next retrieval gain should come from reranking, hybrid weighting, or benchmark refinement
 - improve user-facing UI/status messaging
 
 ---
@@ -157,6 +160,8 @@ Immediate focus:
 - [x] Eval dataset and runner exist
 - [x] Eval debug artifacts and failure tags now exist
 - [ ] Retrieval quality tuning is still needed
+- [x] Lightweight lexical normalization and configurable query expansion now exist
+- [x] Hybrid alpha/beta, overlap boost, and reranker-on/off experiments can now be run from the eval script
 - [ ] Relevance quality for real user questions still needs iteration
 
 #### Prompt / schema maturity
@@ -220,20 +225,79 @@ Measured on:
 - mode: retrieval-only debug run
 - results file: `data/evals/results/qwen2.5_7b_retrieval_debug_results.json`
 
-Current retrieval metrics:
+Baseline retrieval metrics:
 - hit@5: `0.50`
 - hit@10: `0.50`
 - failure count: `5`
 - failure type distribution:
   - `lexical_miss`: `5`
 
-Observed retrieval weaknesses:
-- paraphrase queries about fasting/eating restrictions still miss expected passages in top-10
-- broad thematic prompts like mercy and Moses still miss expected passages in top-10
-- patience-themed retrieval also misses the expected anchor verses even though related verses are present elsewhere in the corpus
+Latest retrieval metrics after lexical normalization + query expansion:
+- mode: retrieval-only debug run
+- results file: `data/evals/results/qwen2.5_7b_lexical_recall_results.json`
+- hit@5: `0.50`
+- hit@10: `0.60`
+- failure count: `4`
+- failure type distribution:
+  - `lexical_miss`: `4`
 
-Known successful cases:
+What improved:
+- `q002` patience now hits expected passages in top-10
+- `q008` Moses now hits expected passages in top-10
+- retrieval debug now shows `original_query`, `normalized_query`, `lexical_query`, and `expanded_terms`
+
+What still fails:
+- `q005` rewards promised to the righteous regressed relative to the previous seed benchmark
+- `q006` abstaining from food during a sacred period still misses expected passages
+- `q007` mercy still misses expected passages
+- `q010` eating restrictions still misses expected passages
+
+Likely interpretation:
+- lightweight normalization and narrow expansions helped direct paraphrase lookup
+- broad thematic questions still need either better benchmark coverage, better hybrid weighting, or reranker improvements
+
+Known successful cases after the latest retrieval pass:
 - fasting direct lookup
+- patience
 - prayer guidance
 - giving to the poor
-- rewards promised to the righteous
+- Moses
+
+Recommended next retrieval step:
+- inspect the four remaining misses and decide whether benchmark refinement, dense retrieval changes, or reranker replacement is the next highest-leverage change, since simple weight tuning did not beat the current balanced baseline
+
+### Hybrid Tuning Summary
+
+Measured on:
+- dataset: `data/evals/questions.json`
+- questions: 10
+- project: `86da8892-b3c5-4a15-a174-1f8ff5179d6b`
+- mode: retrieval-only experiment runs
+
+Experiment results:
+- `balanced_with_rerank`
+  - file: `data/evals/results/qwen2.5_7b_balanced_with_rerank_results.json`
+  - hit@5: `0.50`
+  - hit@10: `0.60`
+  - failure count: `4`
+- `lexical_heavy_with_rerank`
+  - file: `data/evals/results/qwen2.5_7b_lexical_heavy_with_rerank_results.json`
+  - hit@5: `0.40`
+  - hit@10: `0.60`
+  - failure count: `4`
+- `balanced_no_rerank`
+  - file: `data/evals/results/qwen2.5_7b_balanced_no_rerank_results.json`
+  - hit@5: `0.50`
+  - hit@10: `0.60`
+  - failure count: `4`
+- `overlap_boost_balanced`
+  - file: `data/evals/results/qwen2.5_7b_overlap_boost_balanced_results.json`
+  - hit@5: `0.50`
+  - hit@10: `0.60`
+  - failure count: `4`
+
+Interpretation:
+- stronger lexical weighting did not improve hit@10 and made hit@5 worse
+- the current reranker is now measurable, but on this benchmark it did not improve or degrade retrieval outcomes
+- the overlap boost is transparent and configurable, but at `0.05` it did not move the benchmark
+- current misses still originate before reranking, since failures remain `lexical_miss` rather than `rerank_miss`

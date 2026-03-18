@@ -82,3 +82,23 @@ Store per-query retrieval debug artifacts during eval runs, including lexical, d
 
 Reason:
 Makes retrieval misses inspectable and turns evaluation into a practical tuning loop instead of a single aggregate score.
+
+---
+
+## Lexical Query Processing
+
+Decision:
+Use lightweight lexical query normalization plus a small configurable query-expansion map for BM25, and expose the expanded query state in retrieval debug output.
+
+Reason:
+Improves recall on paraphrase-heavy questions while keeping retrieval behavior explainable, inspectable, and easy to disable if an expansion set becomes too broad.
+
+---
+
+## Hybrid Retrieval Defaults
+
+Decision:
+Keep balanced hybrid defaults (`alpha=0.5`, `beta=0.5`) and treat reranking and overlap boost as experiment knobs rather than assumed improvements.
+
+Reason:
+On the current 10-question Quran benchmark, lexical-heavy weighting reduced `hit@5`, while balanced-with-rerank, balanced-no-rerank, and balanced-with-overlap-boost all produced the same `hit@10`. The system now measures these knobs explicitly, but the benchmark does not yet justify changing the default retrieval mix.

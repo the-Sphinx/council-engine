@@ -34,13 +34,23 @@ from app.ingestion.normalizer import normalize_query
 from app.retrieval.context_expander import expand_context
 from app.retrieval.evidence_bundle import build_evidence_bundle
 from app.retrieval.hybrid import compute_hybrid_scores, merge_candidates, normalize_scores
+from app.retrieval.query_processing import build_lexical_query
 
 logger = get_logger(__name__)
 
 
 @dataclass
 class PipelineDebugInfo:
+    original_query: str
     normalized_query: str
+    lexical_query: str
+    expanded_terms: list[str]
+    hybrid_alpha: float
+    hybrid_beta: float
+    overlap_boost_enabled: bool
+    overlap_boost_value: float
+    reranker_enabled: bool
+    reranker_top_k: int
     lexical_candidates: list[RetrievalCandidate]
     dense_candidates: list[RetrievalCandidate]
     merged_candidates: list[RetrievalCandidate]
@@ -70,10 +80,16 @@ class RetrievalPipeline:
 
         # Stage 1: Query normalization
         normalized_q = normalize_query(question)
+        lexical_query_debug = build_lexical_query(
+            question=question,
+            normalized_query=normalized_q,
+            expansions=cfg.lexical_query_expansions,
+            expansion_enabled=cfg.lexical_query_expansion_enabled,
+        )
         logger.info("Pipeline query_id=%s | normalized_q=%r", query_id, normalized_q[:80])
 
         # Stage 2: Lexical retrieval
-        lexical_candidates = self._lex.search(normalized_q, cfg.top_k_lexical)
+        lexical_candidates = self._lex.search(lexical_query_debug.lexical_query, cfg.top_k_lexical)
         logger.debug("Lexical hits: %d", len(lexical_candidates))
 
         # Stage 3: Dense retrieval
@@ -89,10 +105,16 @@ class RetrievalPipeline:
         normalize_scores(merged, "dense")
 
         # Stage 6: Hybrid fusion
-        merged = compute_hybrid_scores(merged, cfg.lexical_weight, cfg.dense_weight)
+        merged = compute_hybrid_scores(
+            merged,
+            alpha=cfg.hybrid_alpha,
+            beta=cfg.hybrid_beta,
+            overlap_boost_enabled=cfg.overlap_boost_enabled,
+            overlap_boost_value=cfg.overlap_boost_value,
+        )
 
         # Stage 7: Reranking
-        top_for_rerank = merged[: cfg.top_k_rerank]
+        top_for_rerank = merged[: cfg.reranker_top_k]
         reranked = self._reranker.rerank(normalized_q, top_for_rerank)
         logger.debug("Reranked candidates: %d", len(reranked))
 
@@ -116,7 +138,16 @@ class RetrievalPipeline:
         )
 
         debug = PipelineDebugInfo(
+            original_query=question,
             normalized_query=normalized_q,
+            lexical_query=lexical_query_debug.lexical_query,
+            expanded_terms=lexical_query_debug.expanded_terms,
+            hybrid_alpha=cfg.hybrid_alpha,
+            hybrid_beta=cfg.hybrid_beta,
+            overlap_boost_enabled=cfg.overlap_boost_enabled,
+            overlap_boost_value=cfg.overlap_boost_value,
+            reranker_enabled=cfg.reranker_enabled,
+            reranker_top_k=cfg.reranker_top_k,
             lexical_candidates=lexical_candidates,
             dense_candidates=dense_candidates,
             merged_candidates=merged,
@@ -136,6 +167,10 @@ class RetrievalPipeline:
             meta = {
                 "lexical_score": c.lexical_score,
                 "dense_score": c.dense_score,
+                "lexical_score_normalized": c.lexical_score_normalized,
+                "dense_score_normalized": c.dense_score_normalized,
+                "overlap_matched": c.overlap_matched,
+                "overlap_boost": c.overlap_boost,
                 "hybrid_score": c.hybrid_score,
                 "rerank_score": c.rerank_score,
                 "source_methods": c.source_methods,

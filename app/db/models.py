@@ -240,7 +240,11 @@ class QueryDebugArtifact(Base):
     query_id: Mapped[str] = mapped_column(
         String(36), ForeignKey("queries.id", ondelete="CASCADE"), nullable=False
     )
+    original_query: Mapped[str | None] = mapped_column(Text, nullable=True)
     normalized_query: Mapped[str] = mapped_column(Text, nullable=False)
+    lexical_query: Mapped[str | None] = mapped_column(Text, nullable=True)
+    expanded_terms_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
+    retrieval_config_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
     lexical_hits_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
     dense_hits_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
     merged_candidates_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")

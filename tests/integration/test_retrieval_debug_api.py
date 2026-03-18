@@ -24,7 +24,20 @@ def test_retrieval_debug_returns_persisted_pipeline_artifacts(db):
 
     debug = QueryDebugArtifact(
         query_id=query.id,
+        original_query="  What is patience?  ",
         normalized_query="What is patience?",
+        lexical_query="patience patient steadfast perseverance",
+        expanded_terms_json=json.dumps(["patient", "steadfast", "perseverance"]),
+        retrieval_config_json=json.dumps(
+            {
+                "hybrid_alpha": 0.5,
+                "hybrid_beta": 0.5,
+                "overlap_boost_enabled": False,
+                "overlap_boost_value": 0.05,
+                "reranker_enabled": True,
+                "reranker_top_k": 25,
+            }
+        ),
         lexical_hits_json=json.dumps([{"passage_id": "p1", "lexical_score": 0.8}]),
         dense_hits_json=json.dumps([{"passage_id": "p1", "dense_score": 0.7}]),
         merged_candidates_json=json.dumps([{"passage_id": "p1", "hybrid_score": 0.75}]),
@@ -73,7 +86,12 @@ def test_retrieval_debug_returns_persisted_pipeline_artifacts(db):
 
     assert response.status_code == 200
     payload = response.json()
+    assert payload["original_query"] == "  What is patience?  "
     assert payload["normalized_query"] == "What is patience?"
+    assert payload["lexical_query"] == "patience patient steadfast perseverance"
+    assert payload["expanded_terms"] == ["patient", "steadfast", "perseverance"]
+    assert payload["retrieval_config"]["hybrid_alpha"] == 0.5
+    assert payload["retrieval_config"]["reranker_enabled"] is True
     assert payload["lexical_hits"] == [{"passage_id": "p1", "lexical_score": 0.8}]
     assert payload["dense_hits"] == [{"passage_id": "p1", "dense_score": 0.7}]
     assert payload["merged_candidates"] == [{"passage_id": "p1", "hybrid_score": 0.75}]

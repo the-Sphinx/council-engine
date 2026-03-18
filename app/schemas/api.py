@@ -76,7 +76,11 @@ class QueryResponse(BaseModel):
 class RetrievalDebugResponse(BaseModel):
     query_id: str
     question: str
+    original_query: str
     normalized_query: str
+    lexical_query: str
+    expanded_terms: list[str]
+    retrieval_config: dict
     lexical_hits: list[dict]
     dense_hits: list[dict]
     merged_candidates: list[dict]

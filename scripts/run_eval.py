@@ -30,10 +30,11 @@ def main():
         sys.exit(1)
 
     from app.core.config import settings
-    from app.db.session import SessionLocal, Base, engine
+    from app.db.bootstrap import ensure_database_ready
+    from app.db.session import SessionLocal, engine
     from app.ingestion.indexer import IndexManager
 
-    Base.metadata.create_all(bind=engine)
+    ensure_database_ready(engine)
     db = SessionLocal()
 
     # Load index

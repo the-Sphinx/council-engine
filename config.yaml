@@ -2,10 +2,25 @@ retrieval:
   top_k_lexical: 30
   top_k_dense: 30
   top_k_rerank: 25
+  reranker_top_k: 25
   top_k_anchors: 6
-  lexical_weight: 0.5
-  dense_weight: 0.5
+  hybrid_alpha: 0.5
+  hybrid_beta: 0.5
   context_window_radius: 1
   max_bundle_passages: 12
   min_anchor_score: null
   reranker_enabled: true
+  overlap_boost_enabled: false
+  overlap_boost_value: 0.05
+  lexical_query_expansion_enabled: true
+  lexical_query_expansions:
+    fasting: ["fast", "abstain", "abstinence", "ramadan"]
+    abstain: ["fast", "fasting", "ramadan"]
+    charity: ["alms", "giving", "poor", "zakat"]
+    mercy: ["merciful", "compassion", "forgiveness", "forgiver"]
+    prayer: ["pray", "prayers", "worship"]
+    patience: ["patient", "steadfast", "perseverance"]
+    parents: ["parent", "mother", "father"]
+    moses: ["musa", "pharaoh", "israel"]
+    eat: ["eating", "food", "lawful", "prohibited"]
+    restrictions: ["prohibited", "forbidden", "lawful", "food"]

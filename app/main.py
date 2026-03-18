@@ -13,6 +13,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
 from app.core.logging import get_logger
+from app.db.bootstrap import ensure_database_ready
 from app.db.session import Base, engine
 
 logger = get_logger(__name__)
@@ -84,8 +85,8 @@ async def lifespan(app: FastAPI):
     settings.INDICES_DIR.mkdir(parents=True, exist_ok=True)
     (settings.DATA_DIR / "eval_runs").mkdir(parents=True, exist_ok=True)
 
-    # Create DB tables
-    Base.metadata.create_all(bind=engine)
+    # Create DB tables and backfill lightweight SQLite schema changes.
+    ensure_database_ready(engine)
     logger.info("Database tables ready")
 
     # Load existing indices from disk

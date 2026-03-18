@@ -81,6 +81,34 @@ def test_lexical_retrieval_returns_results(project_with_index, db):
     assert any("patience" in t.lower() or "virtue" in t.lower() for t in texts)
 
 
+def test_query_expansion_can_be_enabled_and_disabled(project_with_index, db):
+    _project_id, im, _passages = project_with_index
+
+    from app.retrieval.lexical import BM25Retriever
+    from app.retrieval.query_processing import build_lexical_query
+
+    retriever = BM25Retriever(im)
+    disabled_query = build_lexical_query(
+        question="What does the text say about compassion?",
+        normalized_query="What does the text say about compassion?",
+        expansions={"compassion": ["mercy"]},
+        expansion_enabled=False,
+    )
+    enabled_query = build_lexical_query(
+        question="What does the text say about compassion?",
+        normalized_query="What does the text say about compassion?",
+        expansions={"compassion": ["mercy"]},
+        expansion_enabled=True,
+    )
+
+    disabled_results = retriever.search(disabled_query.lexical_query, top_k=5)
+    enabled_results = retriever.search(enabled_query.lexical_query, top_k=5)
+
+    assert enabled_query.expanded_terms == ["mercy"]
+    assert all("mercy triumphs over judgment" not in r.passage_text.lower() for r in disabled_results[:3])
+    assert any("mercy triumphs over judgment" in r.passage_text.lower() for r in enabled_results[:3])
+
+
 def test_dense_retrieval_returns_results(project_with_index, db):
     project_id, im, passages = project_with_index
 

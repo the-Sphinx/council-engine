@@ -27,8 +27,14 @@ def merge_candidates(
             existing.rank_dense = c.rank_dense
             if "dense" not in existing.source_methods:
                 existing.source_methods.append("dense")
+            existing.overlap_matched = True
         else:
             by_id[c.passage_id] = c
+
+    for candidate in by_id.values():
+        candidate.overlap_matched = (
+            candidate.lexical_score is not None and candidate.dense_score is not None
+        )
 
     return list(by_id.values())
 
@@ -42,7 +48,7 @@ def normalize_scores(
     Operates in-place on the candidates.
     """
     score_attr = f"{method}_score"
-    norm_attr = f"{method}_score"  # we overwrite in the candidate
+    norm_attr = f"{method}_score_normalized"
 
     scores = [getattr(c, score_attr) for c in candidates if getattr(c, score_attr) is not None]
     if not scores:
@@ -56,7 +62,7 @@ def normalize_scores(
         raw = getattr(c, score_attr)
         if raw is not None:
             normalized = (raw - min_s) / rng if rng > 0 else 0.0
-            setattr(c, score_attr, normalized)
+            setattr(c, norm_attr, normalized)
 
     return candidates
 
@@ -65,6 +71,8 @@ def compute_hybrid_scores(
     candidates: list[RetrievalCandidate],
     alpha: float = 0.5,
     beta: float = 0.5,
+    overlap_boost_enabled: bool = False,
+    overlap_boost_value: float = 0.05,
 ) -> list[RetrievalCandidate]:
     """
     hybrid_score = alpha * lexical_score + beta * dense_score
@@ -72,9 +80,16 @@ def compute_hybrid_scores(
     Sorts descending by hybrid_score and sets rank_hybrid.
     """
     for c in candidates:
-        lex = c.lexical_score or 0.0
-        den = c.dense_score or 0.0
-        c.hybrid_score = alpha * lex + beta * den
+        c.overlap_matched = (
+            c.overlap_matched
+            or (c.lexical_score is not None and c.dense_score is not None)
+        )
+        lex = c.lexical_score_normalized or 0.0
+        den = c.dense_score_normalized or 0.0
+        c.overlap_boost = (
+            overlap_boost_value if overlap_boost_enabled and c.overlap_matched else 0.0
+        )
+        c.hybrid_score = alpha * lex + beta * den + c.overlap_boost
 
     candidates.sort(key=lambda c: c.hybrid_score or 0.0, reverse=True)
     for rank, c in enumerate(candidates):

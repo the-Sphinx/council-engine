@@ -38,8 +38,12 @@ class RetrievalCandidate:
     normalized_text: str
     lexical_score: Optional[float] = None
     dense_score: Optional[float] = None
+    lexical_score_normalized: Optional[float] = None
+    dense_score_normalized: Optional[float] = None
     hybrid_score: Optional[float] = None
     rerank_score: Optional[float] = None
+    overlap_matched: bool = False
+    overlap_boost: float = 0.0
     source_methods: list[str] = field(default_factory=list)
     rank_lexical: Optional[int] = None
     rank_dense: Optional[int] = None
