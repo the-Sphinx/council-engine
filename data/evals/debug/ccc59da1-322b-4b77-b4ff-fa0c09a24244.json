@@ -1,0 +1,66 @@
+{
+  "query_id": "ccc59da1-322b-4b77-b4ff-fa0c09a24244",
+  "query": "What does the text say about abstaining from food during a sacred period?",
+  "original_query": "What does the text say about abstaining from food during a sacred period?",
+  "normalized_query": "What does the text say about abstaining from food during a sacred period?",
+  "lexical_query": "abstain from food dur sacr period",
+  "expanded_terms": [],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+  ],
+  "top_lexical_ids": [
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "bb868227-b016-49ab-a9b7-fb8de8b9bd79",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "83e8ce40-d651-4474-92d6-581e7f554ac0",
+    "70a19134-da44-4006-86b7-e69d553933c7",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201",
+    "a87a03b2-bb6a-4c48-9ae2-867aa169f380",
+    "5f5f1943-8fbb-411b-9cdb-1693f779a9cb",
+    "c5856fab-405d-4c9d-8b9b-08516615a4f3",
+    "3878c885-d863-481b-89ca-edf9d65137d7"
+  ],
+  "top_dense_ids": [
+    "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "4b847eac-df11-4c20-aafe-d3738a00f9fa",
+    "4e0080c9-8b12-4740-bb23-c949e1c2d7f1",
+    "88e84b30-4880-4f63-af5c-34fc52d6161c",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "c81890d8-43d8-437f-b9ca-99f6f9aa9d7b",
+    "c6ad5eb5-7591-407d-a6bd-122dd228e111",
+    "81eb4f7f-8dd4-4120-87ee-2020927fad7a"
+  ],
+  "merged_ids": [
+    "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "bb868227-b016-49ab-a9b7-fb8de8b9bd79",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "83e8ce40-d651-4474-92d6-581e7f554ac0",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "70a19134-da44-4006-86b7-e69d553933c7",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201"
+  ],
+  "reranked_ids": [
+    "805c4bf7-def0-4ffd-8e1a-2ed6f30c7a83",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "bb868227-b016-49ab-a9b7-fb8de8b9bd79",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "83e8ce40-d651-4474-92d6-581e7f554ac0",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "70a19134-da44-4006-86b7-e69d553933c7",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

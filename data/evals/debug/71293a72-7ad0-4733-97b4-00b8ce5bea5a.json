@@ -1,0 +1,65 @@
+{
+  "query_id": "71293a72-7ad0-4733-97b4-00b8ce5bea5a",
+  "query": "What does the text say about giving to the poor?",
+  "original_query": "What does the text say about giving to the poor?",
+  "normalized_query": "What does the text say about giving to the poor?",
+  "lexical_query": "giv poor",
+  "expanded_terms": [],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "f852a246-d308-499f-b6a9-e7673a33f4e2",
+    "c6604c13-de4f-498b-8229-a956c0d5c09b"
+  ],
+  "top_lexical_ids": [
+    "bd899a3b-56f5-4e29-aaeb-e9ace35f5b49",
+    "6b8b7ca6-0e35-4d58-826a-7ae4939005a3",
+    "fb63b8d0-b993-41e8-906e-baae370dcc1c",
+    "86734db9-b54b-443a-9e5e-dbaab22cf05e",
+    "b3a7bf76-ff01-4b84-b4c7-abc26310b127",
+    "b3c7ce3a-9f71-4914-891f-46bafcb8a6d0",
+    "80b10736-45ff-40e7-979a-59abceac5791",
+    "f852a246-d308-499f-b6a9-e7673a33f4e2",
+    "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a"
+  ],
+  "top_dense_ids": [
+    "c6604c13-de4f-498b-8229-a956c0d5c09b",
+    "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+    "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+    "c64fc734-6607-4218-8a2e-e5b9672958bd",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a",
+    "b3c7ce3a-9f71-4914-891f-46bafcb8a6d0",
+    "d1ce16c0-a0f5-4864-bd5f-bfc69380ed9f",
+    "1880a917-22a1-4d89-be92-14a2873f3c39",
+    "027e9022-ff2e-4fe4-b21d-186a904bf499",
+    "e69adbbe-17c2-450c-940d-8a4534d2a82f"
+  ],
+  "merged_ids": [
+    "b3c7ce3a-9f71-4914-891f-46bafcb8a6d0",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a",
+    "bd899a3b-56f5-4e29-aaeb-e9ace35f5b49",
+    "c6604c13-de4f-498b-8229-a956c0d5c09b",
+    "fb63b8d0-b993-41e8-906e-baae370dcc1c",
+    "6b8b7ca6-0e35-4d58-826a-7ae4939005a3",
+    "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+    "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+    "b3a7bf76-ff01-4b84-b4c7-abc26310b127",
+    "c64fc734-6607-4218-8a2e-e5b9672958bd"
+  ],
+  "reranked_ids": [
+    "b3c7ce3a-9f71-4914-891f-46bafcb8a6d0",
+    "3500cacf-2028-41c3-b08e-c7ef2a71d17a",
+    "bd899a3b-56f5-4e29-aaeb-e9ace35f5b49",
+    "c6604c13-de4f-498b-8229-a956c0d5c09b",
+    "fb63b8d0-b993-41e8-906e-baae370dcc1c",
+    "6b8b7ca6-0e35-4d58-826a-7ae4939005a3",
+    "63b4784d-fc5c-4c99-8629-783e1e6e7bc1",
+    "4459a6c6-136c-4f12-b5aa-2f8b8fc7a419",
+    "b3a7bf76-ff01-4b84-b4c7-abc26310b127",
+    "c64fc734-6607-4218-8a2e-e5b9672958bd"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

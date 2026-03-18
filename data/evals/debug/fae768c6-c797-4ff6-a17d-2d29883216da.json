@@ -1,0 +1,61 @@
+{
+  "query_id": "fae768c6-c797-4ff6-a17d-2d29883216da",
+  "query": "What restrictions does the text place on eating?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "d59e0349-82bc-43d0-aeb1-beb58c2c9664",
+    "410ce1e2-4cff-43e9-9f59-dfbd8850d79b"
+  ],
+  "top_lexical_ids": [
+    "7efa6ff4-23cf-48e3-985b-90e307af3b4e",
+    "0a8b6f73-5c1d-4248-b6c9-32777d1e2189",
+    "4db6645d-9a01-445a-ad45-d9e6ea8d99fe",
+    "12d4f538-39df-42be-8ea9-9a927525385b",
+    "0612071a-cbde-4d8e-9989-ae2157af4848",
+    "e0eb912c-d640-4fca-8dc5-95220e78e910",
+    "5718d64e-5467-475c-b01a-be99a0586310",
+    "62bbe1a7-0ad7-4d6d-bb42-0369be65863b",
+    "8a5cc20e-c74a-4605-825c-deeacd83ec8d",
+    "8a1ed588-2c37-401c-8d9c-4239fa657214"
+  ],
+  "top_dense_ids": [
+    "d633b88b-d3a1-49a1-b40d-6d975c030045",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "a70c5caf-2a91-439c-ac89-111c2c663973",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d",
+    "81eb4f7f-8dd4-4120-87ee-2020927fad7a",
+    "19b61fed-0a4c-4fca-9648-7de881da009d",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201",
+    "71409a87-dbaa-4b25-b8e9-4905936e432b",
+    "bb868227-b016-49ab-a9b7-fb8de8b9bd79"
+  ],
+  "merged_ids": [
+    "7efa6ff4-23cf-48e3-985b-90e307af3b4e",
+    "d633b88b-d3a1-49a1-b40d-6d975c030045",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "0a8b6f73-5c1d-4248-b6c9-32777d1e2189",
+    "a70c5caf-2a91-439c-ac89-111c2c663973",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "4db6645d-9a01-445a-ad45-d9e6ea8d99fe",
+    "12d4f538-39df-42be-8ea9-9a927525385b",
+    "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d",
+    "0612071a-cbde-4d8e-9989-ae2157af4848"
+  ],
+  "reranked_ids": [
+    "a70c5caf-2a91-439c-ac89-111c2c663973",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "81eb4f7f-8dd4-4120-87ee-2020927fad7a",
+    "8a5cc20e-c74a-4605-825c-deeacd83ec8d",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "19b61fed-0a4c-4fca-9648-7de881da009d",
+    "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d",
+    "6e91fa44-4b73-472d-b5f9-801dbb52583d",
+    "71409a87-dbaa-4b25-b8e9-4905936e432b",
+    "d633b88b-d3a1-49a1-b40d-6d975c030045"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

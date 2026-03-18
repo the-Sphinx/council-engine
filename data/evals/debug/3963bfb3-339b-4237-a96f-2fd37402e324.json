@@ -1,0 +1,62 @@
+{
+  "query_id": "3963bfb3-339b-4237-a96f-2fd37402e324",
+  "query": "What does the text say about fasting?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+  ],
+  "top_lexical_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8",
+    "b598bab0-ac52-47d4-bbc7-44cc8b887377",
+    "0dcc615e-99cc-4254-8501-cb628ba2270a",
+    "ea3497f3-edf2-44f2-a69e-2b9e078deecf"
+  ],
+  "top_dense_ids": [
+    "0968372f-9e25-47b6-9d1c-970c85604b37",
+    "51acc9e0-fa2c-4ba5-9edd-b3a510157e52",
+    "4610117d-488e-4743-8545-1e38a12b3aa0",
+    "c0e4e2c6-51f1-4b96-84de-1abd8396314e",
+    "61a917e1-f4d0-449b-b230-a4860514e202",
+    "c5ad7063-894f-40b9-93a9-ee3225e9688c",
+    "086a54c4-fa23-4ceb-aa2d-b58fc0625a90",
+    "cb46092e-5b7b-48f5-ab8e-b3737ed185bd",
+    "27ef7804-a506-4d8a-8225-027319ed6595",
+    "59e2b460-245d-40e3-9beb-87e91c3f24f2"
+  ],
+  "merged_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "0968372f-9e25-47b6-9d1c-970c85604b37",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "51acc9e0-fa2c-4ba5-9edd-b3a510157e52",
+    "4610117d-488e-4743-8545-1e38a12b3aa0",
+    "c0e4e2c6-51f1-4b96-84de-1abd8396314e",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "61a917e1-f4d0-449b-b230-a4860514e202"
+  ],
+  "reranked_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "0968372f-9e25-47b6-9d1c-970c85604b37",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "51acc9e0-fa2c-4ba5-9edd-b3a510157e52",
+    "4610117d-488e-4743-8545-1e38a12b3aa0",
+    "c0e4e2c6-51f1-4b96-84de-1abd8396314e",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "61a917e1-f4d0-449b-b230-a4860514e202"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

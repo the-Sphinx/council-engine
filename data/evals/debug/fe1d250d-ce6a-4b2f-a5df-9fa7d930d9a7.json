@@ -1,0 +1,63 @@
+{
+  "query_id": "fe1d250d-ce6a-4b2f-a5df-9fa7d930d9a7",
+  "query": "What are the rewards promised to the righteous?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+    "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+    "e0b6adc1-32ee-4f79-bef0-175a9e25f104",
+    "a56bb920-89d2-42df-b127-4f8d45c77b34"
+  ],
+  "top_lexical_ids": [
+    "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+    "ff89e702-6abd-4ef5-8329-3c5c44d6f98e",
+    "76d9a5f6-82c5-442c-b0e7-1b6f60c86481",
+    "d2cafbfe-ea4d-4479-bebf-870c9a464469",
+    "87fb4a3a-f6f3-47b1-ae74-2b9cfb432a66",
+    "20ebbeff-a107-4cd5-9d0e-0de0ace832ef",
+    "8a1ed588-2c37-401c-8d9c-4239fa657214",
+    "93a823f0-9b54-4f96-9498-70c080da700a",
+    "4615d4f6-999f-4aef-b450-15481898259f",
+    "d6d0d50d-1468-4f49-9bcc-eb3565ebf3cc"
+  ],
+  "top_dense_ids": [
+    "4e7e62c9-ad2d-4f93-80e9-59a4174ec67a",
+    "711be151-2b8e-434c-a364-42d2ee9f6d00",
+    "5d22a75f-4651-47e7-ad53-9cf92bc8298a",
+    "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+    "52870351-0077-4e7a-ac9c-2399043ded7d",
+    "032e435a-d785-472f-9aae-2ede4fc41673",
+    "210e14f4-6a14-4dc0-a7bd-fa81bb78feab",
+    "2f364dbb-a984-43f7-af97-af57b5709828",
+    "ff82b03b-7960-468d-b3f9-14f62ebb00a1",
+    "0ff040ba-a858-4c0e-aadf-e19e9a4f5dbf"
+  ],
+  "merged_ids": [
+    "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+    "4e7e62c9-ad2d-4f93-80e9-59a4174ec67a",
+    "ff89e702-6abd-4ef5-8329-3c5c44d6f98e",
+    "711be151-2b8e-434c-a364-42d2ee9f6d00",
+    "5d22a75f-4651-47e7-ad53-9cf92bc8298a",
+    "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+    "52870351-0077-4e7a-ac9c-2399043ded7d",
+    "032e435a-d785-472f-9aae-2ede4fc41673",
+    "76d9a5f6-82c5-442c-b0e7-1b6f60c86481",
+    "210e14f4-6a14-4dc0-a7bd-fa81bb78feab"
+  ],
+  "reranked_ids": [
+    "67662328-2dd2-4c35-920b-e9d6c6fcd774",
+    "4e7e62c9-ad2d-4f93-80e9-59a4174ec67a",
+    "ff89e702-6abd-4ef5-8329-3c5c44d6f98e",
+    "711be151-2b8e-434c-a364-42d2ee9f6d00",
+    "5d22a75f-4651-47e7-ad53-9cf92bc8298a",
+    "05d7bacd-2cd1-4b3d-989d-35a0d79cad41",
+    "52870351-0077-4e7a-ac9c-2399043ded7d",
+    "032e435a-d785-472f-9aae-2ede4fc41673",
+    "76d9a5f6-82c5-442c-b0e7-1b6f60c86481",
+    "210e14f4-6a14-4dc0-a7bd-fa81bb78feab"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

@@ -1,0 +1,66 @@
+{
+  "query_id": "71715c11-72c3-43a1-9fd2-f353d41a2e18",
+  "query": "What does the text say about fasting?",
+  "original_query": "What does the text say about fasting?",
+  "normalized_query": "What does the text say about fasting?",
+  "lexical_query": "fast",
+  "expanded_terms": [],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+  ],
+  "top_lexical_ids": [
+    "c98b6386-9b4a-4c3e-8c9b-b97ed3bedd39",
+    "e7ffca24-6365-4df3-9040-93ce4b8aa6ab",
+    "76d5aa11-10d4-49d0-8465-0e9efc1fb65c",
+    "c02e1b07-3728-4760-9b0f-747a0bd7aa71",
+    "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "824ea68f-c8e6-4c25-b1ce-7a5b01ffeb80",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a",
+    "9ee91502-fa5c-4228-aa1a-31cf870dc722",
+    "ed36eeae-92d1-4831-9add-219803bd869a"
+  ],
+  "top_dense_ids": [
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "ed36eeae-92d1-4831-9add-219803bd869a",
+    "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a",
+    "e7ffca24-6365-4df3-9040-93ce4b8aa6ab",
+    "9ee91502-fa5c-4228-aa1a-31cf870dc722",
+    "3492640b-f911-496f-9120-cddfd1a7947b",
+    "c98b6386-9b4a-4c3e-8c9b-b97ed3bedd39",
+    "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d"
+  ],
+  "merged_ids": [
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c98b6386-9b4a-4c3e-8c9b-b97ed3bedd39",
+    "e7ffca24-6365-4df3-9040-93ce4b8aa6ab",
+    "ed36eeae-92d1-4831-9add-219803bd869a",
+    "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "76d5aa11-10d4-49d0-8465-0e9efc1fb65c",
+    "c02e1b07-3728-4760-9b0f-747a0bd7aa71",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a",
+    "9ee91502-fa5c-4228-aa1a-31cf870dc722"
+  ],
+  "reranked_ids": [
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c98b6386-9b4a-4c3e-8c9b-b97ed3bedd39",
+    "e7ffca24-6365-4df3-9040-93ce4b8aa6ab",
+    "ed36eeae-92d1-4831-9add-219803bd869a",
+    "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "76d5aa11-10d4-49d0-8465-0e9efc1fb65c",
+    "c02e1b07-3728-4760-9b0f-747a0bd7aa71",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a",
+    "9ee91502-fa5c-4228-aa1a-31cf870dc722"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

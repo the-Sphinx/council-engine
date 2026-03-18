@@ -1,0 +1,62 @@
+{
+  "query_id": "bbd004a3-22b9-4c42-bba4-c640f5748932",
+  "query": "What does the text say about Moses?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+    "eae25f1e-9f97-4cf4-a1c8-9b7539ad86d5",
+    "6c896c2b-b2de-453b-874d-419719b3e866"
+  ],
+  "top_lexical_ids": [
+    "98e417ca-68c5-4cfc-a347-496707a04ca9",
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8",
+    "b598bab0-ac52-47d4-bbc7-44cc8b887377",
+    "0dcc615e-99cc-4254-8501-cb628ba2270a"
+  ],
+  "top_dense_ids": [
+    "94f4215c-259f-4f96-b9da-63994553db6f",
+    "97c220ba-b9a5-431c-b839-4934c4049bc5",
+    "da6f6e91-e881-44c8-b867-398ff6ffbae1",
+    "086a54c4-fa23-4ceb-aa2d-b58fc0625a90",
+    "301a3fd6-fe99-436d-a766-ef1e3cf8f6f1",
+    "627acabf-c212-4191-a6db-3de30a1a7a5c",
+    "cfbe2a1f-e8b4-4c15-988a-9d8ce722c70f",
+    "44f68888-3730-457d-99d4-093c89910cb3",
+    "c907f5d4-50fe-4dfb-84c2-bafd20bdd5dc",
+    "51acc9e0-fa2c-4ba5-9edd-b3a510157e52"
+  ],
+  "merged_ids": [
+    "98e417ca-68c5-4cfc-a347-496707a04ca9",
+    "94f4215c-259f-4f96-b9da-63994553db6f",
+    "97c220ba-b9a5-431c-b839-4934c4049bc5",
+    "da6f6e91-e881-44c8-b867-398ff6ffbae1",
+    "086a54c4-fa23-4ceb-aa2d-b58fc0625a90",
+    "301a3fd6-fe99-436d-a766-ef1e3cf8f6f1",
+    "627acabf-c212-4191-a6db-3de30a1a7a5c",
+    "cfbe2a1f-e8b4-4c15-988a-9d8ce722c70f",
+    "44f68888-3730-457d-99d4-093c89910cb3",
+    "c907f5d4-50fe-4dfb-84c2-bafd20bdd5dc"
+  ],
+  "reranked_ids": [
+    "98e417ca-68c5-4cfc-a347-496707a04ca9",
+    "94f4215c-259f-4f96-b9da-63994553db6f",
+    "97c220ba-b9a5-431c-b839-4934c4049bc5",
+    "da6f6e91-e881-44c8-b867-398ff6ffbae1",
+    "086a54c4-fa23-4ceb-aa2d-b58fc0625a90",
+    "301a3fd6-fe99-436d-a766-ef1e3cf8f6f1",
+    "627acabf-c212-4191-a6db-3de30a1a7a5c",
+    "cfbe2a1f-e8b4-4c15-988a-9d8ce722c70f",
+    "44f68888-3730-457d-99d4-093c89910cb3",
+    "c907f5d4-50fe-4dfb-84c2-bafd20bdd5dc"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

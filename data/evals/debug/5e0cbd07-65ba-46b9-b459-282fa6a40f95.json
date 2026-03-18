@@ -1,0 +1,62 @@
+{
+  "query_id": "5e0cbd07-65ba-46b9-b459-282fa6a40f95",
+  "query": "What guidance is given about prayer?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4"
+  ],
+  "top_lexical_ids": [
+    "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+    "0c54609b-9e12-4276-8f3d-b8c1aff231b9",
+    "c82d4a47-ab6a-4439-b2e8-2ec2cc2406bd",
+    "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+    "15bdc382-ae80-42ae-a47b-4e34ff9b8eba",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "04fd94b7-6b00-491c-a73f-fd7584da1e07",
+    "665399c7-c360-41ce-8116-03fa6cbe556e",
+    "a044edef-c30a-4f13-9675-ff6642107343"
+  ],
+  "top_dense_ids": [
+    "b67ded1b-0be9-4039-b1fe-76bb665a07ea",
+    "517b7d42-3e01-4acb-95e7-6c986effaffd",
+    "52536867-e9ee-4b61-8eb1-fff318a8c44d",
+    "07ea8ce0-cd5d-4e32-a399-5c41c1498ee4",
+    "80bad3a9-3948-419d-90fe-de94a9d4438f",
+    "6157911d-5561-40a6-babb-48121e6a5aa5",
+    "519783ab-f6cc-43d5-a86d-cab312bb226c",
+    "d633b88b-d3a1-49a1-b40d-6d975c030045",
+    "4e098b56-6d1a-41a3-b32d-33d7a2d60b8d",
+    "a7b6ae0a-54f6-4cdd-bbd6-d65b2f53e41a"
+  ],
+  "merged_ids": [
+    "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+    "b67ded1b-0be9-4039-b1fe-76bb665a07ea",
+    "517b7d42-3e01-4acb-95e7-6c986effaffd",
+    "0c54609b-9e12-4276-8f3d-b8c1aff231b9",
+    "52536867-e9ee-4b61-8eb1-fff318a8c44d",
+    "07ea8ce0-cd5d-4e32-a399-5c41c1498ee4",
+    "c82d4a47-ab6a-4439-b2e8-2ec2cc2406bd",
+    "80bad3a9-3948-419d-90fe-de94a9d4438f",
+    "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+    "6157911d-5561-40a6-babb-48121e6a5aa5"
+  ],
+  "reranked_ids": [
+    "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+    "b67ded1b-0be9-4039-b1fe-76bb665a07ea",
+    "517b7d42-3e01-4acb-95e7-6c986effaffd",
+    "0c54609b-9e12-4276-8f3d-b8c1aff231b9",
+    "52536867-e9ee-4b61-8eb1-fff318a8c44d",
+    "07ea8ce0-cd5d-4e32-a399-5c41c1498ee4",
+    "c82d4a47-ab6a-4439-b2e8-2ec2cc2406bd",
+    "80bad3a9-3948-419d-90fe-de94a9d4438f",
+    "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+    "6157911d-5561-40a6-babb-48121e6a5aa5"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

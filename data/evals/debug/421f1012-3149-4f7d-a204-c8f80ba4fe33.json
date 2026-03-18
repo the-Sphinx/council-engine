@@ -1,0 +1,70 @@
+{
+  "query_id": "421f1012-3149-4f7d-a204-c8f80ba4fe33",
+  "query": "What does the text say about Moses?",
+  "original_query": "What does the text say about Moses?",
+  "normalized_query": "What does the text say about Moses?",
+  "lexical_query": "moses musa pharaoh israel",
+  "expanded_terms": [
+    "musa",
+    "pharaoh",
+    "israel"
+  ],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+    "eae25f1e-9f97-4cf4-a1c8-9b7539ad86d5",
+    "6c896c2b-b2de-453b-874d-419719b3e866"
+  ],
+  "top_lexical_ids": [
+    "0877be3a-5018-4a54-87bd-f68ded440f31",
+    "1406bba8-8352-4193-953c-19ea3cdd3962",
+    "4c7d9785-a7d3-488d-bf76-e4000fedcde1",
+    "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+    "3c2b4c3a-c805-4b36-b75b-b023cefac2c0",
+    "f4403507-e4e5-4ca0-9dd7-4c15cb0a2c4c",
+    "6f073563-0d14-40c5-94d0-577b707de9b9",
+    "8d22410d-487b-492d-9932-d451316b7248",
+    "7256342d-b115-440b-b60e-b5a8cd78aec0",
+    "ee3210b9-b018-4a7e-bc7e-fb169bd3adf5"
+  ],
+  "top_dense_ids": [
+    "2503ecbc-1866-4570-9a99-ae04f605cb3d",
+    "1bca0108-eec9-4c3c-9d01-aeca4244d93f",
+    "ba75ed3c-252f-4b8f-a02f-c0c574f6fa0b",
+    "ab6fa359-6775-4f6e-85c9-40a9e39c91ec",
+    "98e417ca-68c5-4cfc-a347-496707a04ca9",
+    "0a566757-4d55-48cc-9284-c31dd4d3dca6",
+    "3c2b4c3a-c805-4b36-b75b-b023cefac2c0",
+    "d747fd44-528d-43a2-9218-524a9392e88d",
+    "9e7b5721-7499-4a57-bcfb-713569122314",
+    "9531de4f-2e21-49f5-936e-85e721173197"
+  ],
+  "merged_ids": [
+    "0877be3a-5018-4a54-87bd-f68ded440f31",
+    "2503ecbc-1866-4570-9a99-ae04f605cb3d",
+    "3c2b4c3a-c805-4b36-b75b-b023cefac2c0",
+    "1406bba8-8352-4193-953c-19ea3cdd3962",
+    "4c7d9785-a7d3-488d-bf76-e4000fedcde1",
+    "1bca0108-eec9-4c3c-9d01-aeca4244d93f",
+    "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+    "ba75ed3c-252f-4b8f-a02f-c0c574f6fa0b",
+    "ab6fa359-6775-4f6e-85c9-40a9e39c91ec",
+    "f4403507-e4e5-4ca0-9dd7-4c15cb0a2c4c"
+  ],
+  "reranked_ids": [
+    "0877be3a-5018-4a54-87bd-f68ded440f31",
+    "2503ecbc-1866-4570-9a99-ae04f605cb3d",
+    "3c2b4c3a-c805-4b36-b75b-b023cefac2c0",
+    "1406bba8-8352-4193-953c-19ea3cdd3962",
+    "4c7d9785-a7d3-488d-bf76-e4000fedcde1",
+    "1bca0108-eec9-4c3c-9d01-aeca4244d93f",
+    "04a099e2-4815-4b6c-b7e0-14943fe1704a",
+    "ba75ed3c-252f-4b8f-a02f-c0c574f6fa0b",
+    "ab6fa359-6775-4f6e-85c9-40a9e39c91ec",
+    "f4403507-e4e5-4ca0-9dd7-4c15cb0a2c4c"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

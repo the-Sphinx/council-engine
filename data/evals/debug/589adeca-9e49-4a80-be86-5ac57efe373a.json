@@ -1,0 +1,70 @@
+{
+  "query_id": "589adeca-9e49-4a80-be86-5ac57efe373a",
+  "query": "What restrictions does the text place on eating?",
+  "original_query": "What restrictions does the text place on eating?",
+  "normalized_query": "What restrictions does the text place on eating?",
+  "lexical_query": "restriction place on eat food lawful prohibit",
+  "expanded_terms": [
+    "food",
+    "lawful",
+    "prohibit"
+  ],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "d59e0349-82bc-43d0-aeb1-beb58c2c9664",
+    "81eb4f7f-8dd4-4120-87ee-2020927fad7a",
+    "dfcc4cf6-5480-45b4-a756-e7194a065a63"
+  ],
+  "top_lexical_ids": [
+    "0832d8e1-72fe-4e88-b18b-64a362df496a",
+    "f669c2ff-d81d-4ee8-889d-1995b76a9c36",
+    "f0b9245c-da9d-4f96-b76e-d8670b8c72d1",
+    "8278d78e-876c-4003-8adf-2524fffc1e4e",
+    "894adf27-37b0-4601-bcf7-1f15df39ee4a",
+    "410ce1e2-4cff-43e9-9f59-dfbd8850d79b",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "c81890d8-43d8-437f-b9ca-99f6f9aa9d7b",
+    "8fe3ab71-6f8c-4619-8ab3-fabdfd2b8b54",
+    "adcf011a-8344-462e-b308-d6b7f05e02f1"
+  ],
+  "top_dense_ids": [
+    "d633b88b-d3a1-49a1-b40d-6d975c030045",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "a70c5caf-2a91-439c-ac89-111c2c663973",
+    "496a553d-00cd-4401-b5f7-a913c9314e14",
+    "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d",
+    "81eb4f7f-8dd4-4120-87ee-2020927fad7a",
+    "19b61fed-0a4c-4fca-9648-7de881da009d",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201",
+    "71409a87-dbaa-4b25-b8e9-4905936e432b",
+    "bb868227-b016-49ab-a9b7-fb8de8b9bd79"
+  ],
+  "merged_ids": [
+    "f0b9245c-da9d-4f96-b76e-d8670b8c72d1",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "0832d8e1-72fe-4e88-b18b-64a362df496a",
+    "d633b88b-d3a1-49a1-b40d-6d975c030045",
+    "f669c2ff-d81d-4ee8-889d-1995b76a9c36",
+    "8278d78e-876c-4003-8adf-2524fffc1e4e",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "894adf27-37b0-4601-bcf7-1f15df39ee4a"
+  ],
+  "reranked_ids": [
+    "f0b9245c-da9d-4f96-b76e-d8670b8c72d1",
+    "a3546a30-39ff-4e49-8727-fbfe844c680c",
+    "0832d8e1-72fe-4e88-b18b-64a362df496a",
+    "d633b88b-d3a1-49a1-b40d-6d975c030045",
+    "f669c2ff-d81d-4ee8-889d-1995b76a9c36",
+    "8278d78e-876c-4003-8adf-2524fffc1e4e",
+    "2693fa1a-b575-4c41-b9fc-5f97afcf1d50",
+    "f9f73c1c-df5e-4d2e-baae-1dff837d5201",
+    "3878c885-d863-481b-89ca-edf9d65137d7",
+    "894adf27-37b0-4601-bcf7-1f15df39ee4a"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

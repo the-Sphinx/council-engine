@@ -99,6 +99,7 @@ Use this exact template structure.
 ## 1. Task Summary
 - Task name:
 - Date:
+- Time:
 - Branch:
 - Commit hash:
 - Agent:

@@ -1,0 +1,71 @@
+{
+  "query_id": "39299b5c-8fcc-436e-bc0c-25fbb2c04391",
+  "query": "What themes are associated with patience and prayer together?",
+  "original_query": "What themes are associated with patience and prayer together?",
+  "normalized_query": "What themes are associated with patience and prayer together?",
+  "lexical_query": "theme associat patience prayer patient steadfast perseverance pray worship",
+  "expanded_terms": [
+    "patient",
+    "steadfast",
+    "perseverance",
+    "pray",
+    "worship"
+  ],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23"
+  ],
+  "top_lexical_ids": [
+    "3de12c8e-0e34-4064-916d-44129a347fac",
+    "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+    "ce191342-4e7c-44c8-bb5d-e577f47d5271",
+    "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+    "a38874c4-238e-4270-9374-503487acec60",
+    "4da2ca54-8174-479b-a472-3c4dd4926e62",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+    "da7006c6-76ed-431f-9f13-0862fb987c5c",
+    "28005433-3d61-40b4-a52b-079688faf1da"
+  ],
+  "top_dense_ids": [
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "5147f0e5-c798-47e0-b548-09b518ef7a27",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+    "3de12c8e-0e34-4064-916d-44129a347fac",
+    "74913b54-dc17-4158-8e94-a1b3a05980d5",
+    "f2de3bff-f9c0-4d29-ad7c-604afb1f5db2",
+    "d5b1a3ed-3d4d-420e-944c-8aa67c1e7baf",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "9ce46b50-0bca-467f-a881-627051e50f1d"
+  ],
+  "merged_ids": [
+    "3de12c8e-0e34-4064-916d-44129a347fac",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "5147f0e5-c798-47e0-b548-09b518ef7a27",
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+    "ce191342-4e7c-44c8-bb5d-e577f47d5271",
+    "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+    "a38874c4-238e-4270-9374-503487acec60",
+    "4fb26f21-1b22-4980-9414-b3d6924eadb8"
+  ],
+  "reranked_ids": [
+    "3de12c8e-0e34-4064-916d-44129a347fac",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "5147f0e5-c798-47e0-b548-09b518ef7a27",
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+    "ce191342-4e7c-44c8-bb5d-e577f47d5271",
+    "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+    "a38874c4-238e-4270-9374-503487acec60",
+    "4fb26f21-1b22-4980-9414-b3d6924eadb8"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

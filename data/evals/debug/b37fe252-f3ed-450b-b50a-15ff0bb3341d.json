@@ -1,0 +1,69 @@
+{
+  "query_id": "b37fe252-f3ed-450b-b50a-15ff0bb3341d",
+  "query": "What does the text say about patience?",
+  "original_query": "What does the text say about patience?",
+  "normalized_query": "What does the text say about patience?",
+  "lexical_query": "patience patient steadfast perseverance",
+  "expanded_terms": [
+    "patient",
+    "steadfast",
+    "perseverance"
+  ],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f"
+  ],
+  "top_lexical_ids": [
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+    "28005433-3d61-40b4-a52b-079688faf1da",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "50cfb46b-5a1e-4d9f-b617-2a49e52fd72b",
+    "4fb26f21-1b22-4980-9414-b3d6924eadb8",
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+    "3de12c8e-0e34-4064-916d-44129a347fac",
+    "17d1e90c-9d41-4fbc-a642-57959e3f1a5f",
+    "343e706c-3d79-4dc9-807a-04f580763ed3",
+    "50d5dd2d-11da-4192-aa35-884668db698d"
+  ],
+  "top_dense_ids": [
+    "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+    "3047fbe9-e469-45c5-aea8-45024e84ab64",
+    "2c287de0-1875-48ad-af72-1310f84a9144",
+    "a39e3aa6-1986-46c9-aa12-e8d0d8636b15",
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+    "d48d40f2-523a-46fa-8b83-1cc6f7431a05",
+    "3528d881-5923-4be4-9ab1-9d5fa913b791",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "42aa10e9-b88f-438a-8c8f-a6b89a81128b",
+    "3548aaa2-e1db-4168-8578-7838623f7efe"
+  ],
+  "merged_ids": [
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "28005433-3d61-40b4-a52b-079688faf1da",
+    "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+    "3047fbe9-e469-45c5-aea8-45024e84ab64",
+    "50cfb46b-5a1e-4d9f-b617-2a49e52fd72b",
+    "4fb26f21-1b22-4980-9414-b3d6924eadb8",
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+    "2c287de0-1875-48ad-af72-1310f84a9144",
+    "3de12c8e-0e34-4064-916d-44129a347fac"
+  ],
+  "reranked_ids": [
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "28005433-3d61-40b4-a52b-079688faf1da",
+    "2c4bbbc2-cd8f-48ce-9e67-7ca9e6c86f51",
+    "3047fbe9-e469-45c5-aea8-45024e84ab64",
+    "50cfb46b-5a1e-4d9f-b617-2a49e52fd72b",
+    "4fb26f21-1b22-4980-9414-b3d6924eadb8",
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+    "2c287de0-1875-48ad-af72-1310f84a9144",
+    "3de12c8e-0e34-4064-916d-44129a347fac"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

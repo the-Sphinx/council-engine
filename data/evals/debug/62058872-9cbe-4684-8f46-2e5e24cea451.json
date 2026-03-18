@@ -1,0 +1,61 @@
+{
+  "query_id": "62058872-9cbe-4684-8f46-2e5e24cea451",
+  "query": "What themes are associated with patience and prayer together?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "0c7f2e03-6afa-4035-9c18-eb53dcd7933f",
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23"
+  ],
+  "top_lexical_ids": [
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+    "2d910a8e-7eaf-4944-8555-eb4e85d97369",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "4fbf733e-ac45-4e77-bf09-d376aa2a27c1",
+    "fad4d835-0f22-4362-8260-20af896dbeec",
+    "a2826134-6af2-4de5-a670-2fffd4dd5c79",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+    "56382a49-0810-461b-9344-1d2c71242078",
+    "29c80903-ef7f-41e6-9ed2-9c9010146fcc"
+  ],
+  "top_dense_ids": [
+    "e32052ee-13b4-4b7f-a8ba-5e8d64ded40f",
+    "cbc8b0db-a358-46aa-a079-c50380486640",
+    "a64e4c61-0798-44ec-877e-ea7b4e459b68",
+    "1e91f6a4-0090-4953-abec-415964490d3a",
+    "9488f3f0-15a6-4019-8b27-9fa33b95fd0b",
+    "e2720786-5e73-4e56-bfeb-38621c5721c6",
+    "6786a4f2-fec0-4394-9816-66717061ad79",
+    "01c87500-cd0c-4a2b-a4bd-b8efe5560b9a",
+    "420aa9bd-b104-4dca-beb1-01ff7af395a4",
+    "710ad8d9-7aa8-4f49-b36c-febae05efe4e"
+  ],
+  "merged_ids": [
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "e32052ee-13b4-4b7f-a8ba-5e8d64ded40f",
+    "cbc8b0db-a358-46aa-a079-c50380486640",
+    "a64e4c61-0798-44ec-877e-ea7b4e459b68",
+    "1e91f6a4-0090-4953-abec-415964490d3a",
+    "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+    "9488f3f0-15a6-4019-8b27-9fa33b95fd0b",
+    "2d910a8e-7eaf-4944-8555-eb4e85d97369",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "4fbf733e-ac45-4e77-bf09-d376aa2a27c1"
+  ],
+  "reranked_ids": [
+    "659f6b3c-e9a8-4db4-bfb4-a8ff90a08a23",
+    "e32052ee-13b4-4b7f-a8ba-5e8d64ded40f",
+    "cbc8b0db-a358-46aa-a079-c50380486640",
+    "a64e4c61-0798-44ec-877e-ea7b4e459b68",
+    "1e91f6a4-0090-4953-abec-415964490d3a",
+    "bf920931-2ef3-435b-8fb6-8eef2fb9568d",
+    "9488f3f0-15a6-4019-8b27-9fa33b95fd0b",
+    "2d910a8e-7eaf-4944-8555-eb4e85d97369",
+    "47a90928-ee8d-4c77-8fe8-43ae81aa8023",
+    "4fbf733e-ac45-4e77-bf09-d376aa2a27c1"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

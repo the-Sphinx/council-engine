@@ -1,0 +1,62 @@
+{
+  "query_id": "fb3d14b4-652f-462b-b698-187b508503f5",
+  "query": "What does the text say about fasting?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a"
+  ],
+  "top_lexical_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8",
+    "b598bab0-ac52-47d4-bbc7-44cc8b887377",
+    "0dcc615e-99cc-4254-8501-cb628ba2270a",
+    "ea3497f3-edf2-44f2-a69e-2b9e078deecf"
+  ],
+  "top_dense_ids": [
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "ed36eeae-92d1-4831-9add-219803bd869a",
+    "2de5d03c-3c9b-4d21-80b3-79896c3d76c6",
+    "c334bae4-0002-4700-8c43-fcdf7dd9927a",
+    "e7ffca24-6365-4df3-9040-93ce4b8aa6ab",
+    "9ee91502-fa5c-4228-aa1a-31cf870dc722",
+    "3492640b-f911-496f-9120-cddfd1a7947b",
+    "c98b6386-9b4a-4c3e-8c9b-b97ed3bedd39",
+    "a74de2c4-c4aa-464e-8ec4-3c6d08b6895d"
+  ],
+  "merged_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "ed36eeae-92d1-4831-9add-219803bd869a",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8"
+  ],
+  "reranked_ids": [
+    "5731fdbd-70df-4504-bd62-e6f959f57c09",
+    "56a0e00e-efb2-466c-8733-2b4679a62575",
+    "10c773ba-7145-4aa9-b0ae-a2d1a42ff083",
+    "68e7b551-6883-47a5-b7c8-d698d7134e37",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "ed36eeae-92d1-4831-9add-219803bd869a",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "5e9d8237-ac1d-43fc-a32c-348ff1b03c93",
+    "c54eb5d7-401a-47d3-ac44-325d6cf638fc",
+    "d1f68ebc-f538-47ad-afe8-1f1345efd7d8"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}

@@ -1,0 +1,71 @@
+{
+  "query_id": "5321b8ff-8bf6-4540-b2fb-e8ecaf276d6b",
+  "query": "How does the text describe the concept of mercy?",
+  "original_query": "How does the text describe the concept of mercy?",
+  "normalized_query": "How does the text describe the concept of mercy?",
+  "lexical_query": "of mercy merciful compassion forgiveness forgiver",
+  "expanded_terms": [
+    "merciful",
+    "compassion",
+    "forgiveness",
+    "forgiver"
+  ],
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "ece92983-713f-44e0-9d64-5b44d61c36d3",
+    "dbef2942-bd53-4c04-ab15-ad5638a955ef",
+    "99ef3b55-b569-43f3-831b-2cce70e76a87"
+  ],
+  "top_lexical_ids": [
+    "1b4e7953-cd9c-4489-9e5a-dac0db806ffc",
+    "03cad44c-3f46-4f16-b53f-2663b6b6bf52",
+    "268d662f-3b3e-4951-b4e1-0928c4f09739",
+    "e72df2a3-9c6c-4291-ba88-6e1606bad750",
+    "d36a7ddc-ea4d-424f-9689-213f744968f3",
+    "fc0782fa-0f23-4165-8300-9cb5f9f85d85",
+    "4ec0f7ef-86c9-4dc2-bcee-ebb3570e8931",
+    "64d8acef-615b-4f51-bc9d-24c32a7ca093",
+    "cfae1ad3-7baa-447a-8dc9-8f19054d5806",
+    "ddacae3d-02ef-465a-9b3d-6e649f04e804"
+  ],
+  "top_dense_ids": [
+    "ac81e70d-9045-4733-bf10-8f0d0f7b0856",
+    "df3e9c2c-4103-4ebd-bb68-0a20ed2a4faf",
+    "8e090fa9-3d32-4119-a7e1-df6f3ad74bcb",
+    "a7d8df0b-7ce0-44ae-93ab-ab58c9b28c5f",
+    "ecbbde27-daa1-4af4-a427-8df472dfb390",
+    "e73dc266-daff-4a60-9290-1dbc27f55c06",
+    "febab6de-971c-4d56-b978-873a8bad9c56",
+    "da24c0d9-8fbc-4d4f-a736-9699c87df2db",
+    "6e5f33a0-d23c-4a7d-bd47-c1bbdfb97e1d",
+    "d20b7f7a-3496-4877-9cda-e09266e12025"
+  ],
+  "merged_ids": [
+    "1b4e7953-cd9c-4489-9e5a-dac0db806ffc",
+    "ac81e70d-9045-4733-bf10-8f0d0f7b0856",
+    "03cad44c-3f46-4f16-b53f-2663b6b6bf52",
+    "df3e9c2c-4103-4ebd-bb68-0a20ed2a4faf",
+    "8e090fa9-3d32-4119-a7e1-df6f3ad74bcb",
+    "e72df2a3-9c6c-4291-ba88-6e1606bad750",
+    "a7d8df0b-7ce0-44ae-93ab-ab58c9b28c5f",
+    "268d662f-3b3e-4951-b4e1-0928c4f09739",
+    "ecbbde27-daa1-4af4-a427-8df472dfb390",
+    "d36a7ddc-ea4d-424f-9689-213f744968f3"
+  ],
+  "reranked_ids": [
+    "1b4e7953-cd9c-4489-9e5a-dac0db806ffc",
+    "ac81e70d-9045-4733-bf10-8f0d0f7b0856",
+    "03cad44c-3f46-4f16-b53f-2663b6b6bf52",
+    "df3e9c2c-4103-4ebd-bb68-0a20ed2a4faf",
+    "8e090fa9-3d32-4119-a7e1-df6f3ad74bcb",
+    "e72df2a3-9c6c-4291-ba88-6e1606bad750",
+    "a7d8df0b-7ce0-44ae-93ab-ab58c9b28c5f",
+    "268d662f-3b3e-4951-b4e1-0928c4f09739",
+    "ecbbde27-daa1-4af4-a427-8df472dfb390",
+    "d36a7ddc-ea4d-424f-9689-213f744968f3"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

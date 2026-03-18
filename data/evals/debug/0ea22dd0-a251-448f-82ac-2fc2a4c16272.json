@@ -1,0 +1,62 @@
+{
+  "query_id": "0ea22dd0-a251-448f-82ac-2fc2a4c16272",
+  "query": "How does the text describe the concept of mercy?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "ece92983-713f-44e0-9d64-5b44d61c36d3",
+    "dbef2942-bd53-4c04-ab15-ad5638a955ef",
+    "99ef3b55-b569-43f3-831b-2cce70e76a87"
+  ],
+  "top_lexical_ids": [
+    "d33bd4b4-4aa9-4397-9755-749bd3f989d5",
+    "6e91fa44-4b73-472d-b5f9-801dbb52583d",
+    "79839d5d-ea90-4574-acc7-913f79db74ad",
+    "ce7ad83a-e9cd-4571-919f-588acc335ee1",
+    "c18889ef-4845-4e57-98dd-8f7b155336c8",
+    "e8d5f910-e982-4465-a5e2-7beceeb89b5f",
+    "63be5c80-8fc5-4ca6-9dc3-26e2572c8899",
+    "5bbc1e1a-dae0-41f4-afdf-5730409c87e5",
+    "aa4f4780-45c7-43df-9ecd-bdb067e5c685",
+    "fdcd3f05-3673-4e61-97eb-9b67c009b391"
+  ],
+  "top_dense_ids": [
+    "4610117d-488e-4743-8545-1e38a12b3aa0",
+    "5f47d77f-c3ce-4d01-a202-6c25ee0ac05f",
+    "358a70be-fc81-48cf-8282-21fa0d131187",
+    "0968372f-9e25-47b6-9d1c-970c85604b37",
+    "068eacd9-ffa3-4e85-a4c4-a50cc5ae83b6",
+    "8562f5b0-bcf3-4278-ad19-c0a3ae372aab",
+    "278549de-1fb7-4e53-907e-a2de9cbb047d",
+    "9bc913d7-a5d3-4b45-b77e-9c608933c7b5",
+    "63604988-3f9c-403a-b126-0ef568e043ce",
+    "af613e2a-477e-4120-8429-d90f22ef74bb"
+  ],
+  "merged_ids": [
+    "d33bd4b4-4aa9-4397-9755-749bd3f989d5",
+    "4610117d-488e-4743-8545-1e38a12b3aa0",
+    "6e91fa44-4b73-472d-b5f9-801dbb52583d",
+    "5f47d77f-c3ce-4d01-a202-6c25ee0ac05f",
+    "358a70be-fc81-48cf-8282-21fa0d131187",
+    "79839d5d-ea90-4574-acc7-913f79db74ad",
+    "ce7ad83a-e9cd-4571-919f-588acc335ee1",
+    "0968372f-9e25-47b6-9d1c-970c85604b37",
+    "c18889ef-4845-4e57-98dd-8f7b155336c8",
+    "e8d5f910-e982-4465-a5e2-7beceeb89b5f"
+  ],
+  "reranked_ids": [
+    "d33bd4b4-4aa9-4397-9755-749bd3f989d5",
+    "4610117d-488e-4743-8545-1e38a12b3aa0",
+    "6e91fa44-4b73-472d-b5f9-801dbb52583d",
+    "5f47d77f-c3ce-4d01-a202-6c25ee0ac05f",
+    "358a70be-fc81-48cf-8282-21fa0d131187",
+    "79839d5d-ea90-4574-acc7-913f79db74ad",
+    "ce7ad83a-e9cd-4571-919f-588acc335ee1",
+    "0968372f-9e25-47b6-9d1c-970c85604b37",
+    "c18889ef-4845-4e57-98dd-8f7b155336c8",
+    "e8d5f910-e982-4465-a5e2-7beceeb89b5f"
+  ],
+  "hit_at_5": false,
+  "hit_at_10": false,
+  "failure": true,
+  "failure_type": "lexical_miss"
+}

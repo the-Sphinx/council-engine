@@ -1,0 +1,62 @@
+{
+  "query_id": "004d6ed9-ada9-4a7f-9900-5a968de6b8d1",
+  "query": "What guidance is given about prayer?",
+  "model_used": "qwen2.5:7b",
+  "expected_passage_ids": [
+    "c9af66d9-663f-4317-b0ac-b5d646cccb9e",
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4"
+  ],
+  "top_lexical_ids": [
+    "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+    "0c54609b-9e12-4276-8f3d-b8c1aff231b9",
+    "c82d4a47-ab6a-4439-b2e8-2ec2cc2406bd",
+    "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+    "15bdc382-ae80-42ae-a47b-4e34ff9b8eba",
+    "eb869500-bb96-463b-99f0-c44e5b9ef589",
+    "4ac1f93a-156d-47f8-978a-af560ff8d186",
+    "04fd94b7-6b00-491c-a73f-fd7584da1e07",
+    "665399c7-c360-41ce-8116-03fa6cbe556e",
+    "a044edef-c30a-4f13-9675-ff6642107343"
+  ],
+  "top_dense_ids": [
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "1e5fb3ff-0c92-4f29-9353-5e544719c8d1",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+    "59b0ef17-3d24-4be4-ab51-92bac6d8bd61",
+    "eec02d91-ffab-4659-877f-58821cd21ad3",
+    "4e47406b-5806-4f65-a085-1a4706f5c403",
+    "d5b1a3ed-3d4d-420e-944c-8aa67c1e7baf",
+    "f2de3bff-f9c0-4d29-ad7c-604afb1f5db2",
+    "c1283daa-eef2-4441-a7b9-66a8ad805445",
+    "5147f0e5-c798-47e0-b548-09b518ef7a27"
+  ],
+  "merged_ids": [
+    "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "0c54609b-9e12-4276-8f3d-b8c1aff231b9",
+    "1e5fb3ff-0c92-4f29-9353-5e544719c8d1",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+    "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+    "c82d4a47-ab6a-4439-b2e8-2ec2cc2406bd",
+    "59b0ef17-3d24-4be4-ab51-92bac6d8bd61",
+    "15bdc382-ae80-42ae-a47b-4e34ff9b8eba",
+    "eec02d91-ffab-4659-877f-58821cd21ad3"
+  ],
+  "reranked_ids": [
+    "e98c7f0b-0956-478b-a5ef-f4f656caed39",
+    "69047f86-f1ae-4702-ba92-5e11c7035ef3",
+    "e54e7b16-d5e7-4503-bd6c-25880d3cf35f",
+    "eec02d91-ffab-4659-877f-58821cd21ad3",
+    "3de12c8e-0e34-4064-916d-44129a347fac",
+    "59b0ef17-3d24-4be4-ab51-92bac6d8bd61",
+    "e56cfa5b-b14f-41d6-b51f-2341975af23f",
+    "f2de3bff-f9c0-4d29-ad7c-604afb1f5db2",
+    "e810cd59-24a5-4050-b477-bfa5d2abfdb4",
+    "c1283daa-eef2-4441-a7b9-66a8ad805445"
+  ],
+  "hit_at_5": true,
+  "hit_at_10": true,
+  "failure": false,
+  "failure_type": null
+}
